@@ -1,33 +1,53 @@
-pages:
+//DB PAGES
+
+//narrative pages
+//chapters: these come in two types: fight chapters where you don't have any buttons but you do have a monster and a destination after fight.
+//type 2: plain narrative- where you have buttons and no monster/destination after fight.
 
 {
-  name: "Forest",
-  description: "You are in forest, a path heads left. You came from town.",
-  turnTo: ["Path", "Town"]
+    name: "starting inn",
+    narrative_text: "You wake up in...bla bla bla...and now you must make the choice that will seal your fate.",
+    buttons: [{button_text: "Follow the river path to meek Kate in the haunted gallows", button_destination: "river_romance_scene", button_style: "xyz"}, {button_text: "Wade under the bridge to seek the monster that has been bothering the villagers", button_destination: "bridge_fight", button_style: "zzz"}],
+    fight_monster: "", //this should be filled with monster page name
+    gain_item: "", //this should be filled with item page name
+    gain_health_from_narrative: 0, //this should be filled with integer if something happens in narrative to add health
+    destination_after_fight: "",
+    map_coords: [18,96],
+    map_marker_icon: "/inn.svg"
 },
-
+//example of fight chapter
 {
-  name: "Path",
-  descrpition: ...
-  turnTo: [...],
-  items: ["Shiny Key"]
+    name: "bridge_fight",
+    narrative_text: "As you wade under the bridge the troll ambushes you and you must fight",
+    fight_monster: "Horrible Troll", 
+    gain_item: "", //this should be filled with item page name
+    destination_after_fight: "road_to_candlekeep",
+    map_coords: [18,96],
+    map_marker_icon: "/bridge.svg"
 }
 
 
-
-items:
-
-{
-  name: "Chrome Sword",
-  ...
-}
-
-
-monsters:
+//monster pages
 
 {
   name: "Horrible Troll",
-  description: "This troll is really nasty.",
+  taunt: "You think you can fuck with my sweet bridge toll lil punk?",
   health: 120,
-  attack: 15
+  img_file: "/troll.svg"
+}
+
+//character
+
+{
+    name: "Shodon the paladin",
+    health: 20,
+    items: []
+}
+
+//items
+
+{
+    name: "Sword of Godarth",
+    damage_modifier: 2,
+    img_file: "/sword_of_godarth.svg"
 }
