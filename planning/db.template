@@ -11,7 +11,6 @@
     fight_monster: "", //this should be filled with monster page name
     gain_item: "", //this should be filled with item page name
     gain_health_from_narrative: 0, //this should be filled with integer if something happens in narrative to add health
-    destination_after_fight: "",
     map_coords: [18,96],
     map_marker_icon: "/inn.svg"
 },
