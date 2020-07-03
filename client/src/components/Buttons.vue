@@ -1,13 +1,15 @@
 <template>
-  <div class="buttons">Buttons</div>
+  <span>{{button.button_text}}</span>
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["button"]
+};
 </script>
 
 <style>
 .buttons {
-    outline: 2px solid blue;
+  outline: 2px solid blue;
 }
 </style>
