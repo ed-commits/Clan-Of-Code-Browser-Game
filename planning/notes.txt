@@ -27,12 +27,9 @@ Database tables:
       - links to other pages
       - pickups
       - optional: monster
-    _ monsters
-
+    - monsters
         - name
-
         - attributes
-
     - items
       - name
       - attributes
