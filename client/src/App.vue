@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <narrative/>
+    <narrative :pages="pages"/>
     <fight/>
   </div>
 </template>
@@ -8,12 +8,25 @@
 <script>
 import Narrative from './components/Narrative.vue'
 import Fight from './components/Fight.vue'
+import JSONService from './services/JSONService.js'
 
 export default {
   name: 'App',
+  data(){
+    return {
+      pages: [],
+    }
+  },
   components: {
     "narrative": Narrative,
     "fight": Fight,
+  },
+  mounted() {
+    JSONService.getPage("starting inn")
+    .then(page => {
+      console.dir(page);
+      this.pages.push(page);
+    });
   }
 }
 </script>

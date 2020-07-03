@@ -1,5 +1,6 @@
 <template>
   <div class="narrative">
+    <page v-for=" (page, index) in pages" :key="index" :page="page" />
     <buttons />
     Narrative
   </div>
@@ -7,11 +8,14 @@
 
 <script>
 import Buttons from './Buttons.vue'
+import Page from './Page.vue'
 
 export default {
     components: {
-    "buttons": Buttons
-    }
+    "buttons": Buttons,
+    "page": Page
+    },
+    props: ["pages"]
 }
 </script>
 

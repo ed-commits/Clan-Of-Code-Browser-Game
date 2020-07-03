@@ -4,5 +4,9 @@ export default {
     getPages() {
         return fetch(baseURL + "/pages/")
         .then(res => res.json())
+    },
+    getPage(name) {
+        return fetch(baseURL + "/pages/" + encodeURI(name))
+        .then(res => res.json())
     }
 }
