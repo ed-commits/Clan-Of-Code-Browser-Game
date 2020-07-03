@@ -6,6 +6,18 @@ const createRouter = function (collection) {
 
     const router = express.Router();
 
+    router.get("/:name", (req, res) => {
+        const name = req.params.name;
+        collection
+        .findOne({name: name})
+        .then((docs) => res.json(docs))
+        .catch((err) => {
+            res.status(500);
+            res.json({ status: 500, error: err});
+        })
+    })
+
+    /*
     router.get("/", (req, res) => {
         collection
         .find()
@@ -16,6 +28,7 @@ const createRouter = function (collection) {
             res.json({ status: 500, error: err});
         })
     })
+    */
 
     router.post("/", (req, res) => {
         const data = req.body;
