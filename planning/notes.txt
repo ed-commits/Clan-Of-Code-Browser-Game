@@ -1,0 +1,42 @@
+character has various attributes and an inventory that increases stats
+
+mongodb holds 'pages' with links to other pages, monsters, pickups, coordinates etc.
+
+worldmap using leaflet
+
+as you play the story is listed out on the page
+
+combat works using dice rolls
+
+MVP:
+    - map
+    - game:
+        - player
+          - stats
+          - inventory
+        - items
+        - monsters
+        - game modes:
+            - story game mode
+            - combat game mode
+
+Database tables:
+    - pages
+      - description
+      - map coordinates
+      - links to other pages
+      - pickups
+      - optional: monster
+    _ monsters
+
+        - name
+
+        - attributes
+
+    - items
+      - name
+      - attributes
+
+* create a Wireframe
+
+
