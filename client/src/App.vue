@@ -1,34 +1,44 @@
 <template>
   <div id="app">
-    <narrative :pages="pages"/>
-    <fight/>
+    <narrative :pages="pages" />
+    <fight />
   </div>
 </template>
 
 <script>
-import Narrative from './components/Narrative.vue'
-import Fight from './components/Fight.vue'
-import JSONService from './services/JSONService.js'
+import Narrative from "./components/Narrative.vue";
+import Fight from "./components/Fight.vue";
+import JSONService from "./services/JSONService.js";
+import { eventBus } from "./main.js";
 
 export default {
-  name: 'App',
-  data(){
+  name: "App",
+  data() {
     return {
-      pages: [],
-    }
+      pages: []
+    };
   },
   components: {
-    "narrative": Narrative,
-    "fight": Fight,
+    narrative: Narrative,
+    fight: Fight
   },
   mounted() {
-    JSONService.getPage("starting inn")
-    .then(page => {
-      console.dir(page);
-      this.pages.push(page);
+    this.turnToPage("starting inn");
+
+    eventBus.$on("turn-to-page", page => {
+      console.log(`turning to page ${page}`);
+      this.turnToPage(page);
     });
+  },
+  methods: {
+    turnToPage(page_name) {
+      JSONService.getPage(page_name).then(page => {
+        console.dir(page);
+        this.pages.push(page);
+      });
+    }
   }
-}
+};
 </script>
 
 <style>
