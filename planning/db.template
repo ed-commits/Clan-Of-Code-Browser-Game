@@ -1,0 +1,12 @@
+{
+  name: "Forest",
+  description: "You are in forest, a path heads left. You came from town.",
+  turnTo: ["Path", "Town"]
+},
+
+{
+  name: "Path",
+  descrpition: ...
+  turnTo: [...]
+}
+
