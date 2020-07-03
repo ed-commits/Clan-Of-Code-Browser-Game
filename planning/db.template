@@ -9,7 +9,8 @@ pages:
 {
   name: "Path",
   descrpition: ...
-  turnTo: [...]
+  turnTo: [...],
+  items: ["Shiny Key"]
 }
 
 
