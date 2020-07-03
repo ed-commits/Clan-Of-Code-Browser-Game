@@ -1,7 +1,5 @@
 <template>
-  <div class="narrative">
-      Narrative
-  </div>
+  <div class="fight"></div>
 </template>
 
 <script>
@@ -11,8 +9,8 @@ export default {
 </script>
 
 <style>
-.narrative {
-    outline: 2px solid green;
+.fight {
+    outline: 2px solid red;
     height: 50%;
     width: 100%;
 }

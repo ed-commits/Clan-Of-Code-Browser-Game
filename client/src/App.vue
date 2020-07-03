@@ -2,18 +2,21 @@
   <div id="app">
     <narrative/>
     <buttons/>
+    <fight/>
   </div>
 </template>
 
 <script>
 import Narrative from './components/Narrative.vue'
 import Buttons from './components/Buttons.vue'
+import Fight from './components/Fight.vue'
 
 export default {
   name: 'App',
   components: {
     "narrative": Narrative,
-    "buttons": Buttons
+    "buttons": Buttons,
+    "fight": Fight,
   }
 }
 </script>
@@ -25,7 +28,10 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
   height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 </style>
