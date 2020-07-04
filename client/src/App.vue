@@ -16,7 +16,9 @@ export default {
   data() {
     return {
       pages: [],
-      button_links: undefined
+      button_links: undefined,
+      player_health: 100,
+      player_location: "starting inn"
     };
   },
   components: {
@@ -24,7 +26,7 @@ export default {
     fight: Fight
   },
   mounted() {
-    this.turnToPage("starting inn");
+    this.turnToPage(this.player_location);
 
     eventBus.$on("turn-to-page", page => {
       console.log(`turning to page ${page}`);
@@ -35,6 +37,7 @@ export default {
     turnToPage(page_name) {
       JSONService.getPage(page_name).then(page => {
         console.dir(page);
+        this.player_location = page_name;
         this.pages.push(page);
         this.button_links = page.buttons;
       });
