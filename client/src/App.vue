@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <narrative :pages="pages" :button_links="button_links" />
-    <fight />
+    <fight :player = player />
   </div>
 </template>
 
@@ -17,7 +17,7 @@ export default {
     return {
       pages: [],
       button_links: undefined,
-      player_health: 100,
+      player: {name: "Hero", health: 100, items: [], image: "//player.jpeg"},
       player_location: "starting inn"
     };
   },
