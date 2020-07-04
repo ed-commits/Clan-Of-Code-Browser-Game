@@ -73,5 +73,8 @@ export default {
   justify-content: center;
   align-items: center;
   display: flex;
+  background-image: url("./assets/map_background.jpg");
+  background-size: cover; 
+  background-position: center;
 }
 </style>
