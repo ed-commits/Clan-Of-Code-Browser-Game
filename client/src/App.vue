@@ -18,7 +18,7 @@ export default {
       pages: [],
       button_links: undefined,
       player: {name: "Hero", health: 100, items: [], image: "//player.jpeg"},
-      player_location: "starting inn"
+      player_location: "intro"
     };
   },
   components: {

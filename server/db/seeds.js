@@ -15,7 +15,7 @@ db.pages.insertMany([
         narrative_text: "''CRASH BANG WALLOP'' You're awoken by a crescendo of sounds. Unable to identify what's causing the loud clanging, you rush to the window and draw back the curtains! With eyes still blurry you see what seems to be a small man running into the bushes with a bag over his shoulder, chased by your father Crache with a slipper in hand! However he soon gives up the chase and hangs his head in defeat. You decide to get dressed and find out what has happened. You approach Crache sitting on the grass shirtless with his head in his hands and ask him \"what happened?\". Then like a bolt of lightning he jumps up (faster than you've ever seen him move) and with a twinkle in his eye grabs you by the arms \"Listen boy that creature just stole our clans most precious artifact! The one thing that has kept this village safe!\" he exclaims, you try to inquire what he is refering to but he interjects \"There's no time to explain it's getting away! Look take this sword and retrieve the artifact.\" Looking down at the sword just thrusted into your hands you see it is infact a wooden training sword. Before you can complain and ask for a better blade your father has pushed you into the bushes where the creature had just fled through not minutes ago.",
         buttons: [{button_text: "Continue", button_destination: "on_the_trail", button_style: "xyz"}],
         gain_item: "", //this should be filled with item page name
-        destination_after_fight: "",
+        gain_health_from_narrative: 0, //this should be filled with integer if something happens in narrative to add health
         map_coords: [18,96],
         map_marker_icon: "/bridge.svg"
     },
