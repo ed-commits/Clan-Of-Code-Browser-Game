@@ -36,6 +36,12 @@ export default {
     
 
 }
+.button{
+    background-color: rgba(255, 235, 146, 0.801);
+    outline: 2px solid black;
+
+
+}
 .scroll{
   outline: 2px solid black;
   height: 40vh;
