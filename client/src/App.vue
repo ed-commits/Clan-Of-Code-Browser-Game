@@ -37,16 +37,24 @@ export default {
     turnToPage(page_button) {
       const page_name = page_button.button_destination;
       JSONService.getPage(page_name).then(page => {
-        console.dir(page);
-        this.player_location = page_name;
-        const array_length = this.pages.length;
-        if(array_length > 0) {
-          this.pages[array_length-1].narrative_text += "\n\n";
-          this.pages[array_length-1].narrative_text += "You have chosen to ";
-          this.pages[array_length-1].narrative_text += page_button.button_text;
+        if (page == null) {
+          console.log(
+            `Error: Null page returned from database for ${page_name}.`
+          );
+        } else {
+          console.dir(page);
+          this.player_location = page_name;
+          const array_length = this.pages.length;
+          if (array_length > 0) {
+            this.pages[array_length - 1].narrative_text += "\n\n";
+            this.pages[array_length - 1].narrative_text +=
+              "You have chosen to ";
+            this.pages[array_length - 1].narrative_text +=
+              page_button.button_text;
+          }
+          this.pages.push(page);
+          this.button_links = page.buttons;
         }
-        this.pages.push(page);
-        this.button_links = page.buttons;
       });
     }
   }
