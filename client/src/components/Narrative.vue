@@ -1,10 +1,13 @@
 <template>
   <div class="narrative">
-    <page v-for=" (page, index) in pages" :key="index" :page="page" />
+    <div class = "scroll">
+      <page v-for=" (page, index) in pages" :key="index" :page="page" />
+    </div>
     <div v-if="button_links">
       <buttons v-for=" (button, index) in button_links" :key="index" :button="button" />
     </div>
   </div>
+  
 </template>
 
 <script>
@@ -25,5 +28,17 @@ export default {
   outline: 2px solid green;
   height: 50%;
   width: 100%;
+  display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    
+
+}
+.scroll{
+  height: 40vh;
+  width: 60%;
+  background-color: aquamarine;
+  overflow-y: scroll;
 }
 </style>
