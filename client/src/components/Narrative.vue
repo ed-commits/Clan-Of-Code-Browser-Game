@@ -34,7 +34,9 @@ export default {
 
 }
 .scroll{
-  height: 80%;
-  width: 60%
+  height: 40vh;
+  width: 60%;
+  background-color: aquamarine;
+  overflow: scroll;
 }
 </style>
