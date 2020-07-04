@@ -1,6 +1,6 @@
 <template>
   <div class="fight">
-    <div class="health" value="100" max="100">{{ player.health }}</div>
+    <div class="health">Health:{{player.health}}</div>
   </div>
   
 </template>
@@ -23,9 +23,10 @@ export default {
     width: 100%;
 }
 .health {
+  margin: auto;
   width: 50%;
-  height: 10%;
+  height: 8%;
   background-color: #49df3b;
-  bottom: 50px;
+  
 }
 </style>
