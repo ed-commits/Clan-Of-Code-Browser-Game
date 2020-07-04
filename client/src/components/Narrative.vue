@@ -39,6 +39,6 @@ export default {
   height: 40vh;
   width: 60%;
   background-color: aquamarine;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 </style>
