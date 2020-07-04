@@ -36,9 +36,10 @@ export default {
 
 }
 .scroll{
+  outline: 2px solid black;
   height: 40vh;
   width: 60%;
-  background-color: aquamarine;
+  background-color: rgba(255, 235, 146, 0.801);
   overflow-y: scroll;
 }
 </style>
