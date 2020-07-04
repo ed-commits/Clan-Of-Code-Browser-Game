@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <narrative :pages="pages" />
+    <narrative :pages="pages" :button_links="button_links" />
     <fight />
   </div>
 </template>
@@ -15,7 +15,8 @@ export default {
   name: "App",
   data() {
     return {
-      pages: []
+      pages: [],
+      button_links: undefined
     };
   },
   components: {
@@ -35,6 +36,7 @@ export default {
       JSONService.getPage(page_name).then(page => {
         console.dir(page);
         this.pages.push(page);
+        this.button_links = page.buttons;
       });
     }
   }
