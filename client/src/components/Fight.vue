@@ -1,9 +1,11 @@
 <template>
-  <div class="fight"></div>
+  <div class="fight">{{ player.health }}</div>
 </template>
 
 <script>
+
 export default {
+  props: ['player']
 
 }
 </script>

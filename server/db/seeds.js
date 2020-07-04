@@ -1,5 +1,5 @@
 use fighting_fantasy;
-
+db.dropDatabase();
 db.pages.insertMany([
     {
         name: "intro",
@@ -208,8 +208,6 @@ db.items.insertMany([
 ]);
 
 db.monsters.insertMany([
-
-
     {
         name: "Merman",
         taunt: "Glub glub!",
@@ -234,7 +232,9 @@ db.monsters.insertMany([
         health: 100,
         img_file: "/dragon.png"
     }
+    
 ]);
+
 
 //DB PAGES
 
