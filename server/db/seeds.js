@@ -1,5 +1,5 @@
 use fighting_fantasy;
-
+db.dropDatabase();
 db.pages.insertMany([
     {
         name: "intro",
