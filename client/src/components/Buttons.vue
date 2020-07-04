@@ -1,5 +1,5 @@
 <template>
-  <p v-on:click="buttonClicked">{{button.button_text}}</p>
+  <p class="button" v-on:click="buttonClicked">{{button.button_text}}</p>
 </template>
 
 <script>
@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style>
-.buttons {
-  outline: 2px solid blue;
+.button {
+  text-decoration: underline;
 }
 </style>
