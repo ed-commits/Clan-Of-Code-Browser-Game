@@ -32,6 +32,7 @@ export default {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    box-sizing: border-box;
     
 
 }
@@ -41,5 +42,6 @@ export default {
   width: 60%;
   background-color: rgba(255, 235, 146, 0.801);
   overflow-y: scroll;
+  box-sizing: border-box;
 }
 </style>

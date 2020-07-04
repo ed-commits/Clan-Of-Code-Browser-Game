@@ -35,14 +35,14 @@ export default {
   },
   methods: {
     turnToPage(page_button) {
-      const page_name = page_button.button_destination;
-      JSONService.getPage(page_name).then(page => {
-        if (page == null) {
-          console.log(
-            `Error: Null page returned from database for ${page_name}.`
-          );
-        } else {
-          console.dir(page);
+      const page_name = page_button.button_destination; //this gets the destination we're interested in from the button. We will pull the chapter matching this name from the db.
+      JSONService.getPage(page_name).then(page => { //this pulls the page from the db that matched the destination name. 
+        if (page == null) { //error_handling
+          console.log( //error_handling
+            `Error: Null page returned from database for ${page_name}.` //error_handling
+          ); //error_handling
+        } else { 
+          console.dir(page); //like console.log but we can look inside the object
           this.player_location = page_name;
           const array_length = this.pages.length;
           if (array_length > 0) {
