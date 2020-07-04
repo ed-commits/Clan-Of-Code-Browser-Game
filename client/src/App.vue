@@ -18,8 +18,10 @@ export default {
       pages: [],
       button_links: undefined,
       player: {name: "Hero", health: 100, items: [], image: "//player.jpeg"},
-      player_location: "intro"
+      player_location: "intro",
+      current_monster: {}
     };
+
   },
   components: {
     narrative: Narrative,
@@ -48,15 +50,27 @@ export default {
           if (array_length > 0) {
             this.pages[array_length - 1].narrative_text += "\n\n";
             this.pages[array_length - 1].narrative_text +=
-              "You have chosen to ";
+              "You decide to ";
             this.pages[array_length - 1].narrative_text +=
               page_button.button_text;
           }
           this.pages.push(page);
           this.button_links = page.buttons;
+          if ("fight_monster" in page) {
+            this.startFight(page)
+          }
         }
-      });
+      })
+    },
+    startFight(page) {
+      const monster_name = page.fight_monster
+      JSONService.getMonster(monster_name)
+      .then(dbMonster => this.current_monster = dbMonster)
     }
+
+
+
+
   }
 };
 </script>

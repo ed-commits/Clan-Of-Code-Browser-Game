@@ -11,6 +11,10 @@ export default {
   props: ['player'],
 
   methods: {
+    numGenerator() {
+      return Math.ceil(Math.random()*20)
+    }
+    
 
   }
 }

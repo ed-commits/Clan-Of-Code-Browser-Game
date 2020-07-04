@@ -8,5 +8,9 @@ export default {
     getPage(name) {
         return fetch(baseURL + "/pages/" + encodeURI(name))
         .then(res => res.json())
+    },
+    getMonster(name) {
+        return fetch(baseURL + "/monsters/" + encodeURI(name))
+        .then(res => res.json())
     }
 }
