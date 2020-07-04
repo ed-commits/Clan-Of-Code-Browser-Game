@@ -1,6 +1,8 @@
 <template>
   <div class="narrative">
-    <page class = "scroll" v-for=" (page, index) in pages" :key="index" :page="page" />
+    <div class = "scroll">
+      <page v-for=" (page, index) in pages" :key="index" :page="page" />
+    </div>
     <div v-if="button_links">
       <buttons v-for=" (button, index) in button_links" :key="index" :button="button" />
     </div>
