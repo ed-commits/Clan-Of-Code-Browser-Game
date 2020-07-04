@@ -9,7 +9,7 @@ export default {
   props: ["button"],
   methods: {
     buttonClicked() {
-      eventBus.$emit("turn-to-page", this.button.button_destination);
+      eventBus.$emit("turn-to-page", this.button);
     }
   }
 };

@@ -26,18 +26,25 @@ export default {
     fight: Fight
   },
   mounted() {
-    this.turnToPage(this.player_location);
+    this.turnToPage({ button_destination: this.player_location });
 
-    eventBus.$on("turn-to-page", page => {
-      console.log(`turning to page ${page}`);
-      this.turnToPage(page);
+    eventBus.$on("turn-to-page", page_button => {
+      console.log(`turning to page ${page_button.button_destination}`);
+      this.turnToPage(page_button);
     });
   },
   methods: {
-    turnToPage(page_name) {
+    turnToPage(page_button) {
+      const page_name = page_button.button_destination;
       JSONService.getPage(page_name).then(page => {
         console.dir(page);
         this.player_location = page_name;
+        const array_length = this.pages.length;
+        if(array_length > 0) {
+          this.pages[array_length-1].narrative_text += "\n\n";
+          this.pages[array_length-1].narrative_text += "You have chosen to ";
+          this.pages[array_length-1].narrative_text += page_button.button_text;
+        }
         this.pages.push(page);
         this.button_links = page.buttons;
       });

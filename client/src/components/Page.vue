@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>{{ page.name }}</h1>
-    <p>{{ page.narrative_text }}</p>
+    <pre>{{ page.narrative_text }}</pre> //pre stands for pre-formatted text so carriage returns are not removed
   </div>
 </template>
 
@@ -12,4 +12,7 @@ export default {
 </script>
 
 <style>
+pre {
+  
+}
 </style>
