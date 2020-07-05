@@ -185,7 +185,7 @@ db.items.insertMany([
     {
         name: "Steel Blade",
         damage_modifier: 5,
-        img_file: "/steel_blade"
+        img_file: "/assets/Sword_icon"
     },
     {
         name: "Griffin Balls",
