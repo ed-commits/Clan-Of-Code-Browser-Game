@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <narrative :pages="pages" :button_links="button_links" />
-    <fight :player="player" :monster="current_monster" />
+    <fight :player="player" />
   </div>
 </template>
 
@@ -89,7 +89,9 @@ export default {
     startFight(page) {
       const monster_name = page.fight_monster
       JSONService.getMonster(monster_name)
-      .then(dbMonster => this.current_monster = dbMonster)
+      .then(dbMonster => {
+        eventBus.$emit("start-fight", dbMonster)
+      })
     },
     gainItem(page) {
       const item_name = page.gain_item
