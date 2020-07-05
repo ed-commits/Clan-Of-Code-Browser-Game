@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <narrative :pages="pages" :button_links="button_links" />
-    <fight :player = player />
+    <fight :player="player" :monster="current_monster" />
   </div>
 </template>
 
