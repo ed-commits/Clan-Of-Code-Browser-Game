@@ -199,25 +199,25 @@ db.monsters.insertMany([
         name: "Merman",
         taunt: "Glub glub!",
         health: 30,
-        img_file: "/merman.png"
+        img_file: "assets/Merman.png"
     },
     {
         name: "Draugr",
         taunt: "My orders are as follows!",
         health: 50,
-        img_file: "/Draugr.png"
+        img_file: "assets/Draugr.png"
     },
     {
         name: "Ghost",
         taunt: "This is my house!",
         health: 30,
-        img_file: "/ghost.png"
+        img_file: "assets/Ghost.png"
     },
     {
         name: "Dragon",
         taunt: "GET AWAY FROM MY TREASURES!",
         health: 100,
-        img_file: "/dragon.png"
+        img_file: "assets/Dragon.png"
     }
     
 ]);
