@@ -18,7 +18,12 @@ export default {
       pages: [],
       current_page: undefined,
       button_links: undefined,
-      player: { name: "Hero", health: 100, items: [], image: "/assets/Hero.png" },
+      player: {
+        name: "Hero",
+        health: 100,
+        items: [],
+        image: "/assets/Hero.png"
+      },
       player_location: "intro",
       current_monster: undefined
     };
@@ -54,64 +59,72 @@ export default {
   },
   methods: {
     turnToPage(page_button) {
-      const page_name = page_button.button_destination; //this gets the destination we're interested in from the button. We will pull the chapter matching this name from the db.
+      //this gets the destination we're interested in from the button. We will pull the chapter matching this name from the db.
+      const page_name = page_button.button_destination;
       JSONService.getPage(page_name).then(page => {
         //this pulls the page from the db that matched the destination name.
         if (page == null) {
-          //error_handling
           console.log(
-            //error_handling
-            `Error: Null page returned from database for ${page_name}.` //error_handling
-          ); //error_handling
+            `Error: Null page returned from database for ${page_name}.`
+          );
         } else {
-          this.current_monster = undefined;
-          this.current_page = page;
-          console.dir(page); //like console.log but we can look inside the object
-          this.player_location = page_name;
-          const array_length = this.pages.length;
-          if (array_length > 0) {
-            this.pages[array_length - 1].narrative_text += "\n\n";
-            this.pages[array_length - 1].narrative_text += "You ";
-            this.pages[array_length - 1].narrative_text +=
-              page_button.button_text.toLowerCase();
-          }
-          this.pages.push(page);
-          this.button_links = page.buttons;
-          if ("fight_monster" in page) {
-            this.startFight(page);
-          }
-          if ("gain_item" in page) {
-            this.gainItem(page)
-          }
-          if ("gain_health_from_narrative" in page) {
-            this.gainHealth(page)
-          }
+          this.turnToPage_internal(page, page_button);
         }
       });
     },
+    turnToPage_internal(page, page_button) {
+      this.current_monster = undefined;
+      this.current_page = page;
+      this.player_location = page.name;
+      this.button_links = page.buttons;
+      this.pages.push(page);
+
+      // Add a "You then went to the bridge" type message
+      this.addNarrativeMessage("You " + page_button.button_text.toLowerCase());
+
+      // initiate whatever game phases are relevant
+      if ("fight_monster" in page) {
+        this.startFight(page);
+      }
+      if ("gain_item" in page) {
+        this.gainItem(page);
+      }
+      if ("gain_health_from_narrative" in page) {
+        this.gainHealth(page);
+      }
+    },
+    addNarrativeMessage(message) {
+      const array_length = this.pages.length;
+      if (array_length > 0) {
+        this.pages[array_length - 1].narrative_text += "\n\n";
+        this.pages[array_length - 1].narrative_text += message;
+      }
+    },
     startFight(page) {
-      const monster_name = page.fight_monster
-      JSONService.getMonster(monster_name)
-      .then(dbMonster => {
-        eventBus.$emit("start-fight", {monster: dbMonster, player: this.player})
-      })
+      const monster_name = page.fight_monster;
+      JSONService.getMonster(monster_name).then(dbMonster => {
+        eventBus.$emit("start-fight", {
+          monster: dbMonster,
+          player: this.player
+        });
+      });
     },
     gainItem(page) {
-      const item_name = page.gain_item
-      JSONService.getItem(item_name)
-      .then(dbItem => this.player.items.push(dbItem))
+      const item_name = page.gain_item;
+      JSONService.getItem(item_name).then(dbItem =>
+        this.player.items.push(dbItem)
+      );
     },
 
     gainHealth(page) {
-      const health_up = page.gain_health_from_narrative
-        this.player.health += health_up
+      const health_up = page.gain_health_from_narrative;
+      this.player.health += health_up;
     }
   }
 };
 </script>
 
 <style>
-
 #app {
   font-family: "Fondamento";
   -webkit-font-smoothing: antialiased;
