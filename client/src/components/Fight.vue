@@ -6,7 +6,7 @@
         <h2>{{ monster.name }}</h2>
         <img src="https://placebear.com/g/100/100" />
         <br />
-        <i>"{{ monster.name }}"</i>
+        <i>"{{ monster.taunt }}"</i>
         <div class="health">Health:{{ monster.health }}</div>
       </div>
 
