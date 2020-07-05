@@ -34,7 +34,7 @@
           <img class = "character_image" :src="monster.img_file"/>
         </div>
         <div class="health" v-if="monster">
-          {{`${monster.name}`}} Health:{{ fight_data.monster_health }}
+          Health:{{ monster.health }}
         </div>
       </div>
        <div class = "items">
