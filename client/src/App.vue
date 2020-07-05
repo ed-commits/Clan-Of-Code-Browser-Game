@@ -71,7 +71,7 @@ export default {
           const array_length = this.pages.length;
           if (array_length > 0) {
             this.pages[array_length - 1].narrative_text += "\n\n";
-            this.pages[array_length - 1].narrative_text += "You decide to ";
+            this.pages[array_length - 1].narrative_text += "You ";
             this.pages[array_length - 1].narrative_text +=
               page_button.button_text;
           }
