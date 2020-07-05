@@ -9,7 +9,7 @@
             <img class = "character_image" :src="player.image"/>
         </div>
         <div class="health">
-          {{ player.name.name }} Health:{{ fight_data.player_health }}
+          Health:{{ player.health }}
         </div>
       </div>
       <div class = "damage-dealt">
@@ -73,8 +73,6 @@ export default {
     return {
       monster: undefined,
       fight_data: {
-        monster_health: 0,
-        player_health: 0,
         player_roll1: 0,
         player_roll2: 0,
         monster_roll1: 0,
@@ -87,9 +85,10 @@ export default {
     };
   },
   mounted() {
-    eventBus.$on("start-fight", monster => {
-      this.monster = monster;
+    eventBus.$on("start-fight", character => {
+      this.monster = character.monster;
       this.fight_data.monster_health = this.monster.health;
+      this.player = character.player;
     });
   },
   methods: {
@@ -102,8 +101,6 @@ export default {
 
     rollDice() {
       eventBus.$emit("Attack", {});
-      this.fight_data.monster_health = this.monster.health;
-      this.fight_data.player_health = this.player.health;
 
       // perform the dice rolls
       this.fight_data.player_roll1 = this.numGenerator();
@@ -147,8 +144,8 @@ export default {
       }
 
       // check if the fight has ended
-      const playerWins = this.fight_data.monster_health <= 0;
-      const monsterWins = this.fight_data.player_health <= 0;
+      const playerWins = this.monster.health <= 0;
+      const monsterWins = this.player.health <= 0;
 
       if (playerWins) {
         this.monster = undefined;
@@ -172,10 +169,10 @@ export default {
       eventBus.$emit("fight-lost", {});
     },
     dealDamagetoMonster(damageAmount) {
-      this.fight_data.monster_health -= damageAmount;
+      this.monster.health -= damageAmount;
     },
     dealDamagetoPlayer(damageAmount) {
-      this.fight_data.player_health -= damageAmount;
+      this.player.health -= damageAmount;
     }
   }
 };

@@ -90,7 +90,7 @@ export default {
       const monster_name = page.fight_monster
       JSONService.getMonster(monster_name)
       .then(dbMonster => {
-        eventBus.$emit("start-fight", dbMonster)
+        eventBus.$emit("start-fight", {monster: dbMonster, player: this.player})
       })
     },
     gainItem(page) {
