@@ -140,7 +140,6 @@ export default {
         this.fight_data.player_total_damage >
         this.fight_data.monster_total_damage;
       if (playerWinsRound) {
-        this.buttonAudio()
         this.dealDamagetoMonster(
           this.fight_data.player_total_damage -
             this.fight_data.monster_total_damage
