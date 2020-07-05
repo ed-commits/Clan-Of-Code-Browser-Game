@@ -13,7 +13,7 @@ export default {
 
 <style>
 pre {
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-family: "Fondamento";
   white-space: pre-wrap;
   word-break: keep-all;
 }
