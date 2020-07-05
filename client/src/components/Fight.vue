@@ -106,8 +106,10 @@ export default {
       const monsterWins = this.fight_data.player_health <= 0;
 
       if (playerWins) {
+        this.monster = undefined;
         eventBus.$emit("fight-won", {});
       } else if (monsterWins) {
+        this.monster = undefined;
         eventBus.$emit("fight-lost", {});
       }
     },
