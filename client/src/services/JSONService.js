@@ -12,5 +12,9 @@ export default {
     getMonster(name) {
         return fetch(baseURL + "/monsters/" + encodeURI(name))
         .then(res => res.json())
+    },
+    getItem(name) {
+        return fetch(baseURL + "/items/" + encodeURI(name))
+        .then(res => res.json())
     }
 }

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <narrative :pages="pages" :button_links="button_links" />
-    <fight :player = player />
+    <fight :player = player :current_monster = current_monster />
   </div>
 </template>
 
@@ -20,6 +20,7 @@ export default {
       player: {name: "Hero", health: 100, items: [], image: "//player.jpeg"},
       player_location: "intro",
       current_monster: {}
+
     };
 
   },
@@ -59,6 +60,9 @@ export default {
           if ("fight_monster" in page) {
             this.startFight(page)
           }
+          if ("gain_item" in page) {
+            this.gainItem(page)
+          }
         }
       })
     },
@@ -66,9 +70,12 @@ export default {
       const monster_name = page.fight_monster
       JSONService.getMonster(monster_name)
       .then(dbMonster => this.current_monster = dbMonster)
+    },
+    gainItem(page) {
+      const item_name = page.gain_item
+      JSONService.getItem(item_name)
+      .then(dbItem => this.player.items.push(dbItem))
     }
-
-
 
 
   }
@@ -76,6 +83,7 @@ export default {
 </script>
 
 <style>
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
