@@ -25,7 +25,25 @@ import { eventBus } from "../main.js";
 
 export default {
   props: ["player", "monster"],
+  data(){ 
+    return {
+      fight_data: {
+        monster_health: 0,
+        player_health: 0,
+        player_roll1: 0,
+        player_roll2: 0,
+        monster_roll1: 0,
+        monster_roll2: 0,
+        player_total_damage: 0,
+        monster_total_damage: 0,
+        damage_modifier: 0,
+        damage_dealt: 0
+      }
+    }
+
+  },
   methods: {
+
     // i start with 20 health, monster starts with 25
   // I roll 8
   //they roll 4
@@ -35,18 +53,54 @@ export default {
   
     rollDice() {
       eventBus.$emit("Attack", {});
-      const monster_health = this.monster.health
-      const player_health = this.player.health
-      const player_roll1 = this.numGenerator()
-      const player_roll2 = this.numGenerator()
-      let damage_modifier = 0;
+      this.fight_data.monster_health = this.monster.health
+      this.fight_data.player_health = this.player.health
+      
+      // perform the dice rolls
+      this.fight_data.player_roll1 = this.numGenerator()
+      this.fight_data.player_roll2 = this.numGenerator()
+      this.fight_data.monster_roll1 = this.numGenerator()
+      this.fight_data.monster_roll2 = this.numGenerator()
+
+      // total up the players damage modifier
       this.player.items.forEach(item => {
         if('damage_modifier' in item) {
-          damage_modifier += item.damage_modifier;
+          this.fight_data.damage_modifier += item.damage_modifier;
         }
       })
-      console.log(`damage mod ${damage_modifier}`)
-      const total_damage = player_roll1 + player_roll2 + damage_modifier;
+
+      // calculate total damage
+      this.fight_data.player_total_damage =
+        this.fight_data.player_roll1 +
+        this.fight_data.player_roll2 +
+        this.fight_data.damage_modifier;
+      this.fight_data.monster_total_damage =
+        this.fight_data.monster_roll1 +
+        this.fight_data.monster_roll2;
+      
+      // deal damage based on who rolled best this round
+      const playerWinsRound = this.fight_data.player_total_damage > this.fight_data.monster_total_damage;
+        if (playerWinsRound) {
+          this.dealDamagetoMonster(this.fight_data.player_total_damage - this.fight_data.monster_total_damage)
+        }
+      const monsterWinsRound = this.fight_data.player_total_damage < this.fight_data.monster_total_damage;
+        if (monsterWinsRound) {
+          this.dealDamagetoPlayer(this.fight_data.monster_total_damage - this.fight_data.player_total_damage)
+        }
+
+        // check if the fight has ended
+      const playerWins = this.fight_data.monster_health <= 0
+      const monsterWins = this.fight_data.player_health <= 0
+      
+        if (playerWins) {
+          eventBus.$emit("fight-won", {});
+
+        }
+      
+        else if (monsterWins) {
+          eventBus.$emit("fight-lost", {});
+
+        }
       
 
     },
@@ -60,7 +114,14 @@ export default {
     },
     dieClicked() {
       eventBus.$emit("fight-lost", {});
+    },
+    dealDamagetoMonster(damageAmount) {
+      this.fight_data.monster_health -= damageAmount
+    },
+    dealDamagetoPlayer(damageAmount) {
+      this.fight_data.player_health -= damageAmount
     }
+    
   }
 };
 </script>
