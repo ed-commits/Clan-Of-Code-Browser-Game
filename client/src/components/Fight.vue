@@ -20,21 +20,28 @@
       <div class = "damage_animation-parent">
       </div>
       <div class = "attack-button-parent" >
-        <img class = "attack_button" v-if="monster" v-on:click="rollDice" src="/assets/atk.png"/>
+        <transition name="fade">
+          <img class = "attack_button" v-if="monster" v-on:click="rollDice" src="/assets/atk.png"/>
+        </transition>
       </div>
     </div> 
     <div class="combat-box"> <!-- monster box -->
       
-      <div class = "damage-dealt" v-if="monster">
-        <i>"{{ monster.taunt }}"</i>
+      <div class = "damage-dealt" >
+        <i v-if="monster">"{{ monster.taunt }}"</i>
       </div>
       <div class="character-and-health">
-        <div class="character" v-if="monster">  
-          <h2>{{ monster.name }}</h2>
-          <img class = "character_image" :src="monster.img_file"/>
-        </div>
-        <div class="health" v-if="monster">
-          Health:{{ monster.health }}
+        
+          <div class="character" >  
+            <transition name="fade">
+              <h2 v-if="monster">{{ monster.name }}</h2>
+            </transition>
+            <transition name="slide">
+              <img class = "character_image" v-if="monster" :src="monster.img_file"/>
+            </transition>
+          </div>
+        <div class="health">
+          <span v-if="monster">Health:{{ monster.health }}</span>
         </div>
       </div>
        <div class = "items">
@@ -123,6 +130,10 @@ export default {
         this.fight_data.damage_modifier;
       this.fight_data.monster_total_damage =
         this.fight_data.monster_roll1 + this.fight_data.monster_roll2;
+
+       
+
+
 
       // deal damage based on who rolled best this round
       const playerWinsRound =
@@ -230,6 +241,7 @@ export default {
   width: auto;
   height: 100%;
   cursor: pointer;
+
 }
 .items{
   height: 100%;
@@ -311,10 +323,19 @@ export default {
   height: 8%;
   background-color: #ca812e;
 }
-/* .items {
-  margin: auto;
-  width: 50%;
-  height: 8%;
-  background-color: #a89e6f;
-} */
+
+.slide-enter-active, .slide-leave-active {
+  transition: margin-left 1s;
+  transition-timing-function: ease-out;
+}
+.slide-enter, .slide-leave-to  {
+  margin-left: 400px;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 2s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
 </style>
