@@ -14,6 +14,7 @@
 
       <input type="submit" class="button" v-on:click="winClicked" value="win fight" />
       <input type="submit" class="button" v-on:click="dieClicked" value="die" />
+      <input type="submit" class="button" v-on:click="rollDice" value="Attack"/>
     </div>
 
   </div>
@@ -25,8 +26,33 @@ import { eventBus } from "../main.js";
 export default {
   props: ["player", "monster"],
   methods: {
+    // i start with 20 health, monster starts with 25
+  // I roll 8
+  //they roll 4
+  //monster takes 4, its health now 21
+  //click roll again
+  //first to zero or lower loses
+  
+    rollDice() {
+      eventBus.$emit("Attack", {});
+      const monster_health = this.monster.health
+      const player_health = this.player.health
+      const player_roll1 = this.numGenerator()
+      const player_roll2 = this.numGenerator()
+      let damage_modifier = 0;
+      this.player.items.forEach(item => {
+        if('damage_modifier' in item) {
+          damage_modifier += item.damage_modifier;
+        }
+      })
+      console.log(`damage mod ${damage_modifier}`)
+      const total_damage = player_roll1 + player_roll2 + damage_modifier;
+      
+
+    },
+
     numGenerator() {
-      return Math.ceil(Math.random() * 20);
+      return Math.ceil(Math.random() * 10);
     },
 
     winClicked() {
