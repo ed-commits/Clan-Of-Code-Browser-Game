@@ -1,11 +1,7 @@
 <template>
   <div id="app">
     <narrative :pages="pages" :button_links="button_links" />
-<<<<<<< HEAD
-    <fight :player = player :current_monster = current_monster />
-=======
     <fight :player="player" :monster="current_monster" />
->>>>>>> 873588c06ed1dcb6da2a50b3364246e0fafd546d
   </div>
 </template>
 
@@ -24,12 +20,7 @@ export default {
       button_links: undefined,
       player: { name: "Hero", health: 100, items: [], image: "//player.jpeg" },
       player_location: "intro",
-<<<<<<< HEAD
-      current_monster: {}
-
-=======
       current_monster: undefined
->>>>>>> 873588c06ed1dcb6da2a50b3364246e0fafd546d
     };
   },
   components: {
@@ -96,7 +87,6 @@ export default {
       });
     },
     startFight(page) {
-<<<<<<< HEAD
       const monster_name = page.fight_monster
       JSONService.getMonster(monster_name)
       .then(dbMonster => this.current_monster = dbMonster)
@@ -106,15 +96,6 @@ export default {
       JSONService.getItem(item_name)
       .then(dbItem => this.player.items.push(dbItem))
     }
-
-
-=======
-      const monster_name = page.fight_monster;
-      JSONService.getMonster(monster_name).then(
-        dbMonster => (this.current_monster = dbMonster)
-      );
-    }
->>>>>>> 873588c06ed1dcb6da2a50b3364246e0fafd546d
   }
 };
 </script>
