@@ -1,7 +1,7 @@
 <template>
   <div class="fight">
     <div class="health">Health:{{player.health}}</div>
-    <div class="monster">
+    <div class="monster" v-if="monster">
       <h2>{{ monster.name }}</h2>
       <img src="https://placebear.com/g/100/100" /> <br />
       <i>"{{ monster.name }}"</i>
@@ -13,7 +13,6 @@
 <script>
 export default {
   props: ["player", "monster"],
-
   methods: {
     numGenerator() {
       return Math.ceil(Math.random() * 20);

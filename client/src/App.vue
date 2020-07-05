@@ -19,7 +19,7 @@ export default {
       button_links: undefined,
       player: {name: "Hero", health: 100, items: [], image: "//player.jpeg"},
       player_location: "intro",
-      current_monster: {}
+      current_monster: undefined
     };
 
   },
@@ -67,10 +67,6 @@ export default {
       JSONService.getMonster(monster_name)
       .then(dbMonster => this.current_monster = dbMonster)
     }
-
-
-
-
   }
 };
 </script>
