@@ -28,7 +28,7 @@ db.pages.insertMany([
     {
         name: "cross_the_bridge",
         narrative_text: "Whilst crossing the old wooden bridge it seems to hold your weight fine. After a couple shakes and wobbles you make it accross and carry on your path.",
-        buttons: [{button_text: "Back on the creatures trail", button_destination: "back_on_trail", button_style: "xyz"}],
+        buttons: [{button_text: "Get back on the creatures trail", button_destination: "back_on_trail", button_style: "xyz"}],
         gain_health_from_narrative: 0, //this should be filled with integer if something happens in narrative to add health
         map_coords: [68,76],
         map_marker_icon: ""
@@ -60,7 +60,7 @@ db.pages.insertMany([
     {
         name: "the_well",
         narrative_text: "As you approach the well the sound of whistling starts to fade. as you peer into the well you expect the worst. However all you see is the well bucket within arms reach. Inside the bucket you see a ''loaf of bread 5HP UP!''",
-        buttons: [{button_text: "You return to the trail", button_destination: "after_well_trail", button_style: "xyz"}],
+        buttons: [{button_text: "Return to the trail", button_destination: "after_well_trail", button_style: "xyz"}],
         gain_health_from_narrative: 15, //this should be filled with integer if something happens in narrative to add health
         map_coords: [68,76],
         map_marker_icon: ""
@@ -93,7 +93,7 @@ db.pages.insertMany([
     {
         name: "tree_camp",
         narrative_text: "You set up camp under the tree. You rest your eyes and before you know it it's morning! that fight with the troll must have tired you out! Panicked you gather your things when you see the creature you've been tracking picking berries in the clearing not 10 yards away from you!",
-        buttons: [{button_text: "Sword in hand you rush towards it!", button_destination: "creature_capture", button_style: "xyz"}],
+        buttons: [{button_text: "Rush towards it!", button_destination: "creature_capture", button_style: "xyz"}],
         gain_health_from_narrative: 15, //this should be filled with integer if something happens in narrative to add health
         map_coords: [68,76],
         map_marker_icon: ""
@@ -118,7 +118,7 @@ db.pages.insertMany([
     {
         name: "spooky_house_2",
         narrative_text: "With that final swing the spectre vanishes and in its place falls a ''steel blade +5 DMG!''Exausted you slump to your knees and fall asleep... A bright light awakens you, you quickly grab your steel sword ready to fight. But realise its just the morning light coming through the window, it's going to be a long time before you get over last nights encounter. Collecting your things you head out the house. After about 10 minutes of walking you reach the clearing from yesterday. You cast a glance at the tree you considered resting under last night which almost mockingly has a herd of deer underneath, peacefully resting and grazing. Angrily you turn away and continue your search when... You see the creature! Not 30 yards from you it seems to be forraging for berries. You break into a sprint towards the creature!",
-        buttons: [{button_text: "Sword in hand you rush towards it!", button_destination: "creature_capture", button_style: "xyz"}],
+        buttons: [{button_text: "Rush towards it!", button_destination: "creature_capture", button_style: "xyz"}],
         gain_item: "Steel Blade", //this should be filled with item page name
         gain_health_from_narrative: 15, //this should be filled with integer if something happens in narrative to add health
         map_coords: [68,76],
@@ -175,7 +175,7 @@ db.pages.insertMany([
     },
     {
         name: "died",
-        narrative_text: "You have died.",
+        narrative_text: "You have died. GAME OVER",
         buttons: [{button_text: "Retry", button_destination: "intro", button_style: "xyz"}]
     }
 ]);
