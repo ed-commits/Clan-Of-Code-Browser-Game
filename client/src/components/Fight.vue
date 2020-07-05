@@ -1,6 +1,43 @@
 <template>
   <div class="fight">
-    <div class="health">Health:{{player.health}}</div>
+    <div class="combat-box">     <!-- player box -->
+      <div class = "items">
+      </div>
+      <div class="character-and-health">
+        <div class="character">
+        </div>
+        <div class="health">
+        </div>
+      </div>
+      <div class = "damage-dealt">
+      </div>
+
+    </div> 
+    <div class="damage-box">
+      <div class = "damage_animation-parent">
+      </div>
+      <div class = "attack-button-parent">
+      </div>
+    </div> 
+    <div class="combat-box"> <!-- monster box -->
+      <div class = "damage-dealt">
+      </div>
+      <div class="character-and-health">
+        <div class="character">
+        </div>
+        <div class="health">
+        </div>
+      </div>
+       <div class = "items">
+      </div>
+    </div>  
+  
+  </div>
+
+
+
+
+    <!-- <div class="health">Health:{{player.health}}</div>
 
     <div class="items" v-for="(item, index) in player.items" :key="index">Inventory: {{ item.name }}</div>
     <div v-if="monster">
@@ -15,8 +52,8 @@
       <input type="submit" class="button" v-on:click="winClicked" value="win fight" />
       <input type="submit" class="button" v-on:click="dieClicked" value="die" />
       <input type="submit" class="button" v-on:click="rollDice" value="Attack" />
-    </div>
-  </div>
+    </div> -->
+ 
 </template>
 
 <script>
@@ -119,9 +156,11 @@ export default {
     },
 
     winClicked() {
+      this.monster = undefined;
       eventBus.$emit("fight-won", {});
     },
     dieClicked() {
+      this.monster = undefined;
       eventBus.$emit("fight-lost", {});
     },
     dealDamagetoMonster(damageAmount) {
@@ -139,13 +178,86 @@ export default {
   outline: 2px solid red;
   height: 50%;
   width: 100%;
+  display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.combat-box {
+  height: 100%;
+  width: 40%;
+  
+  display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.damage-box {
+  height: 100%;
+  width: 20%;
+ 
+   display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+.damage_animation-parent {
+  width:100%;
+  height: 60%;
+  background-color: violet;
+}
+
+.attack-button-parent {
+  width:100%;
+  height: 40%;
+  background-color: teal;
+}
+
+.items{
+  height: 100%;
+  width: 30%;
+  height: 100%;
+  background-color: tomato;
+
+}
+.character-and-health{
+  height: 100%;
+  width: 40%;
+  height: 100%;
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.character {
+  height: 70%;
+  width: 100%;
+  background-color: maroon;
 }
 .health {
+  height: 30%;
+  width: 100%;
+  background-color: blueviolet;
+}
+
+
+.damage-dealt{
+  height: 100%;
+  width: 30%;
+  height: 100%;
+  background-color: yellow;
+  
+}
+/* .health {
   margin: auto;
   width: 50%;
   height: 8%;
   background-color: #49df3b;
-}
+} */
 .monster {
   float: right;
   margin: 20px;
@@ -156,10 +268,10 @@ export default {
   height: 8%;
   background-color: #ca812e;
 }
-.items {
+/* .items {
   margin: auto;
   width: 50%;
   height: 8%;
   background-color: #a89e6f;
-}
+} */
 </style>
