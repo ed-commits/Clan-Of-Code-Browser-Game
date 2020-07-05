@@ -5,12 +5,8 @@
       </div>
       <div class="character-and-health">
         <div class="character">
-          <div class="character-and-health">
-            <div class="character">  
             <h2>{{ player.name }}</h2>
             <img class = "character_image" :src="player.image"/>
-            </div>
-          </div>
         </div>
         <div class="health">
           {{ player.name.name }} Health:{{ fight_data.player_health }}
