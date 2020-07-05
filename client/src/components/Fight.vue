@@ -119,9 +119,11 @@ export default {
     },
 
     winClicked() {
+      this.monster = undefined;
       eventBus.$emit("fight-won", {});
     },
     dieClicked() {
+      this.monster = undefined;
       eventBus.$emit("fight-lost", {});
     },
     dealDamagetoMonster(damageAmount) {
