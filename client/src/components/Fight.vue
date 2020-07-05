@@ -99,7 +99,7 @@ export default {
     //monster takes 4, its health now 21
     //click roll again
     //first to zero or lower loses
-
+   
     rollDice() {
       eventBus.$emit("Attack", {});
 
@@ -129,11 +129,13 @@ export default {
         this.fight_data.player_total_damage >
         this.fight_data.monster_total_damage;
       if (playerWinsRound) {
+        this.buttonAudio()
         this.dealDamagetoMonster(
           this.fight_data.player_total_damage -
             this.fight_data.monster_total_damage
         );
       }
+
       const monsterWinsRound =
         this.fight_data.player_total_damage <
         this.fight_data.monster_total_damage;
@@ -174,6 +176,10 @@ export default {
     },
     dealDamagetoPlayer(damageAmount) {
       this.player.health -= damageAmount;
+    },
+    playAudio() {
+      const buttonAudio = new Audio('/public/assets/music/sword_impact.mp3')
+      buttonAudio.play()
     }
   }
 };
