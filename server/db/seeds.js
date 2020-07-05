@@ -176,7 +176,7 @@ db.pages.insertMany([
     {
         name: "died",
         narrative_text: "You have died.",
-        buttons: []
+        buttons: [{button_text: "Retry", button_destination: "intro", button_style: "xyz"}]
     }
 ]);
 
