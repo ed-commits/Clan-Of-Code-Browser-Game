@@ -244,10 +244,18 @@ export default {
 
 .attack_button {
   width: auto;
-  height: 100%;
+  height: 95%;
   cursor: pointer;
 
 }
+.attack_button:hover {
+  height: 100%;
+}
+
+.attack_button:active {
+  height: 80%;
+}
+
 .items{
   height: 100%;
   width: 30%;
@@ -298,6 +306,7 @@ export default {
   animation-direction: alternate;
   /* animation-timing-function: ease-in-out; */
 }
+
 .health {
   height: 30%;
   width: 100%;
