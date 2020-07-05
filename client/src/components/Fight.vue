@@ -244,12 +244,12 @@ export default {
   background-color: maroon;
   display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
 }
 
 .character_image{ 
-  height: 80%;
+  height: 70%;
   width: auto;
 }
 .health {
