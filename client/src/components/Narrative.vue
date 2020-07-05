@@ -48,5 +48,6 @@ export default {
   background-color: rgba(255, 235, 146, 0.801);
   overflow-y: scroll;
   box-sizing: border-box;
+  padding: 10px;
 }
 </style>
