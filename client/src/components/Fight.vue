@@ -190,6 +190,7 @@ export default {
     },
     playAudio() {
       const buttonAudio = new Audio('/assets/music/sword_impact.mp3')
+      buttonAudio.volume = 0.1;
       buttonAudio.play()
     }
   }
