@@ -173,6 +173,11 @@ db.pages.insertMany([
         gain_health_from_narrative: 0, //this should be filled with integer if something happens in narrative to add health
         map_coords: [68,76],
         map_marker_icon: ""
+    },
+    {
+        name: "died",
+        narrative_text: "You have died.",
+        buttons: []
     }
 ]);
 
