@@ -108,6 +108,7 @@ export default {
     //first to zero or lower loses
    
     rollDice() {
+      this.playAudio()
       eventBus.$emit("Attack", {});
 
       // perform the dice rolls
@@ -188,7 +189,7 @@ export default {
       this.player.health -= damageAmount;
     },
     playAudio() {
-      const buttonAudio = new Audio('/public/assets/music/sword_impact.mp3')
+      const buttonAudio = new Audio('/assets/music/sword_impact.mp3')
       buttonAudio.play()
     }
   }
