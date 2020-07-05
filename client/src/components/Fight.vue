@@ -20,10 +20,16 @@
       </div>
     </div> 
     <div class="combat-box"> <!-- monster box -->
+      
       <div class = "damage-dealt">
       </div>
       <div class="character-and-health">
-        <div class="character">
+        <div class="character" v-if="monster">  
+          <h2>{{ monster.name }}</h2>
+          <img :src="monster.img_file" />
+          <br />
+          <i>"{{ monster.taunt }}"</i>
+          <div class="monster_health">{{`${monster.name}`}} Health:{{ fight_data.monster_health }}</div>
         </div>
         <div class="health">
         </div>
@@ -237,6 +243,10 @@ export default {
   height: 70%;
   width: 100%;
   background-color: maroon;
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .health {
   height: 30%;
