@@ -15,7 +15,6 @@ db.pages.insertMany([
         buttons: [{button_text: "Continue", button_destination: "on_the_trail", button_style: "xyz"}],
         gain_health_from_narrative: 0, //this should be filled with integer if something happens in narrative to add health
         map_coords: [18,96],
-        gain_item: "Steel Blade",
         map_marker_icon: "/bridge.svg"
     },
     {
