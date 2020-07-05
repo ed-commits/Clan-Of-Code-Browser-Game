@@ -50,25 +50,6 @@
   
   </div>
 
-
-
-
-    <!-- <div class="health">Health:{{player.health}}</div>
-
-    <div class="items" v-for="(item, index) in player.items" :key="index">Inventory: {{ item.name }}</div>
-    <div v-if="monster">
-      <div class="monster" v-if="monster">
-        <h2>{{ monster.name }}</h2>
-        <img :src="monster.img_file" />
-        <br />
-        <i>"{{ monster.taunt }}"</i>
-        <div class="monster_health">{{`${monster.name}`}} Health:{{ fight_data.monster_health }}</div>
-      </div>
-
-      <input type="submit" class="button" v-on:click="winClicked" value="win fight" />
-      <input type="submit" class="button" v-on:click="dieClicked" value="die" />
-      <input type="submit" class="button" v-on:click="rollDice" value="Attack" />
-    </div> -->
  
 </template>
 
@@ -100,13 +81,7 @@ export default {
     });
   },
   methods: {
-    // i start with 20 health, monster starts with 25
-    // I roll 8
-    //they roll 4
-    //monster takes 4, its health now 21
-    //click roll again
-    //first to zero or lower loses
-   
+    
     rollDice() {
       this.playAudio()
       eventBus.$emit("Attack", {});
@@ -323,12 +298,7 @@ export default {
   background-color: yellow;
   
 }
-/* .health {
-  margin: auto;
-  width: 50%;
-  height: 8%;
-  background-color: #49df3b;
-} */
+
 .monster {
   float: right;
   margin: 20px;

@@ -21,7 +21,7 @@ db.pages.insertMany([
         name: "on_the_trail",
         narrative_text: "Scrambling to your feet you take a second to get your barings. behind you is your village and in front is about 20 feet of bushes and trees which lead to a path. Looking down you see what seem to be small feet, perhaps those of a child but you can't be sure. However you can be sure that these are the tracks of your theif so you follow them to the path. The path is a simple trodden path through some woods. Looking down at the tracks you see the tracks head north uphill.After following the tracks for a few hours you see they cross a rickety bridge that should be able to hold your weight. Do you?",
         buttons: [{button_text: "Cross The Bridge", button_destination: "cross_the_bridge", button_style: "xyz"}, {button_text: "Wade through the water and go around the bridge", button_destination: "around_bridge", button_style: "zzz"}],
-        gain_health_from_narrative: 5, //this should be filled with integer if something happens in narrative to add health
+        gain_health_from_narrative: 0, //this should be filled with integer if something happens in narrative to add health
         map_coords: [68,76],
         map_marker_icon: "/romance.svg"
     },
@@ -61,7 +61,7 @@ db.pages.insertMany([
         name: "the_well",
         narrative_text: "As you approach the well the sound of whistling starts to fade. as you peer into the well you expect the worst. However all you see is the well bucket within arms reach. Inside the bucket you see a ''loaf of bread 5HP UP!''",
         buttons: [{button_text: "You return to the trail", button_destination: "after_well_trail", button_style: "xyz"}],
-        gain_health_from_narrative: 5, //this should be filled with integer if something happens in narrative to add health
+        gain_health_from_narrative: 15, //this should be filled with integer if something happens in narrative to add health
         map_coords: [68,76],
         map_marker_icon: ""
     }, 
@@ -94,7 +94,7 @@ db.pages.insertMany([
         name: "tree_camp",
         narrative_text: "You set up camp under the tree. You rest your eyes and before you know it it's morning! that fight with the troll must have tired you out! Panicked you gather your things when you see the creature you've been tracking picking berries in the clearing not 10 yards away from you!",
         buttons: [{button_text: "Sword in hand you rush towards it!", button_destination: "creature_capture", button_style: "xyz"}],
-        gain_health_from_narrative: 0, //this should be filled with integer if something happens in narrative to add health
+        gain_health_from_narrative: 15, //this should be filled with integer if something happens in narrative to add health
         map_coords: [68,76],
         map_marker_icon: ""
     },
@@ -120,7 +120,7 @@ db.pages.insertMany([
         narrative_text: "With that final swing the spectre vanishes and in its place falls a ''steel blade +5 DMG!''Exausted you slump to your knees and fall asleep... A bright light awakens you, you quickly grab your steel sword ready to fight. But realise its just the morning light coming through the window, it's going to be a long time before you get over last nights encounter. Collecting your things you head out the house. After about 10 minutes of walking you reach the clearing from yesterday. You cast a glance at the tree you considered resting under last night which almost mockingly has a herd of deer underneath, peacefully resting and grazing. Angrily you turn away and continue your search when... You see the creature! Not 30 yards from you it seems to be forraging for berries. You break into a sprint towards the creature!",
         buttons: [{button_text: "Sword in hand you rush towards it!", button_destination: "creature_capture", button_style: "xyz"}],
         gain_item: "Steel Blade", //this should be filled with item page name
-        gain_health_from_narrative: 0, //this should be filled with integer if something happens in narrative to add health
+        gain_health_from_narrative: 15, //this should be filled with integer if something happens in narrative to add health
         map_coords: [68,76],
         map_marker_icon: ""
     },
