@@ -9,7 +9,7 @@
         <img src="https://placebear.com/g/100/100" />
         <br />
         <i>"{{ monster.taunt }}"</i>
-       <div class="monster_health">Monster Health:{{ monster.health }}</div>
+       <div class="monster_health">Health:{{ fight_data.monster_health }}</div>
       </div>
 
       <input type="submit" class="button" v-on:click="winClicked" value="win fight" />
@@ -41,6 +41,9 @@ export default {
       }
     }
 
+  },
+  mounted() {
+    this.fight_data.monster_health = this.monster.health
   },
   methods: {
 
@@ -94,15 +97,11 @@ export default {
       
         if (playerWins) {
           eventBus.$emit("fight-won", {});
-
         }
       
         else if (monsterWins) {
           eventBus.$emit("fight-lost", {});
-
         }
-      
-
     },
 
     numGenerator() {
