@@ -19,7 +19,8 @@
     <div class="damage-box">
       <div class = "damage_animation-parent">
       </div>
-      <div class = "attack-button-parent">
+      <div class = "attack-button-parent" >
+        <img class = "attack_button" v-if="monster" v-on:click="rollDice" src="/assets/atk.png"/>
       </div>
     </div> 
     <div class="combat-box"> <!-- monster box -->
@@ -219,8 +220,17 @@ export default {
   width:100%;
   height: 40%;
   background-color: teal;
-}
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 
+.attack_button {
+  width: auto;
+  height: 100%;
+  cursor: pointer;
+}
 .items{
   height: 100%;
   width: 30%;
