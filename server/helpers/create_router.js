@@ -9,12 +9,20 @@ const createRouter = function (collection) {
     router.get("/:name", (req, res) => {
         const name = req.params.name;
         collection
-        .findOne({name: name})
-        .then((docs) => res.json(docs))
-        .catch((err) => {
-            res.status(500);
-            res.json({ status: 500, error: err});
-        })
+            .findOne({ name: name })
+            .then((docs) => {
+                if (docs == null) {
+                    res.status(500);
+                    res.json({ status: 500, error: err });
+                }
+                else {
+                    res.json(docs)
+                }
+            })
+            .catch((err) => {
+                res.status(500);
+                res.json({ status: 500, error: err });
+            })
     })
 
     /*
@@ -59,8 +67,8 @@ const createRouter = function (collection) {
         const data = req.body;
         collection
             .updateOne({ _id: ObjectId(id) },
-                       { $set: data },
-                       { returnOriginal: false})
+                { $set: data },
+                { returnOriginal: false })
             .then((result) => res.json(result))
             .catch((err) => {
                 res.status(500);
