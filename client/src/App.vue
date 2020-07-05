@@ -18,7 +18,7 @@ export default {
       pages: [],
       current_page: undefined,
       button_links: undefined,
-      player: { name: "Hero", health: 100, items: [], image: "//player.jpeg" },
+      player: { name: "Hero", health: 100, items: [], image: "/assets/Hero.png" },
       player_location: "intro",
       current_monster: undefined
     };
