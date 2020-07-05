@@ -83,6 +83,9 @@ export default {
           if ("gain_item" in page) {
             this.gainItem(page)
           }
+          if ("gain_health_from_narrative" in page) {
+            this.gainHealth(page)
+          }
         }
       });
     },
@@ -97,6 +100,11 @@ export default {
       const item_name = page.gain_item
       JSONService.getItem(item_name)
       .then(dbItem => this.player.items.push(dbItem))
+    },
+
+    gainHealth(page) {
+      const health_up = page.gain_health_from_narrative
+        this.player.health += health_up
     }
   }
 };
