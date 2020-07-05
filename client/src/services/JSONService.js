@@ -1,20 +1,17 @@
 const baseURL = "http://localhost:3000/api"
 
 export default {
-    getPages() {
-        return fetch(baseURL + "/pages/")
+    getGeneric(thing, name) {
+        return fetch(baseURL + "/"+thing+"/" + encodeURI(name))
         .then(res => res.json())
     },
     getPage(name) {
-        return fetch(baseURL + "/pages/" + encodeURI(name))
-        .then(res => res.json())
+        return this.getGeneric("pages", name)
     },
     getMonster(name) {
-        return fetch(baseURL + "/monsters/" + encodeURI(name))
-        .then(res => res.json())
+        return this.getGeneric("monsters", name)
     },
     getItem(name) {
-        return fetch(baseURL + "/items/" + encodeURI(name))
-        .then(res => res.json())
+        return this.getGeneric("items", name)
     }
 }
