@@ -18,5 +18,10 @@ export default {
 <style>
 .button {
   text-decoration: underline;
+  cursor: pointer;
+}
+
+.button:hover {
+  outline: 1px solid blueviolet;
 }
 </style>
