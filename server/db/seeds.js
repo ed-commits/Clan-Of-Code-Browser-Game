@@ -168,7 +168,7 @@ db.pages.insertMany([
     {
         name: "credits",
         narrative_text: "Created by Keith Nimmo, Ollie Boyd, Edward Cant and Jack Morris. Thanks for playing!",
-        buttons: [],
+        buttons: [{button_text: "New Game +", button_destination: "intro", button_style: "xyz"}],
         gain_health_from_narrative: 0, //this should be filled with integer if something happens in narrative to add health
         map_coords: [68,76],
         map_marker_icon: ""

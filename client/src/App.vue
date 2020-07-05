@@ -61,6 +61,7 @@ export default {
     turnToPage(page_button) {
       //this gets the destination we're interested in from the button. We will pull the chapter matching this name from the db.
       const page_name = page_button.button_destination;
+      if (page_name === "intro") this.player.health = 100;
       JSONService.getPage(page_name).then(page => {
         //this pulls the page from the db that matched the destination name.
         if (page == null) {
