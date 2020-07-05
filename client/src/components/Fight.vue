@@ -254,13 +254,32 @@ export default {
   background-color: maroon;
   display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: space-between; 
     align-items: center;
+}
+.character h2{
+  margin: 0;
+}
+
+
+@keyframes breathing {
+  from {
+    height: 70%;
+  }
+
+  to {
+    height: 68%;
+  }
 }
 
 .character_image{ 
   height: 70%;
   width: auto;
+  animation-duration: 1s;
+  animation-name: breathing;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  /* animation-timing-function: ease-in-out; */
 }
 .health {
   height: 30%;
