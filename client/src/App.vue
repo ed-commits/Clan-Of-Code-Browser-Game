@@ -71,9 +71,9 @@ export default {
           const array_length = this.pages.length;
           if (array_length > 0) {
             this.pages[array_length - 1].narrative_text += "\n\n";
-            this.pages[array_length - 1].narrative_text += "You decide to ";
+            this.pages[array_length - 1].narrative_text += "You ";
             this.pages[array_length - 1].narrative_text +=
-              page_button.button_text;
+              page_button.button_text.toLowerCase();
           }
           this.pages.push(page);
           this.button_links = page.buttons;
@@ -115,7 +115,7 @@ export default {
   justify-content: center;
   align-items: center;
   display: flex;
-  background-image: url("./assets/map_background.jpg");
+  background-image: url("/assets/map_background.jpg");
   background-size: cover;
   background-position: center;
 }

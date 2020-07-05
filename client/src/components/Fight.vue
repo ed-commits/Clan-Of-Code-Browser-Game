@@ -43,7 +43,7 @@
     <div v-if="monster">
       <div class="monster" v-if="monster">
         <h2>{{ monster.name }}</h2>
-        <img src="https://placebear.com/g/100/100" />
+        <img :src="monster.img_file" />
         <br />
         <i>"{{ monster.taunt }}"</i>
         <div class="monster_health">{{`${monster.name}`}} Health:{{ fight_data.monster_health }}</div>
@@ -156,9 +156,11 @@ export default {
     },
 
     winClicked() {
+      this.monster = undefined;
       eventBus.$emit("fight-won", {});
     },
     dieClicked() {
+      this.monster = undefined;
       eventBus.$emit("fight-lost", {});
     },
     dealDamagetoMonster(damageAmount) {
