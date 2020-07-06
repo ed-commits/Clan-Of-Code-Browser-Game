@@ -83,6 +83,7 @@ export default {
       this.player_location = page.name;
       this.button_links = page.buttons;
       this.pages.push(page);
+      eventBus.$emit("page-turned", page);
 
       // initiate whatever game phases are relevant
       if ("fight_monster" in page) {
@@ -138,8 +139,9 @@ export default {
   justify-content: center;
   align-items: center;
   display: flex;
-  background-image: url("/assets/map_background.jpg");
+  /* background-image: url("/assets/map_background.jpg"); */
   background-size: cover;
   background-position: center;
+  margin: 0px;
 }
 </style>

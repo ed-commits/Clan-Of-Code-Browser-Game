@@ -1,5 +1,8 @@
 <template>
   <div class="narrative">
+    <storymap :pages="pages" class="story-map" >
+    </storymap>
+
     <div class="scroll">
       <page v-for=" (page, index) in pages" :key="index" :page="page" />
     </div>
@@ -12,11 +15,13 @@
 <script>
 import Buttons from "./Buttons.vue";
 import Page from "./Page.vue";
+import StoryMap from "./StoryMap.vue"
 
 export default {
   components: {
     buttons: Buttons,
-    page: Page
+    page: Page,
+    storymap: StoryMap,
   },
   props: ["pages", "button_links"],
   updated() {
@@ -27,6 +32,18 @@ export default {
 </script>
 
 <style>
+
+.story-map{
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  /* change z-index to -1 in production */
+
+  z-index: -1;
+  filter: invert(90%) grayscale(70%);
+
+}
+
 .narrative {
   outline: 2px solid green;
   height: 50%;
