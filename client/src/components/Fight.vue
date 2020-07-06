@@ -10,29 +10,31 @@
         </div>
         <div class="health">Health:{{ player.health }}</div>
         <div class="magic-button-parent"></div>
-       
-
       </div>
       <div class="damage-dealt">
         <div class="dice">
-        <dice :number="diceRoll.player.d1" />
-        <dice :number="diceRoll.player.d2" />
+          <dice :number="diceRoll.player.d1" />
+          <dice :number="diceRoll.player.d2" />
         </div>
       </div>
     </div>
     <div class="damage-box">
-      
       <div class="damage_animation-parent"></div>
       <div class="button_holder">
-      <div class="attack-button-parent">
-        <transition name="fade">
-          <img class="attack_button" v-if="monster" v-on:click="rollDice" src="/assets/atk.png" />
-        </transition>
-      </div>
+        <div class="attack-button-parent">
+          <transition name="fade">
+            <img class="attack_button" v-if="monster" v-on:click="rollDice" src="/assets/atk.png" />
+          </transition>
+        </div>
         <div class="magic-button-parent">
-         <transition name="fade">
-          <img class="magic_button" v-if="monster" v-on:click="rollMagicDice" src="/assets/fireballwithmagic.png" />
-        </transition>
+          <transition name="fade">
+            <img
+              class="magic_button"
+              v-if="monster"
+              v-on:click="rollMagicDice"
+              src="/assets/fireballwithmagic.png"
+            />
+          </transition>
         </div>
       </div>
     </div>
@@ -42,21 +44,20 @@
       <div class="damage-dealt">
         <i v-if="monster">"{{ monster.taunt }}"</i>
         <div class="dice">
-        <dice :number="diceRoll.monster.d1" />
-        <dice :number="diceRoll.monster.d2" />
+          <dice :number="diceRoll.monster.d1" />
+          <dice :number="diceRoll.monster.d2" />
         </div>
       </div>
       <div class="character-and-health">
-        
-          <div class="character" >  
-            <transition name="fade">
-              <h2 v-if="monster">{{ monster.name }}</h2>
-            </transition>
-            <transition name="slide">
-              <img class = "character_image" v-if="monster" :src="monster.img_file"/>
-              <audio autoplay v-if="monster" :src="monster.music_file"></audio>
-            </transition>
-          </div>
+        <div class="character">
+          <transition name="fade">
+            <h2 v-if="monster">{{ monster.name }}</h2>
+          </transition>
+          <transition name="slide">
+            <img class="character_image" v-if="monster" :src="monster.img_file" />
+            <audio autoplay v-if="monster" :src="monster.music_file"></audio>
+          </transition>
+        </div>
         <div class="health">
           <span v-if="monster">Health:{{ monster.health }}</span>
         </div>
@@ -98,6 +99,7 @@ export default {
     eventBus.$on("start-fight", character => {
       this.monster = character.monster;
       this.player = character.player;
+<<<<<<< HEAD
       this.mermanBattleMusic()
       this.draugrBattleMusic()
     });
@@ -111,9 +113,21 @@ export default {
     draugrBattleMusic() {
       if (this.monster.name === "Draugr")
       this.playDraugrBattleMusic()
+=======
+      this.mermanMusic();
+      this.draugrMusic();
+    });
+  },
+  methods: {
+    mermanMusic() {
+      if (this.monster.name === "Merman") this.playMermanBattleMusic();
+    },
+    draugrMusic() {
+      if (this.monster.name === "Draugr") this.playDraugrBattleMusic();
+>>>>>>> d66aa9c25eff3eb5c2c75c4544d7ae29794f1c9f
     },
     combatEnd() {
-            // check if the fight has ended
+      // check if the fight has ended
       const playerWins = this.monster.health <= 0;
       const monsterWins = this.player.health <= 0;
 
@@ -165,7 +179,7 @@ export default {
       if (playerWinsRound) {
         this.dealDamagetoMonster(
           this.fight_data.player_total_damage -
-            this.fight_data.monster_total_damage,
+            this.fight_data.monster_total_damage
         );
       }
 
@@ -175,20 +189,18 @@ export default {
       if (monsterWinsRound) {
         this.dealDamagetoPlayer(
           this.fight_data.monster_total_damage -
-            this.fight_data.player_total_damage,
+            this.fight_data.player_total_damage
         );
       }
-      this.combatEnd()
-
+      this.combatEnd();
     },
-    rollMagicDice(){
+    rollMagicDice() {
       this.fight_data.player_roll1 = this.numGenerator();
 
       const playerMagicAtk = this.dealDamagetoMonster(
-          this.fight_data.player_roll1
-        )
-      this.combatEnd()
-
+        this.fight_data.player_roll1
+      );
+      this.combatEnd();
     },
     numGenerator() {
       return Math.ceil(Math.random() * 10);
@@ -211,25 +223,23 @@ export default {
     playAudio() {
       const buttonAudio = new Audio("/assets/music/sword_impact.mp3");
       buttonAudio.volume = 0.1;
-      buttonAudio.play()
+      buttonAudio.play();
     },
     playMermanBattleMusic() {
-      this.mermanMusic = new Audio('/assets/music/merman_battle.mp3')
+      this.mermanMusic = new Audio("/assets/music/merman_battle.mp3");
       this.mermanMusic.volume = 0.2;
-      this.mermanMusic.play()
+      this.mermanMusic.play();
     },
     playDraugrBattleMusic() {
-      this.draugrMusic = new Audio('/assets/music/draugr_battle.mp3')
+      this.draugrMusic = new Audio("/assets/music/draugr_battle.mp3");
       this.draugrMusic.volume = 0.2;
-      this.draugrMusic.play()
+      this.draugrMusic.play();
     },
     stopMermanMusic() {
-      if (this.mermanMusic != undefined)
-      this.mermanMusic.pause()
+      if (this.mermanMusic != undefined) this.mermanMusic.pause();
     },
     stopDraugrMusic() {
-      if (this.draugrMusic != undefined)
-      this.draugrMusic.pause()
+      if (this.draugrMusic != undefined) this.draugrMusic.pause();
     }
   }
 };
@@ -270,48 +280,45 @@ export default {
   height: 60%;
   background-color: violet;
 }
-.button_holder{
+
+
+.button_holder {
   display: flex;
   justify-content: space-between;
+  width: 100%;
+  height: 40%;
 }
 .attack-button-parent {
-  width: 50%;
-  height: 40%;
   background-color: teal;
-
+  width: 50%;
+}
+.magic-button-parent {
+  background-color: teal;
+  width: 50%;
 }
 
 .attack_button {
-  width: auto;
   cursor: pointer;
+  width: 90%;
 }
 .attack_button:hover {
-  height: 100%;
+  width: 100%;
 }
-
 .attack_button:active {
-  height: 80%;
+  width: 80%;
 }
-.magic-button-parent {
-  width: 50%;
-  background-color: teal;
-
-
-}
-.magic_button{
-  width: auto;
-  height: 95%;
+.magic_button {
   cursor: pointer;
-}
-.magic_button{
-  height: 100%
+  width: 90%;
 }
 .magic_button:hover {
-  height: 105%;
+  width: 100%;
 }
 .magic_button:active {
-  height: 80%;
+  width: 80%;
 }
+
+
 .items {
   height: 100%;
   width: 30%;
