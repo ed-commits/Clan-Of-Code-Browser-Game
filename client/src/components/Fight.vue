@@ -29,7 +29,6 @@
           <img class="attack_button" v-if="monster" v-on:click="rollDice" src="/assets/atk.png" />
         </transition>
       <div class="magic-button-parent">
-
          <transition name="fade">
           <img class="magic_button" v-if="monster" v-on:click="rollMagicDice" src="/assets/fireballwithmagic.png" />
         </transition>
@@ -174,14 +173,9 @@ export default {
     },
     rollMagicDice(){
       this.fight_data.player_roll1 = this.numGenerator();
-      this.fight_data.player_roll2 = this.numGenerator();
-
-      this.fight_data.player_total_damage =
-        this.fight_data.player_roll1 +
-        this.fight_data.player_roll2;
 
       const playerMagicAtk = this.dealDamagetoMonster(
-          this.fight_data.player_total_damage
+          this.fight_data.player_roll1
         )
       const playerWins = this.monster.health <= 0;
       const monsterWins = this.player.health <= 0;
@@ -294,7 +288,7 @@ export default {
   background-color: teal;
   display: flex;
   flex-direction: left;
-  justify-content: left;
+  justify-content: flex-end;
   align-items: left;
 
 }
