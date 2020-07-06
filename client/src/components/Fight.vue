@@ -1,36 +1,38 @@
 <template>
   <div class="fight">
-    <div class="combat-box">     <!-- player box -->
-      <div class = "items">
-      </div>
+    <div class="combat-box">
+      <!-- player box -->
+      <div class="items"></div>
       <div class="character-and-health">
         <div class="character">
-            <h2>{{ player.name }}</h2>
-            <img class = "character_image" :src="player.image"/>
+          <h2>{{ player.name }}</h2>
+          <img class="character_image" :src="player.image" />
         </div>
-        <div class="health">
-          Health:{{ player.health }}
-        </div>
+        <div class="health">Health:{{ player.health }}</div>
       </div>
-      <div class = "damage-dealt">
+      <div class="damage-dealt">
+        <dice :number="diceRoll.player.d1" />
+        <dice :number="diceRoll.player.d2" />
       </div>
-
-    </div> 
+    </div>
     <div class="damage-box">
-      <div class = "damage_animation-parent">
-      </div>
-      <div class = "attack-button-parent" >
+      <div class="damage_animation-parent"></div>
+      <div class="attack-button-parent">
         <transition name="fade">
-          <img class = "attack_button" v-if="monster" v-on:click="rollDice" src="/assets/atk.png"/>
+          <img class="attack_button" v-if="monster" v-on:click="rollDice" src="/assets/atk.png" />
         </transition>
       </div>
-    </div> 
-    <div class="combat-box"> <!-- monster box -->
-      
-      <div class = "damage-dealt" >
+    </div>
+    <div class="combat-box">
+      <!-- monster box -->
+
+      <div class="damage-dealt">
         <i v-if="monster">"{{ monster.taunt }}"</i>
+        <dice :number="diceRoll.monster.d1" />
+        <dice :number="diceRoll.monster.d2" />
       </div>
       <div class="character-and-health">
+<<<<<<< HEAD
         
           <div class="character" >  
             <transition name="fade">
@@ -41,24 +43,34 @@
               <audio autoplay v-if="monster" :src="monster.music_file"></audio>
             </transition>
           </div>
+=======
+        <div class="character">
+          <transition name="fade">
+            <h2 v-if="monster">{{ monster.name }}</h2>
+          </transition>
+          <transition name="slide">
+            <img class="character_image" v-if="monster" :src="monster.img_file" />
+          </transition>
+        </div>
+>>>>>>> bcc615848428703473c684ec58416d197f7788fd
         <div class="health">
           <span v-if="monster">Health:{{ monster.health }}</span>
         </div>
       </div>
-       <div class = "items">
-      </div>
-    </div>  
-  
+      <div class="items"></div>
+    </div>
   </div>
-
- 
 </template>
 
 <script>
 import { eventBus } from "../main.js";
+import Dice from "./Dice.vue";
 
 export default {
   props: ["player"],
+  components: {
+    dice: Dice
+  },
   data() {
     return {
       monster: undefined,
@@ -71,6 +83,10 @@ export default {
         monster_total_damage: 0,
         damage_modifier: 0,
         damage_dealt: 0
+      },
+      diceRoll: {
+        player: { d1: 0, d2: 0 },
+        monster: { d1: 0, d2: 0 }
       }
     };
   },
@@ -89,7 +105,7 @@ export default {
     },
     
     rollDice() {
-      this.playAudio()
+      this.playAudio();
       eventBus.$emit("Attack", {});
 
       // perform the dice rolls
@@ -97,6 +113,10 @@ export default {
       this.fight_data.player_roll2 = this.numGenerator();
       this.fight_data.monster_roll1 = this.numGenerator();
       this.fight_data.monster_roll2 = this.numGenerator();
+      this.diceRoll.player.d1 = this.fight_data.player_roll1;
+      this.diceRoll.player.d2 = this.fight_data.player_roll2;
+      this.diceRoll.monster.d1 = this.fight_data.monster_roll1;
+      this.diceRoll.monster.d2 = this.fight_data.monster_roll2;
 
       // total up the players damage modifier
       this.player.items.forEach(item => {
@@ -112,10 +132,6 @@ export default {
         this.fight_data.damage_modifier;
       this.fight_data.monster_total_damage =
         this.fight_data.monster_roll1 + this.fight_data.monster_roll2;
-
-       
-
-
 
       // deal damage based on who rolled best this round
       const playerWinsRound =
@@ -152,7 +168,29 @@ export default {
         eventBus.$emit("fight-lost", {});
       }
     },
+    rollMagicDice(){
+      this.fight_data.player_roll1 = this.numGenerator();
+      this.fight_data.player_roll2 = this.numGenerator();
 
+      this.fight_data.player_total_damage =
+        this.fight_data.player_roll1 +
+        this.fight_data.player_roll2;
+
+      const playerMagicAtk = this.dealDamagetoMonster(
+          this.fight_data.player_total_damage
+        )
+      const playerWins = this.monster.health <= 0;
+      const monsterWins = this.player.health <= 0;
+
+      if (playerWins) {
+        this.monster = undefined;
+        eventBus.$emit("fight-won", {});
+      } else if (monsterWins) {
+        this.monster = undefined;
+        eventBus.$emit("fight-lost", {});
+      }
+
+    },
     numGenerator() {
       return Math.ceil(Math.random() * 10);
     },
@@ -172,7 +210,7 @@ export default {
       this.player.health -= damageAmount;
     },
     playAudio() {
-      const buttonAudio = new Audio('/assets/music/sword_impact.mp3')
+      const buttonAudio = new Audio("/assets/music/sword_impact.mp3");
       buttonAudio.volume = 0.1;
       buttonAudio.play()
     },
@@ -194,52 +232,50 @@ export default {
   height: 50%;
   width: 100%;
   display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .combat-box {
   height: 100%;
   width: 40%;
-  
+
   display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .damage-box {
   height: 100%;
   width: 20%;
- 
-   display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .damage_animation-parent {
-  width:100%;
+  width: 100%;
   height: 60%;
   background-color: violet;
 }
 
 .attack-button-parent {
-  width:100%;
+  width: 100%;
   height: 40%;
   background-color: teal;
   display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 .attack_button {
   width: auto;
   height: 95%;
   cursor: pointer;
-
 }
 .attack_button:hover {
   height: 100%;
@@ -249,21 +285,20 @@ export default {
   height: 80%;
 }
 
-.items{
+.items {
   height: 100%;
   width: 30%;
   height: 100%;
   background-color: tomato;
-
 }
-.character-and-health{
+.character-and-health {
   height: 100%;
   width: 40%;
   height: 100%;
   display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .character {
@@ -271,14 +306,13 @@ export default {
   width: 100%;
   background-color: maroon;
   display: flex;
-    flex-direction: column;
-    justify-content: space-between; 
-    align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
-.character h2{
+.character h2 {
   margin: 0;
 }
-
 
 @keyframes breathing {
   from {
@@ -290,7 +324,7 @@ export default {
   }
 }
 
-.character_image{ 
+.character_image {
   height: 70%;
   width: auto;
   animation-duration: 1s;
@@ -306,13 +340,11 @@ export default {
   background-color: blueviolet;
 }
 
-
-.damage-dealt{
+.damage-dealt {
   height: 100%;
   width: 30%;
   height: 100%;
   background-color: yellow;
-  
 }
 
 .monster {
@@ -326,18 +358,22 @@ export default {
   background-color: #ca812e;
 }
 
-.slide-enter-active, .slide-leave-active {
+.slide-enter-active,
+.slide-leave-active {
   transition: margin-left 1s;
   transition-timing-function: ease-out;
 }
-.slide-enter, .slide-leave-to  {
+.slide-enter,
+.slide-leave-to {
   margin-left: 400px;
 }
 
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   transition: opacity 2s;
 }
-.fade-enter, .fade-leave-to {
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }
 </style>

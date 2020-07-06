@@ -74,14 +74,15 @@ export default {
       });
     },
     turnToPage_internal(page, page_button) {
+      // Add a "You then went to the bridge" type message
+      if(page_button.button_text != undefined)
+        this.addNarrativeMessage("You " + page_button.button_text.toLowerCase());
+
       this.current_monster = undefined;
       this.current_page = page;
       this.player_location = page.name;
       this.button_links = page.buttons;
       this.pages.push(page);
-
-      // Add a "You then went to the bridge" type message
-      this.addNarrativeMessage("You " + page_button.button_text.toLowerCase());
 
       // initiate whatever game phases are relevant
       if ("fight_monster" in page) {
