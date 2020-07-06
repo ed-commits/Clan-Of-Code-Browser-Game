@@ -147,7 +147,7 @@ export default {
       const playerMagicAtk = this.dealDamagetoMonster(
           this.fight_data.player_total_damage
         )
-            const playerWins = this.monster.health <= 0;
+      const playerWins = this.monster.health <= 0;
       const monsterWins = this.player.health <= 0;
 
       if (playerWins) {
