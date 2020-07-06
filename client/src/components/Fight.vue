@@ -8,7 +8,9 @@
           <h2>{{ player.name }}</h2>
           <img class="character_image" :src="player.image" />
         </div>
-        <div class="health">Health:{{ player.health }}</div>
+        <div class="health-bar">
+          <div class="health" v-bind:style="{ width: playerHealthBar }"></div>
+        </div>
         <div class="magic-button-parent"></div>
       </div>
       <div class="damage-dealt">
@@ -58,8 +60,8 @@
             <audio autoplay v-if="monster" :src="monster.music_file"></audio>
           </transition>
         </div>
-        <div class="health">
-          <span v-if="monster">Health:{{ monster.health }}</span>
+        <div class="health-bar">
+          <div class="health" v-bind:style="{ width: monsterHealthBar }"></div>
         </div>
       </div>
       <div class="items"></div>
@@ -99,19 +101,28 @@ export default {
     eventBus.$on("start-fight", character => {
       this.monster = character.monster;
       this.player = character.player;
-      this.mermanBattleMusic()
-      this.draugrBattleMusic()
+      this.mermanBattleMusic();
+      this.draugrBattleMusic();
     });
   },
+  computed: {
+    playerHealthBar() {
+      return this.player.health + "%";
+    },
+    monsterHealthBar() {
+      if (this.monster == undefined) {
+        return "100%";
+      } else {
+        return this.monster.health + "%";
+      }
+    }
+  },
   methods: {
-
     mermanBattleMusic() {
-      if (this.monster.name === "Merman")
-      this.playMermanBattleMusic()
+      if (this.monster.name === "Merman") this.playMermanBattleMusic();
     },
     draugrBattleMusic() {
-      if (this.monster.name === "Draugr")
-      this.playDraugrBattleMusic()
+      if (this.monster.name === "Draugr") this.playDraugrBattleMusic();
     },
     combatEnd() {
       // check if the fight has ended
@@ -268,7 +279,6 @@ export default {
   background-color: violet;
 }
 
-
 .button_holder {
   display: flex;
   justify-content: space-between;
@@ -304,7 +314,6 @@ export default {
 .magic_button:active {
   width: 80%;
 }
-
 
 .items {
   height: 100%;
@@ -403,5 +412,20 @@ export default {
   width: 80px;
   display: flex;
   flex-direction: row;
+}
+
+.health-bar {
+  border: 2px solid black;
+  background-color: red;
+  width: 120px;
+  text-align: left;
+}
+
+.health {
+  background-color: green;
+  display: inline-block;
+  height: 100%;
+  padding: 0;
+  margin: 0;
 }
 </style>
