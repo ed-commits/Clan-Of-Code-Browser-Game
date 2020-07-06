@@ -230,9 +230,11 @@ export default {
       this.draugrMusic.play()
     },
     stopMermanMusic() {
+      if (this.mermanMusic != undefined)
       this.mermanMusic.pause()
     },
     stopDraugrMusic() {
+      if (this.draugrMusic != undefined)
       this.draugrMusic.pause()
     }
   }
