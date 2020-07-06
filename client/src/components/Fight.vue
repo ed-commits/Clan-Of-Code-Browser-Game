@@ -99,7 +99,6 @@ export default {
     eventBus.$on("start-fight", character => {
       this.monster = character.monster;
       this.player = character.player;
-<<<<<<< HEAD
       this.mermanBattleMusic()
       this.draugrBattleMusic()
     });
@@ -113,18 +112,6 @@ export default {
     draugrBattleMusic() {
       if (this.monster.name === "Draugr")
       this.playDraugrBattleMusic()
-=======
-      this.mermanMusic();
-      this.draugrMusic();
-    });
-  },
-  methods: {
-    mermanMusic() {
-      if (this.monster.name === "Merman") this.playMermanBattleMusic();
-    },
-    draugrMusic() {
-      if (this.monster.name === "Draugr") this.playDraugrBattleMusic();
->>>>>>> d66aa9c25eff3eb5c2c75c4544d7ae29794f1c9f
     },
     combatEnd() {
       // check if the fight has ended
