@@ -270,6 +270,7 @@ export default {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  height: 40%;
 }
 .attack-button-parent {
   background-color: teal;
@@ -289,8 +290,6 @@ export default {
 }
 .attack_button:active {
   width: 80%;
-}
-.magic_button {
 }
 .magic_button {
   cursor: pointer;
