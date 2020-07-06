@@ -9,6 +9,9 @@
           <img class="character_image" :src="player.image" />
         </div>
         <div class="health">Health:{{ player.health }}</div>
+        <div class="magic-button-parent"></div>
+       
+
       </div>
       <div class="damage-dealt">
         <div class="dice">
@@ -18,11 +21,19 @@
       </div>
     </div>
     <div class="damage-box">
+      
       <div class="damage_animation-parent"></div>
+      
       <div class="attack-button-parent">
         <transition name="fade">
           <img class="attack_button" v-if="monster" v-on:click="rollDice" src="/assets/atk.png" />
         </transition>
+      <div class="magic-button-parent">
+
+         <transition name="fade">
+          <img class="magic_button" v-if="monster" v-on:click="rollMagicDice" src="/assets/fireballwithmagic.png" />
+        </transition>
+      </div>
       </div>
     </div>
     <div class="combat-box">
@@ -260,9 +271,9 @@ export default {
   height: 40%;
   background-color: teal;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  flex-direction: left;
+  justify-content: left;
+  align-items: left;
 }
 
 .attack_button {
@@ -277,7 +288,30 @@ export default {
 .attack_button:active {
   height: 80%;
 }
+.magic-button-parent {
+  width: auto;
+  height: 90%;
+  background-color: teal;
+  display: flex;
+  flex-direction: left;
+  justify-content: left;
+  align-items: left;
 
+}
+.magic_button{
+  width: auto;
+  height: 95%;
+  cursor: pointer;
+}
+.magic_button{
+  height: 100%
+}
+.magic_button:hover {
+  height: 105%;
+}
+.magic_button:active {
+  height: 80%;
+}
 .items {
   height: 100%;
   width: 30%;
