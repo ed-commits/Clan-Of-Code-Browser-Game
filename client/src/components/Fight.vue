@@ -136,6 +136,29 @@ export default {
         eventBus.$emit("fight-lost", {});
       }
     },
+    rollMagicDice(){
+      this.fight_data.player_roll1 = this.numGenerator();
+      this.fight_data.player_roll2 = this.numGenerator();
+
+      this.fight_data.player_total_damage =
+        this.fight_data.player_roll1 +
+        this.fight_data.player_roll2;
+
+      const playerMagicAtk = this.dealDamagetoMonster(
+          this.fight_data.player_total_damage
+        )
+            const playerWins = this.monster.health <= 0;
+      const monsterWins = this.player.health <= 0;
+
+      if (playerWins) {
+        this.monster = undefined;
+        eventBus.$emit("fight-won", {});
+      } else if (monsterWins) {
+        this.monster = undefined;
+        eventBus.$emit("fight-lost", {});
+      }
+
+    },
     numGenerator() {
       return Math.ceil(Math.random() * 10);
     },
