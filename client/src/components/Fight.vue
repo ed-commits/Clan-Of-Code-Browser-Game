@@ -38,6 +38,7 @@
             </transition>
             <transition name="slide">
               <img class = "character_image" v-if="monster" :src="monster.img_file"/>
+              <audio autoplay v-if="monster" :src="monster.music_file"></audio>
             </transition>
           </div>
         <div class="health">
@@ -76,11 +77,16 @@ export default {
   mounted() {
     eventBus.$on("start-fight", character => {
       this.monster = character.monster;
-      this.fight_data.monster_health = this.monster.health;
       this.player = character.player;
+      this.battleMusic()
     });
   },
   methods: {
+
+    battleMusic() {
+      if (this.monster.name === "Merman")
+      this.playBattleMusic()
+    },
     
     rollDice() {
       this.playAudio()
@@ -118,7 +124,7 @@ export default {
       if (playerWinsRound) {
         this.dealDamagetoMonster(
           this.fight_data.player_total_damage -
-            this.fight_data.monster_total_damage
+            this.fight_data.monster_total_damage,
         );
       }
 
@@ -128,7 +134,7 @@ export default {
       if (monsterWinsRound) {
         this.dealDamagetoPlayer(
           this.fight_data.monster_total_damage -
-            this.fight_data.player_total_damage
+            this.fight_data.player_total_damage,
         );
       }
 
@@ -138,9 +144,11 @@ export default {
 
       if (playerWins) {
         this.monster = undefined;
+        this.stopMusic();
         eventBus.$emit("fight-won", {});
       } else if (monsterWins) {
         this.monster = undefined;
+        this.stopMusic();
         eventBus.$emit("fight-lost", {});
       }
     },
@@ -167,6 +175,14 @@ export default {
       const buttonAudio = new Audio('/assets/music/sword_impact.mp3')
       buttonAudio.volume = 0.1;
       buttonAudio.play()
+    },
+    playBattleMusic() {
+      this.dragonAudio = new Audio('/assets/music/final_battle.mp3')
+      this.dragonAudio.volume = 0.2;
+      this.dragonAudio.play()
+    },
+    stopMusic() {
+      this.dragonAudio.pause()
     }
   }
 };
