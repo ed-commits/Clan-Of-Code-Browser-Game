@@ -11,10 +11,8 @@
         <div class="health">Health:{{ player.health }}</div>
       </div>
       <div class="damage-dealt">
-        <div v-if="diceRoll">
-          <div class="dicebox">{{ diceRoll.player.d1 }}</div>
-          <div class="dicebox">{{ diceRoll.player.d2 }}</div>
-        </div>
+        <dice :number="diceRoll.player.d1" />
+        <dice :number="diceRoll.player.d2" />
       </div>
     </div>
     <div class="damage-box">
@@ -30,6 +28,8 @@
 
       <div class="damage-dealt">
         <i v-if="monster">"{{ monster.taunt }}"</i>
+        <dice :number="diceRoll.monster.d1" />
+        <dice :number="diceRoll.monster.d2" />
       </div>
       <div class="character-and-health">
         <div class="character">
@@ -51,9 +51,13 @@
 
 <script>
 import { eventBus } from "../main.js";
+import Dice from "./Dice.vue";
 
 export default {
   props: ["player"],
+  components: {
+    dice: Dice
+  },
   data() {
     return {
       monster: undefined,
@@ -67,7 +71,10 @@ export default {
         damage_modifier: 0,
         damage_dealt: 0
       },
-      diceRoll: undefined
+      diceRoll: {
+        player: { d1: 0, d2: 0 },
+        monster: { d1: 0, d2: 0 }
+      }
     };
   },
   mounted() {
@@ -87,6 +94,10 @@ export default {
       this.fight_data.player_roll2 = this.numGenerator();
       this.fight_data.monster_roll1 = this.numGenerator();
       this.fight_data.monster_roll2 = this.numGenerator();
+      this.diceRoll.player.d1 = this.fight_data.player_roll1;
+      this.diceRoll.player.d2 = this.fight_data.player_roll2;
+      this.diceRoll.monster.d1 = this.fight_data.monster_roll1;
+      this.diceRoll.monster.d2 = this.fight_data.monster_roll2;
 
       // total up the players damage modifier
       this.player.items.forEach(item => {
@@ -312,12 +323,5 @@ export default {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
-}
-
-.dicebox {
-  border: 1px solid black;
-  width: 30px;
-  height: 30px;
-  text-align: center;
 }
 </style>
