@@ -98,17 +98,17 @@ export default {
     eventBus.$on("start-fight", character => {
       this.monster = character.monster;
       this.player = character.player;
-      this.mermanMusic()
-      this.draugrMusic()
+      this.mermanBattleMusic()
+      this.draugrBattleMusic()
     });
   },
   methods: {
 
-    mermanMusic() {
+    mermanBattleMusic() {
       if (this.monster.name === "Merman")
       this.playMermanBattleMusic()
     },
-    draugrMusic() {
+    draugrBattleMusic() {
       if (this.monster.name === "Draugr")
       this.playDraugrBattleMusic()
     },
