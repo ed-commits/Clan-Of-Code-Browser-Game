@@ -101,8 +101,10 @@ export default {
     eventBus.$on("start-fight", character => {
       this.monster = character.monster;
       this.player = character.player;
-      this.mermanBattleMusic();
-      this.draugrBattleMusic();
+      this.mermanBattleMusic()
+      this.draugrBattleMusic()
+      this.ghostBattleMusic()
+      this.dragonBattleMusic()
     });
   },
   computed: {
@@ -124,6 +126,15 @@ export default {
     draugrBattleMusic() {
       if (this.monster.name === "Draugr") this.playDraugrBattleMusic();
     },
+    ghostBattleMusic() {
+      if (this.monster.name === "Ghost")
+      this.playGhostBattleMusic()
+    },
+    dragonBattleMusic() {
+      if (this.monster.name === "Dragon")
+      this.playDragonBattleMusic()
+    },
+
     combatEnd() {
       // check if the fight has ended
       const playerWins = this.monster.health <= 0;
@@ -134,11 +145,15 @@ export default {
         eventBus.$emit("fight-won", {});
         this.stopMermanMusic();
         this.stopDraugrMusic();
+        this.stopGhostMusic();
+        this.stopDragonMusic();
       } else if (monsterWins) {
         this.monster = undefined;
         eventBus.$emit("fight-lost", {});
         this.stopMermanMusic();
         this.stopDraugrMusic();
+        this.stopGhostMusic();
+        this.stopDragonMusic();
       }
     },
     rollDice() {
@@ -220,7 +235,7 @@ export default {
     },
     playAudio() {
       const buttonAudio = new Audio("/assets/music/sword_impact.mp3");
-      buttonAudio.volume = 0.1;
+      buttonAudio.volume = 0.05;
       buttonAudio.play();
     },
     playMermanBattleMusic() {
@@ -233,11 +248,27 @@ export default {
       this.draugrMusic.volume = 0.2;
       this.draugrMusic.play();
     },
+    playGhostBattleMusic() {
+      this.ghostMusic = new Audio("/assets/music/ghost_battle.mp3")
+      this.ghostMusic.volume = 0.2;
+      this.ghostMusic.play();
+    },
+    playDragonBattleMusic() {
+      this.dragonMusic = new Audio("/assets/music/dragon_battle.mp3")
+      this.dragonMusic.volume = 0.2;
+      this.dragonMusic.play();
+    },
     stopMermanMusic() {
       if (this.mermanMusic != undefined) this.mermanMusic.pause();
     },
     stopDraugrMusic() {
       if (this.draugrMusic != undefined) this.draugrMusic.pause();
+    },
+    stopGhostMusic() {
+      if (this.ghostMusic != undefined) this.ghostMusic.pause();
+    },
+    stopDragonMusic() {
+      if (this.dragonMusic != undefined) this.dragonMusic.pause();
     }
   }
 };
