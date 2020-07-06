@@ -157,7 +157,7 @@ export default {
       }
     },
     rollDice() {
-      this.playAudio();
+      this.playSwordAudio();
       eventBus.$emit("Attack", {});
 
       // perform the dice rolls
@@ -208,6 +208,7 @@ export default {
       this.combatEnd();
     },
     rollMagicDice() {
+      this.playFireballAudio();
       this.fight_data.player_roll1 = this.numGenerator();
 
       const playerMagicAtk = this.dealDamagetoMonster(
@@ -233,10 +234,15 @@ export default {
     dealDamagetoPlayer(damageAmount) {
       this.player.health -= damageAmount;
     },
-    playAudio() {
-      const buttonAudio = new Audio("/assets/music/sword_impact.mp3");
-      buttonAudio.volume = 0.05;
-      buttonAudio.play();
+    playSwordAudio() {
+      const buttonSwordAudio = new Audio("/assets/music/sword_impact.mp3");
+      buttonSwordAudio.volume = 0.05;
+      buttonSwordAudio.play();
+    },
+    playFireballAudio() {
+      const buttonFireballAudio = new Audio("/assets/music/fireball_sound.mp3");
+      buttonFireballAudio.volume = 0.05;
+      buttonFireballAudio.play();
     },
     playMermanBattleMusic() {
       this.mermanMusic = new Audio("/assets/music/merman_battle.mp3");
