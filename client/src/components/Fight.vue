@@ -32,7 +32,6 @@
         <dice :number="diceRoll.monster.d2" />
       </div>
       <div class="character-and-health">
-<<<<<<< HEAD
         
           <div class="character" >  
             <transition name="fade">
@@ -43,16 +42,6 @@
               <audio autoplay v-if="monster" :src="monster.music_file"></audio>
             </transition>
           </div>
-=======
-        <div class="character">
-          <transition name="fade">
-            <h2 v-if="monster">{{ monster.name }}</h2>
-          </transition>
-          <transition name="slide">
-            <img class="character_image" v-if="monster" :src="monster.img_file" />
-          </transition>
-        </div>
->>>>>>> bcc615848428703473c684ec58416d197f7788fd
         <div class="health">
           <span v-if="monster">Health:{{ monster.health }}</span>
         </div>
