@@ -305,7 +305,7 @@ export default {
   background-color: teal;
   display: flex;
   flex-direction: left;
-  justify-content: flex-end;
+  justify-content: left;
   align-items: left;
 
 }
