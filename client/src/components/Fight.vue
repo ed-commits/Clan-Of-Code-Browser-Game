@@ -23,16 +23,17 @@
     <div class="damage-box">
       
       <div class="damage_animation-parent"></div>
-      
+      <div class="button_holder">
       <div class="attack-button-parent">
         <transition name="fade">
           <img class="attack_button" v-if="monster" v-on:click="rollDice" src="/assets/atk.png" />
         </transition>
-      <div class="magic-button-parent">
+      </div>
+        <div class="magic-button-parent">
          <transition name="fade">
           <img class="magic_button" v-if="monster" v-on:click="rollMagicDice" src="/assets/fireballwithmagic.png" />
         </transition>
-      </div>
+        </div>
       </div>
     </div>
     <div class="combat-box">
@@ -111,7 +112,23 @@ export default {
       if (this.monster.name === "Draugr")
       this.playDraugrBattleMusic()
     },
-    
+    combatEnd() {
+            // check if the fight has ended
+      const playerWins = this.monster.health <= 0;
+      const monsterWins = this.player.health <= 0;
+
+      if (playerWins) {
+        this.monster = undefined;
+        eventBus.$emit("fight-won", {});
+        this.stopMermanMusic();
+        this.stopDraugrMusic();
+      } else if (monsterWins) {
+        this.monster = undefined;
+        eventBus.$emit("fight-lost", {});
+        this.stopMermanMusic();
+        this.stopDraugrMusic();
+      }
+    },
     rollDice() {
       this.playAudio();
       eventBus.$emit("Attack", {});
@@ -161,22 +178,8 @@ export default {
             this.fight_data.player_total_damage,
         );
       }
+      this.combatEnd()
 
-      // check if the fight has ended
-      const playerWins = this.monster.health <= 0;
-      const monsterWins = this.player.health <= 0;
-
-      if (playerWins) {
-        this.monster = undefined;
-        eventBus.$emit("fight-won", {});
-        this.stopMermanMusic();
-        this.stopDraugrMusic();
-      } else if (monsterWins) {
-        this.monster = undefined;
-        eventBus.$emit("fight-lost", {});
-        this.stopMermanMusic();
-        this.stopDraugrMusic();
-      }
     },
     rollMagicDice(){
       this.fight_data.player_roll1 = this.numGenerator();
@@ -184,16 +187,7 @@ export default {
       const playerMagicAtk = this.dealDamagetoMonster(
           this.fight_data.player_roll1
         )
-      const playerWins = this.monster.health <= 0;
-      const monsterWins = this.player.health <= 0;
-
-      if (playerWins) {
-        this.monster = undefined;
-        eventBus.$emit("fight-won", {});
-      } else if (monsterWins) {
-        this.monster = undefined;
-        eventBus.$emit("fight-lost", {});
-      }
+      this.combatEnd()
 
     },
     numGenerator() {
@@ -274,20 +268,19 @@ export default {
   height: 60%;
   background-color: violet;
 }
-
+.button_holder{
+  display: flex;
+  justify-content: space-between;
+}
 .attack-button-parent {
-  width: 100%;
+  width: 50%;
   height: 40%;
   background-color: teal;
-  display: flex;
-  flex-direction: left;
-  justify-content: left;
-  align-items: left;
+
 }
 
 .attack_button {
   width: auto;
-  height: 95%;
   cursor: pointer;
 }
 .attack_button:hover {
@@ -298,13 +291,9 @@ export default {
   height: 80%;
 }
 .magic-button-parent {
-  width: auto;
-  height: 90%;
+  width: 50%;
   background-color: teal;
-  display: flex;
-  flex-direction: left;
-  justify-content: left;
-  align-items: left;
+
 
 }
 .magic_button{
