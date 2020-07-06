@@ -28,9 +28,12 @@ export default {
 
 <style>
 .dicebox {
-  border: 1px solid black;
+    background: rgb(223, 167, 13);
+  border: 2px solid black;
   width: 30px;
   height: 30px;
+  margin: 3px;
   text-align: center;
+  font-size: 1.3rem;
 }
 </style>

@@ -11,8 +11,10 @@
         <div class="health">Health:{{ player.health }}</div>
       </div>
       <div class="damage-dealt">
+        <div class="dice">
         <dice :number="diceRoll.player.d1" />
         <dice :number="diceRoll.player.d2" />
+        </div>
       </div>
     </div>
     <div class="damage-box">
@@ -28,8 +30,10 @@
 
       <div class="damage-dealt">
         <i v-if="monster">"{{ monster.taunt }}"</i>
+        <div class="dice">
         <dice :number="diceRoll.monster.d1" />
         <dice :number="diceRoll.monster.d2" />
+        </div>
       </div>
       <div class="character-and-health">
         
@@ -364,5 +368,12 @@ export default {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
+}
+
+.dice {
+  margin: auto;
+  width: 80px;
+  display: flex;
+  flex-direction: row;
 }
 </style>
