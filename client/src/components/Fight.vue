@@ -83,14 +83,19 @@ export default {
     eventBus.$on("start-fight", character => {
       this.monster = character.monster;
       this.player = character.player;
-      this.battleMusic()
+      this.mermanMusic()
+      this.draugrMusic()
     });
   },
   methods: {
 
-    battleMusic() {
+    mermanMusic() {
       if (this.monster.name === "Merman")
-      this.playBattleMusic()
+      this.playMermanBattleMusic()
+    },
+    draugrMusic() {
+      if (this.monster.name === "Draugr")
+      this.playDraugrBattleMusic()
     },
     
     rollDice() {
@@ -149,12 +154,14 @@ export default {
 
       if (playerWins) {
         this.monster = undefined;
-        this.stopMusic();
         eventBus.$emit("fight-won", {});
+        this.stopMermanMusic();
+        this.stopDraugrMusic();
       } else if (monsterWins) {
         this.monster = undefined;
-        this.stopMusic();
         eventBus.$emit("fight-lost", {});
+        this.stopMermanMusic();
+        this.stopDraugrMusic();
       }
     },
     rollMagicDice(){
@@ -203,13 +210,21 @@ export default {
       buttonAudio.volume = 0.1;
       buttonAudio.play()
     },
-    playBattleMusic() {
-      this.dragonAudio = new Audio('/assets/music/final_battle.mp3')
-      this.dragonAudio.volume = 0.2;
-      this.dragonAudio.play()
+    playMermanBattleMusic() {
+      this.mermanMusic = new Audio('/assets/music/merman_battle.mp3')
+      this.mermanMusic.volume = 0.2;
+      this.mermanMusic.play()
     },
-    stopMusic() {
-      this.dragonAudio.pause()
+    playDraugrBattleMusic() {
+      this.draugrMusic = new Audio('/assets/music/draugr_battle.mp3')
+      this.draugrMusic.volume = 0.2;
+      this.draugrMusic.play()
+    },
+    stopMermanMusic() {
+      this.mermanMusic.pause()
+    },
+    stopDraugrMusic() {
+      this.draugrMusic.pause()
     }
   }
 };

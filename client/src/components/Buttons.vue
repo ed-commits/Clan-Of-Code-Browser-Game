@@ -11,7 +11,7 @@ export default {
     buttonClicked() {
       eventBus.$emit("turn-to-page", this.button);
       const pageTurn = new Audio('/assets/music/Page_Turn.mp3')
-      pageTurn.volume = 0.2;
+      pageTurn.volume = 1.0;
       pageTurn.play()
     }
   }
