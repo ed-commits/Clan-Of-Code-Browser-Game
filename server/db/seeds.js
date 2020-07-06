@@ -80,7 +80,7 @@ db.pages.insertMany([
         fight_monster: "Draugr", 
         destination_after_fight: "mountain_trail",
         map_coords: [18,96],
-        map_marker_icon: "/bridge.svg"
+        map_marker_icon: "/bridge.svg",
     },
     {
         name: "mountain_trail",
@@ -216,7 +216,8 @@ db.monsters.insertMany([
         name: "Dragon",
         taunt: "GET AWAY FROM MY TREASURES!",
         health: 100,
-        img_file: "assets/Dragon.png"
+        img_file: "assets/Dragon.png",
+        music_file: "assets/music/final_battle.mp3"
     }
     
 ]);

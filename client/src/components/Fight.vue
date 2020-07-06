@@ -14,10 +14,8 @@
 
       </div>
       <div class="damage-dealt">
-        <div v-if="diceRoll">
-          <div class="dicebox">{{ diceRoll.player.d1 }}</div>
-          <div class="dicebox">{{ diceRoll.player.d2 }}</div>
-        </div>
+        <dice :number="diceRoll.player.d1" />
+        <dice :number="diceRoll.player.d2" />
       </div>
     </div>
     <div class="damage-box">
@@ -41,16 +39,20 @@
 
       <div class="damage-dealt">
         <i v-if="monster">"{{ monster.taunt }}"</i>
+        <dice :number="diceRoll.monster.d1" />
+        <dice :number="diceRoll.monster.d2" />
       </div>
       <div class="character-and-health">
-        <div class="character">
-          <transition name="fade">
-            <h2 v-if="monster">{{ monster.name }}</h2>
-          </transition>
-          <transition name="slide">
-            <img class="character_image" v-if="monster" :src="monster.img_file" />
-          </transition>
-        </div>
+        
+          <div class="character" >  
+            <transition name="fade">
+              <h2 v-if="monster">{{ monster.name }}</h2>
+            </transition>
+            <transition name="slide">
+              <img class = "character_image" v-if="monster" :src="monster.img_file"/>
+              <audio autoplay v-if="monster" :src="monster.music_file"></audio>
+            </transition>
+          </div>
         <div class="health">
           <span v-if="monster">Health:{{ monster.health }}</span>
         </div>
@@ -62,9 +64,13 @@
 
 <script>
 import { eventBus } from "../main.js";
+import Dice from "./Dice.vue";
 
 export default {
   props: ["player"],
+  components: {
+    dice: Dice
+  },
   data() {
     return {
       monster: undefined,
@@ -78,17 +84,26 @@ export default {
         damage_modifier: 0,
         damage_dealt: 0
       },
-      diceRoll: undefined
+      diceRoll: {
+        player: { d1: 0, d2: 0 },
+        monster: { d1: 0, d2: 0 }
+      }
     };
   },
   mounted() {
     eventBus.$on("start-fight", character => {
       this.monster = character.monster;
-      this.fight_data.monster_health = this.monster.health;
       this.player = character.player;
+      this.battleMusic()
     });
   },
   methods: {
+
+    battleMusic() {
+      if (this.monster.name === "Merman")
+      this.playBattleMusic()
+    },
+    
     rollDice() {
       this.playAudio();
       eventBus.$emit("Attack", {});
@@ -98,6 +113,10 @@ export default {
       this.fight_data.player_roll2 = this.numGenerator();
       this.fight_data.monster_roll1 = this.numGenerator();
       this.fight_data.monster_roll2 = this.numGenerator();
+      this.diceRoll.player.d1 = this.fight_data.player_roll1;
+      this.diceRoll.player.d2 = this.fight_data.player_roll2;
+      this.diceRoll.monster.d1 = this.fight_data.monster_roll1;
+      this.diceRoll.monster.d2 = this.fight_data.monster_roll2;
 
       // total up the players damage modifier
       this.player.items.forEach(item => {
@@ -121,7 +140,7 @@ export default {
       if (playerWinsRound) {
         this.dealDamagetoMonster(
           this.fight_data.player_total_damage -
-            this.fight_data.monster_total_damage
+            this.fight_data.monster_total_damage,
         );
       }
 
@@ -131,7 +150,7 @@ export default {
       if (monsterWinsRound) {
         this.dealDamagetoPlayer(
           this.fight_data.monster_total_damage -
-            this.fight_data.player_total_damage
+            this.fight_data.player_total_damage,
         );
       }
 
@@ -141,9 +160,11 @@ export default {
 
       if (playerWins) {
         this.monster = undefined;
+        this.stopMusic();
         eventBus.$emit("fight-won", {});
       } else if (monsterWins) {
         this.monster = undefined;
+        this.stopMusic();
         eventBus.$emit("fight-lost", {});
       }
     },
@@ -191,7 +212,15 @@ export default {
     playAudio() {
       const buttonAudio = new Audio("/assets/music/sword_impact.mp3");
       buttonAudio.volume = 0.1;
-      buttonAudio.play();
+      buttonAudio.play()
+    },
+    playBattleMusic() {
+      this.dragonAudio = new Audio('/assets/music/final_battle.mp3')
+      this.dragonAudio.volume = 0.2;
+      this.dragonAudio.play()
+    },
+    stopMusic() {
+      this.dragonAudio.pause()
     }
   }
 };
@@ -369,12 +398,5 @@ export default {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
-}
-
-.dicebox {
-  border: 1px solid black;
-  width: 30px;
-  height: 30px;
-  text-align: center;
 }
 </style>
