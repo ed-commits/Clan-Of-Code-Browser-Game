@@ -176,6 +176,7 @@ export default {
        return new Promise(resolve => setTimeout(resolve, ms));
     },
     async rollDice() {
+      this.playSwordAudio();
       eventBus.$emit("Attack", {});
 
       // perform the dice rolls
@@ -203,10 +204,11 @@ export default {
       this.fight_data.monster_total_damage =
         this.fight_data.monster_roll1 + this.fight_data.monster_roll2;
       await this.sleep(2000);
-      this.playAudio();
+      // this.playAudio();
 
       this.show_player_roll = true
       this.show_monster_roll = true
+      console.log(this.show_player_roll)
       // deal damage based on who rolled best this round
       const playerWinsRound =
         this.fight_data.player_total_damage >
@@ -232,6 +234,7 @@ export default {
 
     
     rollMagicDice() {
+      this.playFireballAudio();
       this.fight_data.player_roll1 = this.numGenerator();
 
       const playerMagicAtk = this.dealDamagetoMonster(
@@ -258,10 +261,15 @@ export default {
     dealDamagetoPlayer(damageAmount) {
       this.player.health -= damageAmount;
     },
-    playAudio() {
-      const buttonAudio = new Audio("/assets/music/sword_impact.mp3");
-      buttonAudio.volume = 0.05;
-      buttonAudio.play();
+    playSwordAudio() {
+      const buttonSwordAudio = new Audio("/assets/music/sword_impact.mp3");
+      buttonSwordAudio.volume = 0.05;
+      buttonSwordAudio.play();
+    },
+    playFireballAudio() {
+      const buttonFireballAudio = new Audio("/assets/music/fireball_sound.mp3");
+      buttonFireballAudio.volume = 0.05;
+      buttonFireballAudio.play();
     },
     playMermanBattleMusic() {
       this.mermanMusic = new Audio("/assets/music/merman_battle.mp3");
