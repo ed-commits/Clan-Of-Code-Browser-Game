@@ -9,7 +9,10 @@
         </div>-->
         <div class="character">
           <h2>{{ player.name }}</h2>
-          <img class="character_image" :src="player.image" />
+          <div class="character_image_parent">
+            <img class="character_image" :src="player.image" />
+            <img class= "hero_slash" src="/assets/hero_slash.png"/>
+          </div>
           
         </div>
         <healthbar :amount="this.player.health" max="100" />
@@ -80,7 +83,9 @@
           </transition>
           <transition name="slide">
             <img class="character_image" v-if="monster" :src="monster.img_file" />
-            <!-- <audio autoplay v-if="monster" :src="monster.music_file"></audio> -->
+            <img class= "monster_slash" v-if="monster" src="/assets/monster_slash.png"/>
+
+          
           </transition>
           <img class="fire_gif" v-if="this.show_fireball" src="/assets/Fireball_animation.gif" />
         </div>
@@ -472,16 +477,32 @@ export default {
 
 @keyframes breathing {
   from {
-    height: 70%;
+    height: 100%;
   }
 
   to {
-    height: 68%;
+    height: 95%;
   }
+}
+.character_image_parent{
+  height: 70%;
+  width: auto;
+  position: relative;
+}
+
+.hero_slash {
+  width: 30%;
+  height: auto;
+  position: absolute;
+  left: 50%;
+  margin-left: -50%;
+  top: 50%;
+  margin-top: -50%;
+  z-index: 5;
 }
 
 .character_image {
-  height: 70%;
+  height: 100%;
   width: auto;
   animation-duration: 1s;
   animation-name: breathing;
@@ -489,6 +510,7 @@ export default {
   animation-direction: alternate;
   /* animation-timing-function: ease-in-out; */
   z-index: 2;
+  position: absolute;
 }
 
 .damage-dealt {
@@ -548,11 +570,5 @@ export default {
   flex-direction: row;
 }
 
-/* .background-image {
-  height: 50%;
-  padding: 0;
-  margin: 0;
-  position: absolute;
-  z-index: 1;
-} */
+
 </style>
