@@ -50,22 +50,19 @@
             <img class="attack_button" v-if="monster" v-on:click="rollDice" src="/assets/atk.png" />
           </transition>
         </div>
-        <div class="magic-button-parent" v-if="monster">
+        <div class="magic-button-parent">
           <transition name="fade">
             <img
               class="magic_button"
               style="z-index: 2; position: absolute;"
-              v-if="show_fireball_button"
-              v-on:click="rollMagicDice"
+              v-if="this.show_fireball_button"
+              v-on:click="this.rollMagicDice"
               src="/assets/fireballwithmagic.png"
             />
           </transition>
-          <img
-            class="magic_button_used"
-            style="z-index: 1; position: absolute;"
-            v_if="show_used_fireball_button"
-            src="/assets/fireball_used.png"
-          />
+          <transition name="fade">
+            <img class="magic_button_used" v-if="monster" src="/assets/fireball_used.png"/>
+          </transition>
         </div>
       </div>
     </div>
@@ -438,7 +435,8 @@ export default {
   width: 50%;
 }
 .magic-button-parent {
-  width: 100%;
+  width: 50%;
+  display: flex;
 }
 
 .attack_button {
@@ -471,6 +469,8 @@ export default {
 .magic_button_used {
   height: 18%;
   width: auto;
+  z-index: 1; 
+  position: absolute;
   
 }
 .items {
