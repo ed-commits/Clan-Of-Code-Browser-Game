@@ -10,7 +10,7 @@
         <div class="character">
           <h2>{{ player.name }}</h2>
           <img class="character_image" :src="player.image" />
-          <div >
+          
         </div>
         <healthbar :amount="this.player.health" max="100" />
       </div>
