@@ -117,6 +117,7 @@ export default {
   },
   data() {
     return {
+      roundInProgress: false,
       monster: undefined,
       fight_data: {
         player_roll1: 0,
@@ -192,11 +193,16 @@ export default {
         this.stopGhostMusic();
         this.stopDragonMusic();
       }
+
+      this.roundInProgress = false;
     },
     sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
     },
     async rollDice() {
+      if(this.roundInProgress) return;
+      this.roundInProgress = true;
+
       this.playSwordAudio();
       eventBus.$emit("Attack", {});
 
