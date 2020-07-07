@@ -60,7 +60,7 @@
             />
           </transition>
           <img
-            class="magic_button"
+            class="magic_button_used"
             v_if="show_used_fireball_button"
             src="/assets/fireball_used.png"
           />
@@ -135,9 +135,10 @@ export default {
       show_monster_roll: false,
       show_damage_excess: false,
       show_fireball: false,
-      show_fireball_button: true,
-      show_used_fireball: false,
+      show_fireball_button: false,
+      show_used_fireball: false
       show_hero_slash: false,
+
     };
   },
   mounted() {
@@ -149,6 +150,7 @@ export default {
       this.draugrBattleMusic();
       this.ghostBattleMusic();
       this.dragonBattleMusic();
+      this.show_fireball_button = true
     });
   },
   methods: {
@@ -445,6 +447,8 @@ export default {
   cursor: pointer;
   height: 90%;
   width: auto;
+  z-index: 5;
+
 }
 .magic_button:hover {
   height: 100%;
@@ -454,7 +458,11 @@ export default {
   height: 80%;
   width: auto;
 }
-
+.magic_button_used {
+  height: 90%;
+  width: auto;
+  z-index: 3;
+}
 .items {
   height: 100%;
   width: 30%;
