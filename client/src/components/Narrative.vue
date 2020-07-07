@@ -1,8 +1,7 @@
 <template>
-  <div class="narrative">
+  <div class="narrative scroll-background">
     <storymap :pages="pages" class="story-map" >
     </storymap>
-
     <div class="scroll">
       <page v-for=" (page, index) in pages" :key="index" :page="page" />
     </div>
@@ -62,12 +61,19 @@ export default {
   outline: 2px solid black;
 }
 .scroll {
-  outline: 2px solid black;
+  /* outline: 2px solid black; */
   height: 40vh;
-  width: 60%;
-  background-color: rgba(255, 235, 146, 0.801);
+  width: calc(60% + 40px);
+  /* background-color: rgba(255, 235, 146, 0.801); */
   overflow-y: scroll;
   box-sizing: border-box;
   padding: 10px;
+}
+
+.scroll-background {
+  background-image: url("/assets/Scroll.png");
+  background-size: cover;
+  width: 70%;
+  height: 50%;
 }
 </style>

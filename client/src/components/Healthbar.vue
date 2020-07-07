@@ -44,4 +44,20 @@ export default {
 </script>
 
 <style>
+.health-bar {
+  border: 2px solid black;
+  background-color: red;
+  width: 80%;
+  text-align: left;
+  height: 25px;
+  margin-bottom: 3px;
+}
+
+.health {
+  background-color: green;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  z-index: 2;
+}
 </style>

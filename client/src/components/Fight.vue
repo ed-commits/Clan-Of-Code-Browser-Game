@@ -142,28 +142,6 @@ export default {
       this.dragonBattleMusic();
     });
   },
-  /*
-  computed: {
-    playerHealthBar() {
-      let percentage = this.player.health;
-      if (percentage < 0) percentage = 0;
-      if (percentage > 100) percentage = 100;
-      return percentage;
-    },
-    monsterHealthBar() {
-      let percentage = 100;
-
-      if (!(this.monster == undefined)) {
-        percentage = Math.round(
-          (100 * this.monster.health) / this.monster.maxHealth
-        );
-      }
-      if (percentage < 0) percentage = 0;
-      if (percentage > 100) percentage = 100;
-
-      return percentage;
-    }
-  },*/
   methods: {
     mermanBattleMusic() {
       if (this.monster.name === "Merman") this.playMermanBattleMusic();
@@ -513,12 +491,6 @@ export default {
   z-index: 2;
 }
 
-.health {
-  height: 30%;
-  width: 100%;
-  /* background-color: blueviolet; */
-}
-
 .damage-dealt {
   height: 100%;
   width: 30%;
@@ -574,23 +546,6 @@ export default {
   width: 80px;
   display: flex;
   flex-direction: row;
-}
-
-.health-bar {
-  border: 2px solid black;
-  background-color: red;
-  width: 80%;
-  text-align: left;
-  height: 10%;
-  margin-bottom: 3px;
-}
-
-.health {
-  background-color: green;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  z-index: 2;
 }
 
 /* .background-image {
