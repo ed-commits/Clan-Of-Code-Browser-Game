@@ -11,12 +11,10 @@
           <h2>{{ player.name }}</h2>
           <div class="character_image_parent">
             <transition name="heroslash">
-              <img class= "hero_slash" v-if="this.show_hero_slash" src="/assets/hero_slash.svg"/>
+              <img class="hero_slash" v-if="this.show_hero_slash" src="/assets/hero_slash.svg" />
             </transition>
             <img class="character_image" :src="player.image" />
-         
           </div>
-          
         </div>
         <healthbar :amount="player.health" max="100" />
       </div>
@@ -26,6 +24,12 @@
           <dice :number="diceRoll.player.d1" />
           <dice :number="diceRoll.player.d2" />
         </div>
+        <ul>
+          <li v-for="(item, key) in player.items" :key="key">
+            <img :src="item.img_file" width="32px" />
+            {{ item.name }}
+            </li>
+        </ul>
       </div>
     </div>
     <div class="damage-box">
@@ -37,8 +41,8 @@
         </div>
         <div class="damage_excess">
           <transition name="damage_excess_animation">
-           <span v-if="this.show_damage_excess">+{{this.fight_data.damage_dealt}}</span>
-          </transition> 
+            <span v-if="this.show_damage_excess">+{{this.fight_data.damage_dealt}}</span>
+          </transition>
         </div>
         <div class="roll_total">
           <span v-if="this.show_monster_roll">{{this.fight_data.monster_total_damage}}</span>
@@ -88,8 +92,7 @@
           </transition>
           <transition name="slide">
             <img class="character_image" v-if="monster" :src="monster.img_file" />
-            <img class= "monster_slash" v-if="monster" src="/assets/monster_slash.svg"/>
-          
+            <img class="monster_slash" v-if="monster" src="/assets/monster_slash.svg" />
           </transition>
           <img class="fire_gif" v-if="this.show_fireball" src="/assets/Fireball_animation.gif" />
         </div>
@@ -139,8 +142,7 @@ export default {
       show_fireball: false,
       show_fireball_button: false,
       show_used_fireball: false,
-      show_hero_slash: false,
-
+      show_hero_slash: false
     };
   },
   mounted() {
@@ -148,7 +150,7 @@ export default {
       this.monster = character.monster;
       this.monster.maxHealth = this.monster.health;
       this.player = character.player;
-      this.show_fireball_button = true
+      this.show_fireball_button = true;
 
       this.mermanBattleMusic();
       this.draugrBattleMusic();
@@ -171,9 +173,8 @@ export default {
     },
 
     combatEnd() {
-      if(this.monster == undefined)
-        return;
-      
+      if (this.monster == undefined) return;
+
       // check if the fight has ended
       const playerWins = this.monster.health <= 0;
       const monsterWins = this.player.health <= 0;
@@ -200,7 +201,7 @@ export default {
       return new Promise(resolve => setTimeout(resolve, ms));
     },
     async rollDice() {
-      if(this.roundInProgress) return;
+      if (this.roundInProgress) return;
       this.roundInProgress = true;
 
       this.playSwordAudio();
@@ -231,8 +232,18 @@ export default {
       this.fight_data.monster_total_damage =
         this.fight_data.monster_roll1 + this.fight_data.monster_roll2;
       await this.sleep(2000);
-      this.fight_data.damage_dealt = Math.abs(this.fight_data.player_total_damage-this.fight_data.monster_total_damage)
-      console.log("player total damage:", this.fight_data.player_total_damage, "monster total damage:" , this.fight_data.monster_total_damage, "damage dealt:", this.fight_data.damage_dealt)
+      this.fight_data.damage_dealt = Math.abs(
+        this.fight_data.player_total_damage -
+          this.fight_data.monster_total_damage
+      );
+      console.log(
+        "player total damage:",
+        this.fight_data.player_total_damage,
+        "monster total damage:",
+        this.fight_data.monster_total_damage,
+        "damage dealt:",
+        this.fight_data.damage_dealt
+      );
 
       const playerWinsRound =
         this.fight_data.player_total_damage >
@@ -241,20 +252,18 @@ export default {
       const monsterWinsRound =
         this.fight_data.player_total_damage <
         this.fight_data.monster_total_damage;
-        
 
       this.show_player_roll = true;
       this.show_monster_roll = true;
-      await this.sleep(2000)
+      await this.sleep(2000);
       this.show_damage_excess = true;
-      await this.sleep(1000)
+      await this.sleep(1000);
       if (playerWinsRound) this.show_hero_slash = true;
-      await this.sleep(4000)
+      await this.sleep(4000);
       this.show_hero_slash = false;
       this.show_player_roll = false;
       this.show_monster_roll = false;
       this.show_damage_excess = false;
-      
 
       if (playerWinsRound) {
         this.dealDamagetoMonster(
@@ -263,7 +272,6 @@ export default {
         );
       }
 
-      
       if (monsterWinsRound) {
         this.dealDamagetoPlayer(
           this.fight_data.monster_total_damage -
@@ -274,9 +282,9 @@ export default {
     },
 
     async rollMagicDice() {
-      if(this.roundInProgress) return;
+      if (this.roundInProgress) return;
       this.roundInProgress = true;
-      
+
       this.show_fireball = true;
       this.show_fireball_button = false;
       this.show_used_fireball_button = true;
@@ -305,12 +313,10 @@ export default {
       eventBus.$emit("fight-lost", {});
     },
     dealDamagetoMonster(damageAmount) {
-      if(this.monster != undefined)
-        this.monster.health -= damageAmount;
+      if (this.monster != undefined) this.monster.health -= damageAmount;
     },
     dealDamagetoPlayer(damageAmount) {
-      if(this.player != undefined)
-        this.player.health -= damageAmount;
+      if (this.player != undefined) this.player.health -= damageAmount;
     },
     playSwordAudio() {
       const buttonSwordAudio = new Audio("/assets/music/sword_impact.mp3");
@@ -458,7 +464,6 @@ export default {
   cursor: pointer;
   height: 18%;
   width: auto;
-
 }
 .magic_button:hover {
   height: 19%;
@@ -471,7 +476,6 @@ export default {
 .magic_button_used {
   height: 18%;
   width: auto;
-  
 }
 .items {
   height: 100%;
@@ -513,35 +517,36 @@ export default {
     height: 95%;
   }
 }
-.character_image_parent{
+.character_image_parent {
   height: 70%;
   width: auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  
 }
 
 .hero_slash {
-    width: auto;
-    height: 30%;
-    z-index: 0;
-    margin-bottom: -60%;
-    animation-duration: 0.05s;
-    animation-name: slash_flash;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-    margin-left: 2500%;
+  width: auto;
+  height: 30%;
+  z-index: 0;
+  margin-bottom: -60%;
+  animation-duration: 0.05s;
+  animation-name: slash_flash;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  margin-left: 2500%;
 }
 
 @keyframes slash_flash {
   from {
-    filter: brightness(0) saturate(100%) invert(78%) sepia(46%) saturate(615%) hue-rotate(159deg) brightness(108%) contrast(103%);
+    filter: brightness(0) saturate(100%) invert(78%) sepia(46%) saturate(615%)
+      hue-rotate(159deg) brightness(108%) contrast(103%);
   }
 
   to {
-    filter: brightness(0) saturate(100%) invert(20%) sepia(56%) saturate(6020%) hue-rotate(293deg) brightness(96%) contrast(125%);
+    filter: brightness(0) saturate(100%) invert(20%) sepia(56%) saturate(6020%)
+      hue-rotate(293deg) brightness(96%) contrast(125%);
   }
 }
 
@@ -581,12 +586,10 @@ export default {
 
 .heroslash-enter {
   margin-left: 0%;
-  
 }
 .heroslash-enter-active {
   transition: margin-left 2s ease-in;
 }
-
 
 .total_animation-enter-active,
 .total_animation-leave-active {
@@ -623,5 +626,14 @@ export default {
   flex-direction: row;
 }
 
+li {
+  list-style-type:none;
+  background-color: black;
+  color: white;
+  margin: 5px;
+}
 
+li img {
+  float: left;
+}
 </style>
