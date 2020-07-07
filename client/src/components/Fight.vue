@@ -51,6 +51,9 @@
               src="/assets/fireballwithmagic.png"
             />
           </transition>
+          <img class="magic_button" v_if="show_used_fireball_button" src="/assets/fireball_used.png">
+
+          
         </div>
       </div>
     </div>
@@ -114,7 +117,8 @@ export default {
       show_monster_roll: false,
       show_damage_excess: false,
       show_fireball: false,
-      show_fireball_button: true
+      show_fireball_button: true,
+      show_used_fireball: false,
     };
   },
   mounted() {
@@ -244,9 +248,11 @@ export default {
       this.combatEnd();
     },
 
+    
     async rollMagicDice() {
       this.show_fireball = true;
       this.show_fireball_button = false;
+      this.show_used_fireball_button = true;
       this.playFireballAudio();
       this.fight_data.player_roll1 = this.numGenerator();
 
