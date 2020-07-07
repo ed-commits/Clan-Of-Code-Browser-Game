@@ -43,12 +43,7 @@
         </div>
         <div class="magic-button-parent">
           <transition name="fade">
-            <img
-              class="magic_button"
-              v-if="monster"
-              v-on:click="rollMagicDice"
-              src="/assets/fireballwithmagic.png"
-            />
+            <img class="magic_button" v-if="monster" v-on:click="rollMagicDice" src="/assets/fireballwithmagic.png" />
           </transition>
         </div>
       </div>
@@ -70,8 +65,9 @@
           </transition>
           <transition name="slide">
             <img class="character_image" v-if="monster" :src="monster.img_file" />
-            <audio autoplay v-if="monster" :src="monster.music_file"></audio>
+            <!-- <audio autoplay v-if="monster" :src="monster.music_file"></audio> -->
           </transition>
+          <img class="fire_gif" v-if="this.show_fireball" src="/assets/Fireball_animation.gif" />
         </div>
         <div class="health-bar">
           <div class="health" v-bind:style="{ width: monsterHealthBar }"></div>
@@ -111,6 +107,7 @@ export default {
       show_player_roll: false,
       show_monster_roll: false,
       show_damage_excess: false,
+      show_fireball: false,
     };
   },
   mounted() {
@@ -233,9 +230,13 @@ export default {
     },
 
     
-    rollMagicDice() {
+     async rollMagicDice() {
+      this.show_fireball = true;
       this.playFireballAudio();
       this.fight_data.player_roll1 = this.numGenerator();
+
+      await this.sleep(1000);
+      this.show_fireball = false;
 
       const playerMagicAtk = this.dealDamagetoMonster(
         this.fight_data.player_roll1
@@ -327,6 +328,13 @@ export default {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+}
+.fire_gif {
+  height: 50%;
+  width: auto;
+  position: absolute;
+  margin: 0 auto;
+  z-index: 2;
 }
 
 .damage-box {
@@ -424,6 +432,7 @@ export default {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  z-index: 1;
 }
 
 .character {
@@ -434,6 +443,7 @@ export default {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  z-index: 1;
 }
 .character h2 {
   margin: 0;
@@ -457,6 +467,7 @@ export default {
   animation-iteration-count: infinite;
   animation-direction: alternate;
   /* animation-timing-function: ease-in-out; */
+  z-index: 1;
 }
 
 .health {
