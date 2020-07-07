@@ -78,7 +78,7 @@
           </transition>
           <img class="fire_gif" v-if="this.show_fireball" src="/assets/Fireball_animation.gif" />
         </div>
-        <div class="health-bar">
+        <div class="health-bar" v-if="this.monster != undefined">
           <div class="health" v-bind:style="{ width: monsterHealthBar }"></div>
         </div>
       </div>
