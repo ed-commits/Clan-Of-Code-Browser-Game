@@ -11,11 +11,10 @@
           <h2>{{ player.name }}</h2>
           <img class="character_image" :src="player.image" />
         </div>
-        <div class="health-bar">
-          <div class="health" v-bind:style="{ width: playerHealthBar }"></div>
-        </div>
+        <healthbar :amount="this.player.health" max="100" />
       </div>
       <div class="damage-dealt">
+        <div class="damage-dealt-message"></div>
         <div class="dice">
           <dice :number="diceRoll.player.d1" />
           <dice :number="diceRoll.player.d2" />
@@ -51,9 +50,11 @@
               src="/assets/fireballwithmagic.png"
             />
           </transition>
-          <img class="magic_button" v_if="show_used_fireball_button" src="/assets/fireball_used.png">
-
-          
+          <img
+            class="magic_button"
+            v_if="show_used_fireball_button"
+            src="/assets/fireball_used.png"
+          />
         </div>
       </div>
     </div>
@@ -61,7 +62,9 @@
       <!-- monster box -->
 
       <div class="damage-dealt">
-        <i v-if="monster">"{{ monster.taunt }}"</i>
+        <div class="damage-dealt-message">
+          <i v-if="monster">"{{ monster.taunt }}"</i>
+        </div>
         <div class="dice">
           <dice :number="diceRoll.monster.d1" />
           <dice :number="diceRoll.monster.d2" />
@@ -78,9 +81,11 @@
           </transition>
           <img class="fire_gif" v-if="this.show_fireball" src="/assets/Fireball_animation.gif" />
         </div>
-        <div class="health-bar" v-if="this.monster != undefined">
-          <div class="health" v-bind:style="{ width: monsterHealthBar }"></div>
-        </div>
+        <healthbar
+          v-if="monster != undefined"
+          :amount="this.monster.health"
+          :max="this.monster.maxHealth"
+        />
       </div>
       <div class="items"></div>
     </div>
@@ -90,11 +95,13 @@
 <script>
 import { eventBus } from "../main.js";
 import Dice from "./Dice.vue";
+import Healthbar from "./Healthbar.vue";
 
 export default {
   props: ["player"],
   components: {
-    dice: Dice
+    dice: Dice,
+    healthbar: Healthbar
   },
   data() {
     return {
@@ -118,7 +125,7 @@ export default {
       show_damage_excess: false,
       show_fireball: false,
       show_fireball_button: true,
-      show_used_fireball: false,
+      show_used_fireball: false
     };
   },
   mounted() {
@@ -132,12 +139,13 @@ export default {
       this.dragonBattleMusic();
     });
   },
+  /*
   computed: {
     playerHealthBar() {
       let percentage = this.player.health;
       if (percentage < 0) percentage = 0;
       if (percentage > 100) percentage = 100;
-      return percentage + "%";
+      return percentage;
     },
     monsterHealthBar() {
       let percentage = 100;
@@ -150,9 +158,9 @@ export default {
       if (percentage < 0) percentage = 0;
       if (percentage > 100) percentage = 100;
 
-      return `${percentage}%`;
+      return percentage;
     }
-  },
+  },*/
   methods: {
     mermanBattleMusic() {
       if (this.monster.name === "Merman") this.playMermanBattleMusic();
@@ -253,7 +261,6 @@ export default {
       this.combatEnd();
     },
 
-    
     async rollMagicDice() {
       this.show_fireball = true;
       this.show_fireball_button = false;
@@ -506,6 +513,11 @@ export default {
   width: 30%;
   height: 100%;
   /* background-color: yellow; */
+}
+
+.damage-dealt-message {
+  color: black;
+  margin: 30px 0px 0px 0px;
 }
 
 .monster {
