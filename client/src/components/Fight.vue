@@ -21,7 +21,20 @@
       </div>
     </div>
     <div class="damage-box">
-      <div class="damage_animation-parent"></div>
+      <div class="damage_animation-parent">
+        <div class="roll_total">
+          <transition name="total_animation">     
+             <span v-if="this.show_player_roll">{{this.fight_data.player_total_damage}}</span>
+          </transition>
+        </div>
+        <div class="damage_excess">
+          <span>+{{this.fight_data.damage_dealt}}</span>
+        </div>
+        <div class="roll_total">
+          <span v-if="this.show_monster_roll">{{this.fight_data.monster_total_damage}}</span>
+        </div>
+
+      </div>
       <div class="button_holder">
         <div class="attack-button-parent">
           <transition name="fade">
@@ -89,7 +102,10 @@ export default {
       diceRoll: {
         player: { d1: 0, d2: 0 },
         monster: { d1: 0, d2: 0 }
-      }
+      },
+      show_player_roll: false,
+      show_monster_roll: false,
+      show_damage_excess: false,
     };
   },
   mounted() {
@@ -151,7 +167,10 @@ export default {
         this.stopDragonMusic();
       }
     },
-    rollDice() {
+    sleep(ms) {
+       return new Promise(resolve => setTimeout(resolve, ms));
+    },
+    async rollDice() {
       this.playSwordAudio();
       eventBus.$emit("Attack", {});
 
@@ -164,7 +183,7 @@ export default {
       this.diceRoll.player.d2 = this.fight_data.player_roll2;
       this.diceRoll.monster.d1 = this.fight_data.monster_roll1;
       this.diceRoll.monster.d2 = this.fight_data.monster_roll2;
-
+      
       // total up the players damage modifier
       this.player.items.forEach(item => {
         if ("damage_modifier" in item) {
@@ -179,7 +198,12 @@ export default {
         this.fight_data.damage_modifier;
       this.fight_data.monster_total_damage =
         this.fight_data.monster_roll1 + this.fight_data.monster_roll2;
+      await this.sleep(2000);
+      // this.playAudio();
 
+      this.show_player_roll = true
+      this.show_monster_roll = true
+      console.log(this.show_player_roll)
       // deal damage based on who rolled best this round
       const playerWinsRound =
         this.fight_data.player_total_damage >
@@ -202,6 +226,8 @@ export default {
       }
       this.combatEnd();
     },
+
+    
     rollMagicDice() {
       this.playFireballAudio();
       this.fight_data.player_roll1 = this.numGenerator();
@@ -211,6 +237,7 @@ export default {
       );
       this.combatEnd();
     },
+    
     numGenerator() {
       return Math.ceil(Math.random() * 10);
     },
@@ -279,6 +306,7 @@ export default {
 </script>
 
 <style>
+
 .fight {
   outline: 2px solid red;
   height: 50%;
@@ -311,7 +339,31 @@ export default {
 .damage_animation-parent {
   width: 100%;
   height: 60%;
+  
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.roll_total{
+  height: 100%;
+  width: 30%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   background-color: violet;
+
+}
+.damage_excess{
+  height: 100%;
+  width: 40%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: orange;
+  font-size: xx-large;
 }
 
 .button_holder {
@@ -421,6 +473,12 @@ export default {
   width: 50%;
   height: 8%;
   background-color: #ca812e;
+}
+.total_animation-enter-active, .total_animation-leave-active {
+  transition: opacity .5s;
+}
+.total_animation-enter, .total_animation-leave-to {
+  opacity: 0;
 }
 
 .slide-enter-active,
