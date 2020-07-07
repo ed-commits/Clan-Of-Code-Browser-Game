@@ -130,7 +130,10 @@ export default {
   },
   computed: {
     playerHealthBar() {
-      return this.player.health + "%";
+      let percentage = this.player.health;
+      if (percentage < 0) percentage = 0;
+      if (percentage > 100) percentage = 100;
+      return percentage + "%";
     },
     monsterHealthBar() {
       let percentage = 100;
