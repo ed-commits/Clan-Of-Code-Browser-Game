@@ -14,6 +14,7 @@
         <healthbar :amount="this.player.health" max="100" />
       </div>
       <div class="damage-dealt">
+        <div class="damage-dealt-message"></div>
         <div class="dice">
           <dice :number="diceRoll.player.d1" />
           <dice :number="diceRoll.player.d2" />
@@ -61,7 +62,9 @@
       <!-- monster box -->
 
       <div class="damage-dealt">
-        <i v-if="monster">"{{ monster.taunt }}"</i>
+        <div class="damage-dealt-message">
+          <i v-if="monster">"{{ monster.taunt }}"</i>
+        </div>
         <div class="dice">
           <dice :number="diceRoll.monster.d1" />
           <dice :number="diceRoll.monster.d2" />
@@ -78,7 +81,11 @@
           </transition>
           <img class="fire_gif" v-if="this.show_fireball" src="/assets/Fireball_animation.gif" />
         </div>
-        <healthbar v-if="monster != undefined" :amount="this.monster.health" :max="this.monster.maxHealth" />
+        <healthbar
+          v-if="monster != undefined"
+          :amount="this.monster.health"
+          :max="this.monster.maxHealth"
+        />
       </div>
       <div class="items"></div>
     </div>
@@ -501,6 +508,11 @@ export default {
   width: 30%;
   height: 100%;
   /* background-color: yellow; */
+}
+
+.damage-dealt-message {
+  color: black;
+  margin: 30px 0px 0px 0px;
 }
 
 .monster {
