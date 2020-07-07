@@ -468,6 +468,16 @@ export default {
   height: 18%;
   width: auto;
 }
+
+.magic_button_used {
+    height: 18%;
+    width: auto;
+    z-index: 1; 
+    position: absolute;
+  
+}
+
+z-index: 2; position: absolute;
 .magic_button:hover {
   height: 18.5%;
   width: auto;
