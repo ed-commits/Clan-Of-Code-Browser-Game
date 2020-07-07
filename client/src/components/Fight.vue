@@ -44,9 +44,9 @@
             <img class="attack_button" v-if="monster" v-on:click="rollDice" src="/assets/atk.png" />
           </transition>
         </div>
-        <div class="magic-button-parent">
+        <div class="magic-button-parent" v-if="monster">
           <transition name="fade">
-            <img class="magic_button" v-if="monster" v-on:click="rollMagicDice" src="/assets/fireballwithmagic.png" />
+            <img class="magic_button" v-if="show_fireball_button" v-on:click="rollMagicDice" src="/assets/fireballwithmagic.png" />
           </transition>
         </div>
       </div>
@@ -111,6 +111,7 @@ export default {
       show_monster_roll: false,
       show_damage_excess: false,
       show_fireball: false,
+      show_fireball_button: true,
     };
   },
   mounted() {
@@ -235,6 +236,7 @@ export default {
     
      async rollMagicDice() {
       this.show_fireball = true;
+      this.show_fireball_button = false
       this.playFireballAudio();
       this.fight_data.player_roll1 = this.numGenerator();
 
