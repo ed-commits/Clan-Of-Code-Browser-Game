@@ -7,7 +7,7 @@ db.pages.insertMany([
         buttons: [{button_text: "Continue", button_destination: "intro_part_2", button_style: "xyz"}],
         gain_health_from_narrative: 0, //this should be filled with integer if something happens in narrative to add health
         map_coords: [1800,3900],
-        map_marker_icon: "/inn.svg"
+        map_marker_icon: "/inn.svg",
     },
     {
         name: "intro_part_2",
@@ -184,12 +184,12 @@ db.items.insertMany([
     {
         name: "Steel Blade",
         damage_modifier: 5,
-        img_file: "/assets/Sword_icon"
+        img_file: "/assets/Sword_icon.png"
     },
     {
         name: "Griffin Balls",
         health_modifier: 50,
-        img_file: "/griffin_balls"
+        img_file: "/assets/Griffin balls.png"
     }
 ]);
 
