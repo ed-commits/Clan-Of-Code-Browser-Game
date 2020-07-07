@@ -76,4 +76,17 @@ export default {
   width: 70%;
   height: 50%;
 }
+
+.scroll::-webkit-scrollbar {
+  width: 12px;               /* width of the entire scrollbar */
+}
+.scroll::-webkit-scrollbar-track {
+  background: transparent;        /* color of the tracking area */
+}
+.scroll::-webkit-scrollbar-thumb {
+  background-color: rgb(124, 70, 19);    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 2px solid black;  /* creates padding around scroll thumb */
+}
+
 </style>
