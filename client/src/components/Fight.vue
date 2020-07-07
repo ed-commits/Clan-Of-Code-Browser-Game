@@ -136,7 +136,7 @@ export default {
       show_damage_excess: false,
       show_fireball: false,
       show_fireball_button: false,
-      show_used_fireball: false
+      show_used_fireball: false,
       show_hero_slash: false,
 
     };
