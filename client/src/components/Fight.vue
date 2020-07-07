@@ -10,6 +10,7 @@
         <div class="character">
           <h2>{{ player.name }}</h2>
           <img class="character_image" :src="player.image" />
+          <div >
         </div>
         <healthbar :amount="this.player.health" max="100" />
       </div>
@@ -29,7 +30,9 @@
           </transition>
         </div>
         <div class="damage_excess">
-          <span v-if="this.show_damage_excess">+{{this.fight_data.damage_dealt}}</span>
+          <transition name="damage_excess_animation">
+           <span v-if="this.show_damage_excess">+{{this.fight_data.damage_dealt}}</span>
+          </transition> 
         </div>
         <div class="roll_total">
           <span v-if="this.show_monster_roll">{{this.fight_data.monster_total_damage}}</span>
@@ -228,16 +231,21 @@ export default {
       this.fight_data.monster_total_damage =
         this.fight_data.monster_roll1 + this.fight_data.monster_roll2;
       await this.sleep(2000);
-  
+      this.fight_data.damage_dealt = Math.abs(this.fight_data.player_total_damage-this.fight_data.monster_total_damage)
+      console.log("player total damage:", this.fight_data.player_total_damage, "monster total damage:" , this.fight_data.monster_total_damage, "damage dealt:", this.fight_data.damage_dealt)
+
 
       this.show_player_roll = true;
       this.show_monster_roll = true;
       await this.sleep(2000)
       this.show_damage_excess = true;
+      await this.sleep(4000)
+      this.show_player_roll = false;
+      this.show_monster_roll = false;
+      this.show_damage_excess = false;
       
-   
-      this.fight_data.damage_dealt = Math.abs(this.fight_data.player_total_damage-this.fight_data.monster_total_damage)
 
+      
      
 
       const playerWinsRound =
