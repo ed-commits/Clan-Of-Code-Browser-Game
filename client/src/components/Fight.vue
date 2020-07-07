@@ -4,9 +4,6 @@
       <!-- player box -->
       <div class="items"></div>
       <div class="character-and-health">
-        <!-- <div class="background">
-          <img class="background-image" src="/assets/Background_1.png">
-        </div>-->
         <div class="character">
           <h2>{{ player.name }}</h2>
           <div class="character_image_parent">
@@ -36,16 +33,18 @@
       <div class="damage_animation-parent">
         <div class="roll_total">
           <transition name="total_animation">
-            <span v-if="this.show_player_roll">{{this.fight_data.player_total_damage}}</span>
+            <span id="hero_total_text" class="total_animation" v-if="this.show_player_roll">{{this.fight_data.player_total_damage}}</span>
           </transition>
         </div>
         <div class="damage_excess">
           <transition name="damage_excess_animation">
-            <span v-if="this.show_damage_excess">+{{this.fight_data.damage_dealt}}</span>
+            <span style ="color: #e60000" v-if="this.show_damage_excess">+{{this.fight_data.damage_dealt}}</span>
           </transition>
         </div>
         <div class="roll_total">
-          <span v-if="this.show_monster_roll">{{this.fight_data.monster_total_damage}}</span>
+          <transition name="total_animation">
+            <span id="monster_total_text" class="total_animation" v-if="this.show_monster_roll">{{this.fight_data.monster_total_damage}}</span>
+          </transition>
         </div>
       </div>
       <div class="button_holder">
@@ -88,10 +87,15 @@
           <transition name="fade">
             <h2 v-if="monster">{{ monster.name }}</h2>
           </transition>
-          <transition name="slide">
-            <img class="character_image" v-if="monster" :src="monster.img_file" />
-            <img class="monster_slash" v-if="monster" src="/assets/monster_slash.svg" />
-          </transition>
+          <div class="character_image_parent">
+            <transition name="monsterslash">
+              <img class="monster_slash" v-if="this.show_monster_slash" src="/assets/monster_slash.svg" />
+            </transition>
+            <transition name="slide">
+              <img class="character_image" v-if="monster" :src="monster.img_file" />
+            </transition>
+          </div>
+
           <img class="fire_gif" v-if="this.show_fireball" src="/assets/Fireball_animation.gif" />
         </div>
         <healthbar
@@ -142,7 +146,8 @@ export default {
       show_fireball: false,
       show_fireball_button: false,
       show_used_fireball: false,
-      show_hero_slash: false
+      show_hero_slash: false,
+      show_monster_slash: false,
     };
   },
   mounted() {
@@ -232,7 +237,7 @@ export default {
         this.fight_data.damage_modifier;
       this.fight_data.monster_total_damage =
         this.fight_data.monster_roll1 + this.fight_data.monster_roll2;
-      await this.sleep(2000);
+      await this.sleep(1000);
       this.fight_data.damage_dealt = Math.abs(
         this.fight_data.player_total_damage -
           this.fight_data.monster_total_damage
@@ -255,12 +260,15 @@ export default {
         this.fight_data.monster_total_damage;
 
       this.show_player_roll = true;
+      await this.sleep(500);
       this.show_monster_roll = true;
       await this.sleep(2000);
       this.show_damage_excess = true;
       await this.sleep(1000);
       if (playerWinsRound) this.show_hero_slash = true;
-      await this.sleep(4000);
+      if (monsterWinsRound) this.show_monster_slash = true
+      await this.sleep(2500);
+      this.show_monster_slash = false;
       this.show_hero_slash = false;
       this.show_player_roll = false;
       this.show_monster_roll = false;
@@ -411,7 +419,6 @@ export default {
 .damage_animation-parent {
   width: 100%;
   height: 60%;
-
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -425,7 +432,7 @@ export default {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color: violet;
+  font-weight: bold;
 }
 
 .damage_excess {
@@ -458,6 +465,7 @@ export default {
   cursor: pointer;
   height: 18%;
   width: auto;
+  margin-left: -25px;
 }
 
 .attack_button:hover {
@@ -474,17 +482,17 @@ export default {
   cursor: pointer;
   height: 18%;
   width: auto;
+  margin-left: 25px;
 }
 
 .magic_button_used {
     height: 18%;
     width: auto;
     z-index: 1; 
-    position: absolute;
-  
+    position: absolute; 
+    margin-left: 25px;
 }
 
-z-index: 2; position: absolute;
 .magic_button:hover {
   height: 18.5%;
   width: auto;
@@ -500,6 +508,7 @@ z-index: 2; position: absolute;
   width: auto;
   z-index: 1; 
   position: absolute;
+  margin-left: -25px;
 }
 
 .items {
@@ -539,7 +548,7 @@ z-index: 2; position: absolute;
   }
 
   to {
-    height: 95%;
+    height: 98%;
   }
 }
 .character_image_parent {
@@ -573,6 +582,48 @@ z-index: 2; position: absolute;
     filter: brightness(0) saturate(100%) invert(20%) sepia(56%) saturate(6020%)
       hue-rotate(293deg) brightness(96%) contrast(125%);
   }
+}
+
+.monster_slash {
+  width: auto;
+  height: 30%;
+  z-index: 0;
+  margin-bottom: -60%;
+  animation-duration: 0.05s;
+  animation-name: monsterslash_flash;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  margin-right: 2500%;
+}
+
+@keyframes monsterslash_flash {
+  from {
+    filter: brightness(0) saturate(100%) invert(27%) sepia(83%) saturate(3099%) hue-rotate(342deg) brightness(82%) contrast(115%);
+  }
+
+  to {
+    filter: none
+  }
+}
+
+#monster_total_text{
+  animation-duration: 0.5s;
+  animation-name: monsterslash_flash;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  margin-left: 40%
+}
+
+#hero_total_text{
+  animation-duration: 0.5s;
+  animation-name: slash_flash;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  margin-right: 40%
+}
+
+.total_animation{
+ font-size: 0px;
 }
 
 .character_image {
@@ -614,13 +665,26 @@ z-index: 2; position: absolute;
   transition: margin-left 2s ease-in;
 }
 
-.total_animation-enter-active,
-.total_animation-leave-active {
-  transition: opacity 0.5s;
+.monsterslash-enter {
+  margin-right: 0%;
 }
-.total_animation-enter,
-.total_animation-leave-to {
-  opacity: 0;
+.monsterslash-enter-active {
+  transition: margin-right 2s ease-in;
+}
+
+
+.total_animation-enter {
+  font-size: 500px;
+}
+.total_animation-enter-active {
+  transition: font-size 3s ;
+}
+
+.damage_excess_animation-enter {
+  font-size: 500px;
+}
+.damage_excess_animation-enter-active {
+  transition: font-size 3s ;
 }
 
 .slide-enter-active,
