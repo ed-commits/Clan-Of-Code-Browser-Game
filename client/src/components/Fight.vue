@@ -10,8 +10,9 @@
         <div class="character">
           <h2>{{ player.name }}</h2>
           <div class="character_image_parent">
-            <img class="character_image" :src="player.image" />
             <img class= "hero_slash" src="/assets/hero_slash.png"/>
+            <img class="character_image" :src="player.image" />
+         
           </div>
           
         </div>
@@ -492,18 +493,18 @@ export default {
 .character_image_parent{
   height: 70%;
   width: auto;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  
 }
 
 .hero_slash {
-  width: 30%;
-  height: auto;
-  position: absolute;
-  left: 50%;
-  margin-left: -50%;
-  top: 50%;
-  margin-top: -50%;
-  z-index: 5;
+    width: auto;
+    height: 30%;
+    z-index: 0;
+    margin-bottom: -60%;
 }
 
 .character_image {
@@ -515,7 +516,6 @@ export default {
   animation-direction: alternate;
   /* animation-timing-function: ease-in-out; */
   z-index: 2;
-  position: absolute;
 }
 
 .damage-dealt {
