@@ -142,6 +142,7 @@ export default {
   /* background-image: url("/assets/map_background.jpg"); */
   background-size: cover;
   background-position: center;
+  overflow: hidden;
 
   margin: 0px;
   padding: 0px;

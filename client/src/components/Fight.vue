@@ -10,7 +10,9 @@
         <div class="character">
           <h2>{{ player.name }}</h2>
           <div class="character_image_parent">
-            <img class= "hero_slash" src="/assets/hero_slash.png"/>
+            <transition name="heroslash">
+              <img class= "hero_slash" v-if="this.show_hero_slash" src="/assets/hero_slash.svg"/>
+            </transition>
             <img class="character_image" :src="player.image" />
          
           </div>
@@ -84,7 +86,7 @@
           </transition>
           <transition name="slide">
             <img class="character_image" v-if="monster" :src="monster.img_file" />
-            <img class= "monster_slash" v-if="monster" src="/assets/monster_slash.png"/>
+            <img class= "monster_slash" v-if="monster" src="/assets/monster_slash.svg"/>
 
           
           </transition>
@@ -134,7 +136,8 @@ export default {
       show_damage_excess: false,
       show_fireball: false,
       show_fireball_button: true,
-      show_used_fireball: false
+      show_used_fireball: false,
+      show_hero_slash: false,
     };
   },
   mounted() {
@@ -221,25 +224,28 @@ export default {
       this.fight_data.damage_dealt = Math.abs(this.fight_data.player_total_damage-this.fight_data.monster_total_damage)
       console.log("player total damage:", this.fight_data.player_total_damage, "monster total damage:" , this.fight_data.monster_total_damage, "damage dealt:", this.fight_data.damage_dealt)
 
+      const playerWinsRound =
+        this.fight_data.player_total_damage >
+        this.fight_data.monster_total_damage;
+
+      const monsterWinsRound =
+        this.fight_data.player_total_damage <
+        this.fight_data.monster_total_damage;
+        
 
       this.show_player_roll = true;
       this.show_monster_roll = true;
       await this.sleep(2000)
       this.show_damage_excess = true;
+      await this.sleep(1000)
+      if (playerWinsRound) this.show_hero_slash = true;
       await this.sleep(4000)
+      this.show_hero_slash = false;
       this.show_player_roll = false;
       this.show_monster_roll = false;
       this.show_damage_excess = false;
       
 
-      
-     
-
-      const playerWinsRound =
-        this.fight_data.player_total_damage >
-        this.fight_data.monster_total_damage;
-        
-        
       if (playerWinsRound) {
         this.dealDamagetoMonster(
           this.fight_data.player_total_damage -
@@ -247,9 +253,7 @@ export default {
         );
       }
 
-      const monsterWinsRound =
-        this.fight_data.player_total_damage <
-        this.fight_data.monster_total_damage;
+      
       if (monsterWinsRound) {
         this.dealDamagetoPlayer(
           this.fight_data.monster_total_damage -
@@ -505,6 +509,21 @@ export default {
     height: 30%;
     z-index: 0;
     margin-bottom: -60%;
+    animation-duration: 0.05s;
+    animation-name: slash_flash;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    margin-left: 2500%;
+}
+
+@keyframes slash_flash {
+  from {
+    filter: brightness(0) saturate(100%) invert(78%) sepia(46%) saturate(615%) hue-rotate(159deg) brightness(108%) contrast(103%);
+  }
+
+  to {
+    filter: brightness(0) saturate(100%) invert(20%) sepia(56%) saturate(6020%) hue-rotate(293deg) brightness(96%) contrast(125%);
+  }
 }
 
 .character_image {
@@ -540,6 +559,16 @@ export default {
   height: 8%;
   /* background-color: #ca812e; */
 }
+
+.heroslash-enter {
+  margin-left: 0%;
+  
+}
+.heroslash-enter-active {
+  transition: margin-left 2s ease-in;
+}
+
+
 .total_animation-enter-active,
 .total_animation-leave-active {
   transition: opacity 0.5s;
