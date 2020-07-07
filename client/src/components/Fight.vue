@@ -505,12 +505,6 @@ export default {
   z-index: 2;
 }
 
-.health {
-  height: 30%;
-  width: 100%;
-  /* background-color: blueviolet; */
-}
-
 .damage-dealt {
   height: 100%;
   width: 30%;
@@ -567,7 +561,6 @@ export default {
   display: flex;
   flex-direction: row;
 }
-
 
 /* .background-image {
   height: 50%;
