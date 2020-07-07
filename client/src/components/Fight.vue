@@ -65,17 +65,9 @@
               src="/assets/fireballwithmagic.png"
             />
           </transition>
-<<<<<<< HEAD
           <transition name="fade">
             <img class="magic_button_used" v-if="monster" src="/assets/fireball_used.png"/>
           </transition>
-=======
-          <img
-            class="button_used"
-            style="z-index: 1; position: absolute;"
-            src="/assets/fireball_used.png"
-          />
->>>>>>> 44f6c8f1640c09e5d3907022d73eadccbce11027
         </div>
       </div>
     </div>
@@ -487,12 +479,9 @@ export default {
 .button_used {
   height: 18%;
   width: auto;
-<<<<<<< HEAD
   z-index: 1; 
   position: absolute;
   
-=======
->>>>>>> 44f6c8f1640c09e5d3907022d73eadccbce11027
 }
 .items {
   height: 100%;
