@@ -89,7 +89,6 @@
           <transition name="slide">
             <img class="character_image" v-if="monster" :src="monster.img_file" />
             <img class= "monster_slash" v-if="monster" src="/assets/monster_slash.svg"/>
-
           
           </transition>
           <img class="fire_gif" v-if="this.show_fireball" src="/assets/Fireball_animation.gif" />
@@ -430,7 +429,7 @@ export default {
   width: 50%;
 }
 .magic-button-parent {
-  width: 50%;
+  width: 100%;
 }
 
 .attack_button {
@@ -450,7 +449,6 @@ export default {
   cursor: pointer;
   height: 18%;
   width: auto;
-  z-index: 5;
 
 }
 .magic_button:hover {
@@ -464,7 +462,7 @@ export default {
 .magic_button_used {
   height: 18%;
   width: auto;
-  z-index: 3;
+  
 }
 .items {
   height: 100%;
