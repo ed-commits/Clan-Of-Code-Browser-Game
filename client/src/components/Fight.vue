@@ -11,7 +11,7 @@
         <div class="health-bar">
           <div class="health" v-bind:style="{ width: playerHealthBar }"></div>
         </div>
-        <div class="magic-button-parent"></div>
+        
       </div>
       <div class="damage-dealt">
         <div class="dice">
@@ -385,23 +385,29 @@ export default {
 
 .attack_button {
   cursor: pointer;
-  width: 90%;
+  height: 90%;
+  width: auto;
 }
 .attack_button:hover {
-  width: 100%;
+  height: 100%;
+  width: auto;
 }
 .attack_button:active {
-  width: 80%;
+  height: 80%;
+  width: auto;
 }
 .magic_button {
   cursor: pointer;
-  width: 90%;
+  height: 90%;
+  width: auto;
 }
 .magic_button:hover {
-  width: 100%;
+  height: 100%;
+  width: auto;
 }
 .magic_button:active {
-  width: 80%;
+  height: 80%;
+  width: auto;
 }
 
 .items {
@@ -416,12 +422,12 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
 .character {
-  height: 70%;
+  height: 85%;
   width: 100%;
   background-color: maroon;
   display: flex;
@@ -512,13 +518,14 @@ export default {
 .health-bar {
   border: 2px solid black;
   background-color: red;
-  width: 120px;
+  width: 80%;
   text-align: left;
+  height: 10%;
+  margin-bottom: 3px
 }
 
 .health {
   background-color: green;
-  display: inline-block;
   height: 100%;
   padding: 0;
   margin: 0;
