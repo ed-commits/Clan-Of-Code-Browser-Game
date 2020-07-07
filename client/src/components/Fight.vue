@@ -4,6 +4,9 @@
       <!-- player box -->
       <div class="items"></div>
       <div class="character-and-health">
+        <!-- <div class="background">
+          <img class="background-image" src="/assets/Background_1.png">
+        </div> -->
         <div class="character">
           <h2>{{ player.name }}</h2>
           <img class="character_image" :src="player.image" />
@@ -311,7 +314,8 @@ export default {
 <style>
 
 .fight {
-  outline: 2px solid red;
+  background-image: url("/assets/Background_1.png");
+  background-size: cover;
   height: 50%;
   width: 100%;
   display: flex;
@@ -334,7 +338,7 @@ export default {
   width: auto;
   position: absolute;
   margin: 0 auto;
-  z-index: 2;
+  z-index: 3;
 }
 
 .damage-box {
@@ -356,7 +360,7 @@ export default {
   align-items: center;
 }
 .roll_total{
-  height: 100%;
+  height: 10%;
   width: 30%;
   display: flex;
   flex-direction: row;
@@ -372,7 +376,7 @@ export default {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color: orange;
+  /* background-color: orange; */
   font-size: xx-large;
 }
 
@@ -383,11 +387,9 @@ export default {
   height: 40%;
 }
 .attack-button-parent {
-  background-color: teal;
   width: 50%;
 }
 .magic-button-parent {
-  background-color: teal;
   width: 50%;
 }
 
@@ -422,7 +424,7 @@ export default {
   height: 100%;
   width: 30%;
   height: 100%;
-  background-color: tomato;
+  /* background-color: tomato; */
 }
 .character-and-health {
   height: 100%;
@@ -432,18 +434,17 @@ export default {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  z-index: 1;
+  z-index: 2;
 }
 
 .character {
   height: 85%;
   width: 100%;
-  background-color: maroon;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  z-index: 1;
+  z-index: 2;
 }
 .character h2 {
   margin: 0;
@@ -467,20 +468,20 @@ export default {
   animation-iteration-count: infinite;
   animation-direction: alternate;
   /* animation-timing-function: ease-in-out; */
-  z-index: 1;
+  z-index: 2;
 }
 
 .health {
   height: 30%;
   width: 100%;
-  background-color: blueviolet;
+  /* background-color: blueviolet; */
 }
 
 .damage-dealt {
   height: 100%;
   width: 30%;
   height: 100%;
-  background-color: yellow;
+  /* background-color: yellow; */
 }
 
 .monster {
@@ -491,7 +492,7 @@ export default {
   margin: auto;
   width: 50%;
   height: 8%;
-  background-color: #ca812e;
+  /* background-color: #ca812e; */
 }
 .total_animation-enter-active, .total_animation-leave-active {
   transition: opacity .5s;
@@ -540,5 +541,14 @@ export default {
   height: 100%;
   padding: 0;
   margin: 0;
+  z-index: 2;
 }
+
+/* .background-image {
+  height: 50%;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  z-index: 1;
+} */
 </style>
