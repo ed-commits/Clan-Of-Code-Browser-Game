@@ -30,12 +30,7 @@
         </div>
         <div class="magic-button-parent">
           <transition name="fade">
-            <img
-              class="magic_button"
-              v-if="monster"
-              v-on:click="rollMagicDice"
-              src="/assets/fireballwithmagic.png"
-            />
+            <img class="magic_button" v-if="monster" v-on:click="rollMagicDice; fireBallEffect" src="/assets/fireballwithmagic.png" />
           </transition>
         </div>
       </div>
@@ -275,6 +270,9 @@ export default {
     },
     stopDragonMusic() {
       if (this.dragonMusic != undefined) this.dragonMusic.pause();
+    },
+    fireBallEffect() {
+      this.fireBallEffect = "/assets/fireball_animation.gif"
     }
   }
 };
