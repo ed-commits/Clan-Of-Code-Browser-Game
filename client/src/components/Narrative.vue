@@ -44,7 +44,6 @@ export default {
 }
 
 .narrative {
-  outline: 2px solid green;
   height: 50%;
   width: 100%;
   display: flex;
