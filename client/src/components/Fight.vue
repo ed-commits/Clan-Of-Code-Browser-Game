@@ -45,10 +45,11 @@
         </div>
       </div>
       <div class="button_holder">
-        <div class="attack-button-parent">
+        <div class="attack-button-parent" v-if="monster">
           <transition name="fade">
-            <img class="attack_button" v-if="monster" v-on:click="rollDice" src="/assets/atk.png" />
+            <img class="attack_button" style="z-index: 2; position: absolute;" v-if="show_attack_button" v-on:click="rollDice" src="/assets/atk.png" />
           </transition>
+            <img class="button_used" style="z-index: 1; position: absolute;" src="/assets/atk_used.png" />
         </div>
         <div class="magic-button-parent" v-if="monster">
           <transition name="fade">
@@ -61,9 +62,8 @@
             />
           </transition>
           <img
-            class="magic_button_used"
+            class="button_used"
             style="z-index: 1; position: absolute;"
-            v_if="show_used_fireball_button"
             src="/assets/fireball_used.png"
           />
         </div>
@@ -136,6 +136,8 @@ export default {
       show_player_roll: false,
       show_monster_roll: false,
       show_damage_excess: false,
+      show_attack_button: false,
+      show_used_attack: false,
       show_fireball: false,
       show_fireball_button: false,
       show_used_fireball: false,
@@ -149,6 +151,7 @@ export default {
       this.monster.maxHealth = this.monster.health;
       this.player = character.player;
       this.show_fireball_button = true
+      this.show_attack_button = true
 
       this.mermanBattleMusic();
       this.draugrBattleMusic();
@@ -202,7 +205,7 @@ export default {
     async rollDice() {
       if(this.roundInProgress) return;
       this.roundInProgress = true;
-
+      this.show_attack_button = false
       this.playSwordAudio();
       eventBus.$emit("Attack", {});
 
@@ -270,6 +273,7 @@ export default {
             this.fight_data.player_total_damage
         );
       }
+      this.show_attack_button = true
       this.combatEnd();
     },
 
@@ -443,15 +447,15 @@ export default {
 
 .attack_button {
   cursor: pointer;
-  height: 90%;
+  height: 18%;
   width: auto;
 }
 .attack_button:hover {
-  height: 100%;
+  height: 18.5%;
   width: auto;
 }
 .attack_button:active {
-  height: 80%;
+  height: 18%;
   width: auto;
 }
 .magic_button {
@@ -461,14 +465,14 @@ export default {
 
 }
 .magic_button:hover {
-  height: 19%;
+  height: 18.5%;
   width: auto;
 }
 .magic_button:active {
-  height: 19%;
+  height: 18%;
   width: auto;
 }
-.magic_button_used {
+.button_used {
   height: 18%;
   width: auto;
   
@@ -609,7 +613,7 @@ export default {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 2s;
+  transition: opacity 0.5s;
 }
 .fade-enter,
 .fade-leave-to {
