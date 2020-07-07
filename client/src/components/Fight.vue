@@ -339,6 +339,9 @@ export default {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+
+  margin: 0px;
+  padding: 0px;
 }
 
 .combat-box {
