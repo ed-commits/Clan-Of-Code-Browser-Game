@@ -52,6 +52,7 @@
           <transition name="fade">
             <img
               class="magic_button"
+              style="z-index: 2; position: absolute;"
               v-if="show_fireball_button"
               v-on:click="rollMagicDice"
               src="/assets/fireballwithmagic.png"
@@ -59,6 +60,7 @@
           </transition>
           <img
             class="magic_button_used"
+            style="z-index: 1; position: absolute;"
             v_if="show_used_fireball_button"
             src="/assets/fireball_used.png"
           />
@@ -142,11 +144,12 @@ export default {
       this.monster = character.monster;
       this.monster.maxHealth = this.monster.health;
       this.player = character.player;
+      this.show_fireball_button = true
+
       this.mermanBattleMusic();
       this.draugrBattleMusic();
       this.ghostBattleMusic();
       this.dragonBattleMusic();
-      this.show_fireball_button = true
     });
   },
   methods: {
@@ -440,21 +443,21 @@ export default {
 }
 .magic_button {
   cursor: pointer;
-  height: 90%;
+  height: 18%;
   width: auto;
   z-index: 5;
 
 }
 .magic_button:hover {
-  height: 100%;
+  height: 19%;
   width: auto;
 }
 .magic_button:active {
-  height: 80%;
+  height: 19%;
   width: auto;
 }
 .magic_button_used {
-  height: 90%;
+  height: 18%;
   width: auto;
   z-index: 3;
 }
