@@ -15,7 +15,7 @@
           </div>
           
         </div>
-        <healthbar :amount="this.player.health" max="100" />
+        <healthbar :amount="player.health" max="100" />
       </div>
       <div class="damage-dealt">
         <div class="damage-dealt-message"></div>
@@ -162,6 +162,9 @@ export default {
     },
 
     combatEnd() {
+      if(this.monster == undefined)
+        return;
+      
       // check if the fight has ended
       const playerWins = this.monster.health <= 0;
       const monsterWins = this.player.health <= 0;
@@ -284,10 +287,12 @@ export default {
       eventBus.$emit("fight-lost", {});
     },
     dealDamagetoMonster(damageAmount) {
-      this.monster.health -= damageAmount;
+      if(this.monster != undefined)
+        this.monster.health -= damageAmount;
     },
     dealDamagetoPlayer(damageAmount) {
-      this.player.health -= damageAmount;
+      if(this.player != undefined)
+        this.player.health -= damageAmount;
     },
     playSwordAudio() {
       const buttonSwordAudio = new Audio("/assets/music/sword_impact.mp3");
