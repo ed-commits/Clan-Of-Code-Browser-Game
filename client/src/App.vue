@@ -142,6 +142,13 @@ export default {
   /* background-image: url("/assets/map_background.jpg"); */
   background-size: cover;
   background-position: center;
+
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  padding: 0px;
   margin: 0px;
 }
 </style>

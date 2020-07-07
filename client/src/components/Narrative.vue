@@ -52,6 +52,9 @@ export default {
   justify-content: flex-start;
   align-items: center;
   box-sizing: border-box;
+
+  margin: 0px;
+  padding: 0px;
 }
 .button {
   background-color: rgba(255, 235, 146, 0.801);
