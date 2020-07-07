@@ -58,7 +58,7 @@
             />
           </transition>
           <img
-            class="magic_button"
+            class="magic_button_used"
             v_if="show_used_fireball_button"
             src="/assets/fireball_used.png"
           />
@@ -441,6 +441,8 @@ export default {
   cursor: pointer;
   height: 90%;
   width: auto;
+  z-index: 5;
+
 }
 .magic_button:hover {
   height: 100%;
@@ -450,7 +452,11 @@ export default {
   height: 80%;
   width: auto;
 }
-
+.magic_button_used {
+  height: 90%;
+  width: auto;
+  z-index: 3;
+}
 .items {
   height: 100%;
   width: 30%;
