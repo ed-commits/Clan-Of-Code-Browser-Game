@@ -492,7 +492,7 @@ export default {
 }
 .character h2 {
   margin: 0;
-  color: azure;
+  color: rgb(211, 243, 243);
 }
 
 @keyframes breathing {
