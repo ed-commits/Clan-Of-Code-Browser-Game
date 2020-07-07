@@ -133,7 +133,7 @@ export default {
       show_monster_roll: false,
       show_damage_excess: false,
       show_fireball: false,
-      show_fireball_button: true,
+      show_fireball_button: false,
       show_used_fireball: false
     };
   },
@@ -146,6 +146,7 @@ export default {
       this.draugrBattleMusic();
       this.ghostBattleMusic();
       this.dragonBattleMusic();
+      this.show_fireball_button = true
     });
   },
   methods: {
