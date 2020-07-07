@@ -139,28 +139,6 @@ export default {
       this.dragonBattleMusic();
     });
   },
-  /*
-  computed: {
-    playerHealthBar() {
-      let percentage = this.player.health;
-      if (percentage < 0) percentage = 0;
-      if (percentage > 100) percentage = 100;
-      return percentage;
-    },
-    monsterHealthBar() {
-      let percentage = 100;
-
-      if (!(this.monster == undefined)) {
-        percentage = Math.round(
-          (100 * this.monster.health) / this.monster.maxHealth
-        );
-      }
-      if (percentage < 0) percentage = 0;
-      if (percentage > 100) percentage = 100;
-
-      return percentage;
-    }
-  },*/
   methods: {
     mermanBattleMusic() {
       if (this.monster.name === "Merman") this.playMermanBattleMusic();
