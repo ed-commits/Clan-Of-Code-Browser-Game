@@ -29,7 +29,7 @@
           </transition>
         </div>
         <div class="damage_excess">
-          <span>+{{this.fight_data.damage_dealt}}</span>
+          <span v-if="this.show_damage_excess">+{{this.fight_data.damage_dealt}}</span>
         </div>
         <div class="roll_total">
           <span v-if="this.show_monster_roll">{{this.fight_data.monster_total_damage}}</span>
@@ -228,15 +228,23 @@ export default {
       this.fight_data.monster_total_damage =
         this.fight_data.monster_roll1 + this.fight_data.monster_roll2;
       await this.sleep(2000);
-      // this.playAudio();
+  
 
       this.show_player_roll = true;
       this.show_monster_roll = true;
-      console.log(this.show_player_roll);
-      // deal damage based on who rolled best this round
+      await this.sleep(2000)
+      this.show_damage_excess = true;
+      
+   
+      this.fight_data.damage_dealt = Math.abs(this.fight_data.player_total_damage-this.fight_data.monster_total_damage)
+
+     
+
       const playerWinsRound =
         this.fight_data.player_total_damage >
         this.fight_data.monster_total_damage;
+        
+        
       if (playerWinsRound) {
         this.dealDamagetoMonster(
           this.fight_data.player_total_damage -
