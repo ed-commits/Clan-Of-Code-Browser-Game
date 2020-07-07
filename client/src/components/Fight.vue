@@ -234,8 +234,11 @@ export default {
       this.show_monster_roll = true;
       await this.sleep(2000)
       this.show_damage_excess = true;
+      
    
-      this.damage_dealt = (this.player_total_damage-this.monster_total_damage)*1
+      this.fight_data.damage_dealt = Math.abs(this.fight_data.player_total_damage-this.fight_data.monster_total_damage)
+
+     
 
       const playerWinsRound =
         this.fight_data.player_total_damage >
