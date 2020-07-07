@@ -6,7 +6,7 @@
       <div class="character-and-health">
         <!-- <div class="background">
           <img class="background-image" src="/assets/Background_1.png">
-        </div> -->
+        </div>-->
         <div class="character">
           <h2>{{ player.name }}</h2>
           <img class="character_image" :src="player.image" />
@@ -14,7 +14,6 @@
         <div class="health-bar">
           <div class="health" v-bind:style="{ width: playerHealthBar }"></div>
         </div>
-        
       </div>
       <div class="damage-dealt">
         <div class="dice">
@@ -26,8 +25,8 @@
     <div class="damage-box">
       <div class="damage_animation-parent">
         <div class="roll_total">
-          <transition name="total_animation">     
-             <span v-if="this.show_player_roll">{{this.fight_data.player_total_damage}}</span>
+          <transition name="total_animation">
+            <span v-if="this.show_player_roll">{{this.fight_data.player_total_damage}}</span>
           </transition>
         </div>
         <div class="damage_excess">
@@ -36,7 +35,6 @@
         <div class="roll_total">
           <span v-if="this.show_monster_roll">{{this.fight_data.monster_total_damage}}</span>
         </div>
-
       </div>
       <div class="button_holder">
         <div class="attack-button-parent">
@@ -46,7 +44,12 @@
         </div>
         <div class="magic-button-parent" v-if="monster">
           <transition name="fade">
-            <img class="magic_button" v-if="show_fireball_button" v-on:click="rollMagicDice" src="/assets/fireballwithmagic.png" />
+            <img
+              class="magic_button"
+              v-if="show_fireball_button"
+              v-on:click="rollMagicDice"
+              src="/assets/fireballwithmagic.png"
+            />
           </transition>
         </div>
       </div>
@@ -111,17 +114,18 @@ export default {
       show_monster_roll: false,
       show_damage_excess: false,
       show_fireball: false,
-      show_fireball_button: true,
+      show_fireball_button: true
     };
   },
   mounted() {
     eventBus.$on("start-fight", character => {
       this.monster = character.monster;
+      this.monster.maxHealth = this.monster.health;
       this.player = character.player;
-      this.mermanBattleMusic()
-      this.draugrBattleMusic()
-      this.ghostBattleMusic()
-      this.dragonBattleMusic()
+      this.mermanBattleMusic();
+      this.draugrBattleMusic();
+      this.ghostBattleMusic();
+      this.dragonBattleMusic();
     });
   },
   computed: {
@@ -129,11 +133,17 @@ export default {
       return this.player.health + "%";
     },
     monsterHealthBar() {
-      if (this.monster == undefined) {
-        return "100%";
-      } else {
-        return this.monster.health + "%";
+      let percentage = 100;
+
+      if (!(this.monster == undefined)) {
+        percentage = Math.round(
+          (100 * this.monster.health) / this.monster.maxHealth
+        );
       }
+      if (percentage < 0) percentage = 0;
+      if (percentage > 100) percentage = 100;
+
+      return `${percentage}%`;
     }
   },
   methods: {
@@ -144,12 +154,10 @@ export default {
       if (this.monster.name === "Draugr") this.playDraugrBattleMusic();
     },
     ghostBattleMusic() {
-      if (this.monster.name === "Ghost")
-      this.playGhostBattleMusic()
+      if (this.monster.name === "Ghost") this.playGhostBattleMusic();
     },
     dragonBattleMusic() {
-      if (this.monster.name === "Dragon")
-      this.playDragonBattleMusic()
+      if (this.monster.name === "Dragon") this.playDragonBattleMusic();
     },
 
     combatEnd() {
@@ -174,7 +182,7 @@ export default {
       }
     },
     sleep(ms) {
-       return new Promise(resolve => setTimeout(resolve, ms));
+      return new Promise(resolve => setTimeout(resolve, ms));
     },
     async rollDice() {
       this.playSwordAudio();
@@ -189,7 +197,7 @@ export default {
       this.diceRoll.player.d2 = this.fight_data.player_roll2;
       this.diceRoll.monster.d1 = this.fight_data.monster_roll1;
       this.diceRoll.monster.d2 = this.fight_data.monster_roll2;
-      
+
       // total up the players damage modifier
       this.player.items.forEach(item => {
         if ("damage_modifier" in item) {
@@ -207,9 +215,9 @@ export default {
       await this.sleep(2000);
       // this.playAudio();
 
-      this.show_player_roll = true
-      this.show_monster_roll = true
-      console.log(this.show_player_roll)
+      this.show_player_roll = true;
+      this.show_monster_roll = true;
+      console.log(this.show_player_roll);
       // deal damage based on who rolled best this round
       const playerWinsRound =
         this.fight_data.player_total_damage >
@@ -233,10 +241,9 @@ export default {
       this.combatEnd();
     },
 
-    
-     async rollMagicDice() {
+    async rollMagicDice() {
       this.show_fireball = true;
-      this.show_fireball_button = false
+      this.show_fireball_button = false;
       this.playFireballAudio();
       this.fight_data.player_roll1 = this.numGenerator();
 
@@ -248,7 +255,7 @@ export default {
       );
       this.combatEnd();
     },
-    
+
     numGenerator() {
       return Math.ceil(Math.random() * 10);
     },
@@ -288,12 +295,12 @@ export default {
       this.draugrMusic.play();
     },
     playGhostBattleMusic() {
-      this.ghostMusic = new Audio("/assets/music/ghost_battle.mp3")
+      this.ghostMusic = new Audio("/assets/music/ghost_battle.mp3");
       this.ghostMusic.volume = 0.2;
       this.ghostMusic.play();
     },
     playDragonBattleMusic() {
-      this.dragonMusic = new Audio("/assets/music/dragon_battle.mp3")
+      this.dragonMusic = new Audio("/assets/music/dragon_battle.mp3");
       this.dragonMusic.volume = 0.2;
       this.dragonMusic.play();
     },
@@ -314,7 +321,6 @@ export default {
 </script>
 
 <style>
-
 .fight {
   background-image: url("/assets/Background_1.png");
   background-size: cover;
@@ -355,13 +361,13 @@ export default {
 .damage_animation-parent {
   width: 100%;
   height: 60%;
-  
+
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
-.roll_total{
+.roll_total {
   height: 10%;
   width: 30%;
   display: flex;
@@ -369,9 +375,8 @@ export default {
   justify-content: center;
   align-items: center;
   background-color: violet;
-
 }
-.damage_excess{
+.damage_excess {
   height: 100%;
   width: 40%;
   display: flex;
@@ -496,10 +501,12 @@ export default {
   height: 8%;
   /* background-color: #ca812e; */
 }
-.total_animation-enter-active, .total_animation-leave-active {
-  transition: opacity .5s;
+.total_animation-enter-active,
+.total_animation-leave-active {
+  transition: opacity 0.5s;
 }
-.total_animation-enter, .total_animation-leave-to {
+.total_animation-enter,
+.total_animation-leave-to {
   opacity: 0;
 }
 
@@ -535,7 +542,7 @@ export default {
   width: 80%;
   text-align: left;
   height: 10%;
-  margin-bottom: 3px
+  margin-bottom: 3px;
 }
 
 .health {
