@@ -6,7 +6,7 @@ db.pages.insertMany([
         narrative_text: "You are Johnny the eldest child of the Crach an Code. The Code clan resides in a newly built village of Riverdale, a tranquil place where the most exciting thing that has ever happened was the previous winter; when a goblin trader tried to sell everyone Griffin Balls! (everyone knows Griffin Balls aren't in season until summer).Your father Crache is an elderly man now but at one point he was a famous monster hunter. However now he looks the same as any old man, the only thing that sets him aside from the rest is his insistence to wear his plate codpiece to bed. Something about \"ensuring his legacy\" you and the rest of the village do your best to ignore his weirdness. Life is dull. Until...",
         buttons: [{button_text: "Continue", button_destination: "intro_part_2", button_style: "xyz"}],
         gain_health_from_narrative: 0, //this should be filled with integer if something happens in narrative to add health
-        map_coords: [18,96],
+        map_coords: [1800,3900],
         map_marker_icon: "/inn.svg"
     },
     {
@@ -14,7 +14,7 @@ db.pages.insertMany([
         narrative_text: "''CRASH BANG WALLOP'' You're awoken by a crescendo of sounds. Unable to identify what's causing the loud clanging, you rush to the window and draw back the curtains! With eyes still blurry you see what seems to be a small man running into the bushes with a bag over his shoulder, chased by your father Crache with a slipper in hand! However he soon gives up the chase and hangs his head in defeat. You decide to get dressed and find out what has happened. You approach Crache sitting on the grass shirtless with his head in his hands and ask him \"what happened?\". Then like a bolt of lightning he jumps up (faster than you've ever seen him move) and with a twinkle in his eye grabs you by the arms \"Listen boy that creature just stole our clans most precious artifact! The one thing that has kept this village safe!\" he exclaims, you try to inquire what he is refering to but he interjects \"There's no time to explain it's getting away! Look take this sword and retrieve the artifact.\" Looking down at the sword just thrusted into your hands you see it is infact a wooden training sword. Before you can complain and ask for a better blade your father has pushed you into the bushes where the creature had just fled through not minutes ago.",
         buttons: [{button_text: "Continue", button_destination: "on_the_trail", button_style: "xyz"}],
         gain_health_from_narrative: 0, //this should be filled with integer if something happens in narrative to add health
-        map_coords: [18,96],
+        map_coords: [1800,3900],
         map_marker_icon: "/bridge.svg"
     },
     {
@@ -22,7 +22,7 @@ db.pages.insertMany([
         narrative_text: "Scrambling to your feet you take a second to get your barings. behind you is your village and in front is about 20 feet of bushes and trees which lead to a path. Looking down you see what seem to be small feet, perhaps those of a child but you can't be sure. However you can be sure that these are the tracks of your theif so you follow them to the path. The path is a simple trodden path through some woods. Looking down at the tracks you see the tracks head north uphill.After following the tracks for a few hours you see they cross a rickety bridge that should be able to hold your weight. Do you?",
         buttons: [{button_text: "Cross The Bridge", button_destination: "cross_the_bridge", button_style: "xyz"}, {button_text: "Wade through the water and go around the bridge", button_destination: "around_bridge", button_style: "zzz"}],
         gain_health_from_narrative: 0, //this should be filled with integer if something happens in narrative to add health
-        map_coords: [68,76],
+        map_coords: [2800,3200],
         map_marker_icon: "/romance.svg"
     },
     {
@@ -30,7 +30,7 @@ db.pages.insertMany([
         narrative_text: "Whilst crossing the old wooden bridge it seems to hold your weight fine. After a couple shakes and wobbles you make it accross and carry on your path.",
         buttons: [{button_text: "Get back on the creatures trail", button_destination: "back_on_trail", button_style: "xyz"}],
         gain_health_from_narrative: 0, //this should be filled with integer if something happens in narrative to add health
-        map_coords: [68,76],
+        map_coords: [1500,3500],
         map_marker_icon: ""
     },
     {
