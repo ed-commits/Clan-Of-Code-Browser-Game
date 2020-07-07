@@ -274,6 +274,9 @@ export default {
     },
 
     async rollMagicDice() {
+      if(this.roundInProgress) return;
+      this.roundInProgress = true;
+      
       this.show_fireball = true;
       this.show_fireball_button = false;
       this.show_used_fireball_button = true;
