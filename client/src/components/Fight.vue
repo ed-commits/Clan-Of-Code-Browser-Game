@@ -305,7 +305,6 @@ export default {
     numGenerator() {
       return Math.ceil(Math.random() * 10);
     },
-
     winClicked() {
       this.monster = undefined;
       eventBus.$emit("fight-won", {});
@@ -390,6 +389,7 @@ export default {
   justify-content: center;
   align-items: center;
 }
+
 .fire_gif {
   height: 50%;
   width: auto;
@@ -407,6 +407,7 @@ export default {
   justify-content: center;
   align-items: center;
 }
+
 .damage_animation-parent {
   width: 100%;
   height: 60%;
@@ -416,6 +417,7 @@ export default {
   justify-content: center;
   align-items: center;
 }
+
 .roll_total {
   height: 10%;
   width: 30%;
@@ -425,6 +427,7 @@ export default {
   align-items: center;
   background-color: violet;
 }
+
 .damage_excess {
   height: 100%;
   width: 40%;
@@ -432,7 +435,6 @@ export default {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  /* background-color: orange; */
   font-size: xx-large;
 }
 
@@ -442,9 +444,11 @@ export default {
   width: 100%;
   height: 40%;
 }
+
 .attack-button-parent {
   width: 50%;
 }
+
 .magic-button-parent {
   width: 50%;
   display: flex;
@@ -455,40 +459,46 @@ export default {
   height: 18%;
   width: auto;
 }
+
 .attack_button:hover {
   height: 18.5%;
   width: auto;
 }
+
 .attack_button:active {
   height: 18%;
   width: auto;
 }
+
 .magic_button {
   cursor: pointer;
   height: 18%;
   width: auto;
 }
+
 .magic_button:hover {
   height: 18.5%;
   width: auto;
 }
+
 .magic_button:active {
   height: 18%;
   width: auto;
 }
+
 .button_used {
   height: 18%;
   width: auto;
   z-index: 1; 
   position: absolute;
-  
 }
+
 .items {
   height: 100%;
   width: 30%;
   height: 100%;
-  /* background-color: tomato; */
 }
+
 .character-and-health {
   height: 100%;
   width: 40%;
@@ -563,7 +573,6 @@ export default {
   animation-name: breathing;
   animation-iteration-count: infinite;
   animation-direction: alternate;
-  /* animation-timing-function: ease-in-out; */
   z-index: 2;
 }
 
@@ -571,11 +580,10 @@ export default {
   height: 100%;
   width: 30%;
   height: 100%;
-  /* background-color: yellow; */
 }
 
 .damage-dealt-message {
-  color: black;
+  color: rgb(211, 243, 243);
   margin: 30px 0px 0px 0px;
 }
 
@@ -583,11 +591,11 @@ export default {
   float: right;
   margin: 20px;
 }
+
 .monster_health {
   margin: auto;
   width: 50%;
   height: 8%;
-  /* background-color: #ca812e; */
 }
 
 .heroslash-enter {
