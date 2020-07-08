@@ -117,9 +117,9 @@ db.pages.insertMany([
     },
     {
         name: "spooky_house_2",
-        narrative_text: "With that final swing the spectre vanishes and in its place falls a ''steel blade +5 DMG!''Exausted you slump to your knees and fall asleep... A bright light awakens you, you quickly grab your steel sword ready to fight. But realise its just the morning light coming through the window, it's going to be a long time before you get over last nights encounter. Collecting your things you head out the house. After about 10 minutes of walking you reach the clearing from yesterday. You cast a glance at the tree you considered resting under last night which almost mockingly has a herd of deer underneath, peacefully resting and grazing. Angrily you turn away and continue your search when... You see the creature! Not 30 yards from you it seems to be forraging for berries. You break into a sprint towards the creature!",
+        narrative_text: "With that final swing the spectre vanishes and in its place falls a ''Blade of the Dragon Slayer +5 DMG!''Exausted you slump to your knees and fall asleep... A bright light awakens you, you quickly grab your blade ready to fight. But realise its just the morning light coming through the window, it's going to be a long time before you get over last nights encounter. Collecting your things you head out the house. After about 10 minutes of walking you reach the clearing from yesterday. You cast a glance at the tree you considered resting under last night which almost mockingly has a herd of deer underneath, peacefully resting and grazing. Angrily you turn away and continue your search when... You see the creature! Not 30 yards from you it seems to be forraging for berries. You break into a sprint towards the creature!",
         buttons: [{button_text: "Rush towards it!", button_destination: "creature_capture", button_style: "xyz"}],
-        gain_item: "Steel Blade", //this should be filled with item page name
+        gain_item: "Blade of the Dragon Slayer", //this should be filled with item page name
         gain_health_from_narrative: 15, //this should be filled with integer if something happens in narrative to add health
         map_coords: [3550,4500],
         map_marker_icon: ""
@@ -182,7 +182,7 @@ db.pages.insertMany([
 
 db.items.insertMany([
     {
-        name: "Steel Blade",
+        name: "Blade of the Dragon Slayer",
         damage_modifier: 5,
         img_file: "/assets/Sword_icon.png",
         modifierDescription: "+5 ATK"

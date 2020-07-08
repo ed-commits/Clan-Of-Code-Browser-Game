@@ -79,13 +79,14 @@
     <div class="combat-box">
       <!-- monster box -->
 
-      <div class="damage-dealt">
-        <div class="damage-dealt-message">
-          <i v-if="monster">"{{ monster.taunt }}"</i>
-        </div>
+   <div class="damage-dealt">
+        <div class="damage-dealt-message"></div>
         <div class="dice" v-if="monster">
           <dice :number="diceRoll.monster.d1" />
           <dice :number="diceRoll.monster.d2" />
+        </div>
+        <div class="damage-dealt-message">
+          <i v-if="monster">"{{ monster.taunt }}"</i>
         </div>
       </div>
       <div class="character-and-health">
@@ -322,7 +323,7 @@ export default {
       this.show_fireball_button = false;
       this.show_used_fireball_button = true;
       this.playFireballAudio();
-      this.fight_data.player_roll1 = this.numGenerator();
+      this.fight_data.player_roll1 = 5 + this.numGenerator();
       await this.sleep(1000);
       this.heroDamageIsActive = true
       await this.sleep(1000);
@@ -478,7 +479,8 @@ export default {
 }
 
 .attack-button-parent {
-  width: 50%;
+  width: 100%;
+  display: flex;
 }
 
 .magic-button-parent {
@@ -490,7 +492,7 @@ export default {
   cursor: pointer;
   height: 13%;
   width: auto;
-  margin-left: -50px;
+  margin-left: 15px;
 }
 
 .attack_button:hover {
@@ -507,7 +509,6 @@ export default {
   cursor: pointer;
   height: 13%;
   width: auto;
-  margin-left: 50px;
 }
 
 .magic_button_used {
@@ -515,7 +516,6 @@ export default {
     width: auto;
     z-index: 1; 
     position: absolute; 
-    margin-left: 50px;
 }
 
 .magic_button:hover {
@@ -533,7 +533,8 @@ export default {
   width: auto;
   z-index: 1; 
   position: absolute;
-  margin-left: -50px;
+  margin-left: 15px;
+
 }
 
 .backpack {
