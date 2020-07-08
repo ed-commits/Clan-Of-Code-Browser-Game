@@ -544,6 +544,7 @@ export default {
   justify-content: center;
   width: 80%;
   height: 110%;
+  z-index: 8;
 }
 
 .items {
