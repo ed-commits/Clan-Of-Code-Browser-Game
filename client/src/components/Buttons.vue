@@ -20,11 +20,21 @@ export default {
 
 <style>
 .button {
-  text-decoration: underline;
+/*  background-color: rgba(255, 235, 146, 0.801);
+  outline: 2px solid #99855f; */
+  padding-right: 5px;
+  padding-left: 5px;
   cursor: pointer;
+
+  font-size: 1.08em;
 }
 
 .button:hover {
-  outline: 1px solid blueviolet;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.button:active {
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    font-weight: bolder;
 }
 </style>

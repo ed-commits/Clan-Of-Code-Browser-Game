@@ -3,9 +3,9 @@
     <storymap :pages="pages" class="story-map"></storymap>
     <div class="scroll">
       <page v-for=" (page, index) in pages" :key="index" :page="page" />
-    </div>
-    <div v-if="button_links">
-      <buttons v-for=" (button, index) in button_links" :key="index" :button="button" />
+      <div v-if="button_links">
+        <buttons v-for=" (button, index) in button_links" :key="index" :button="button" />
+      </div>
     </div>
   </div>
 </template>
@@ -23,8 +23,8 @@ export default {
   },
   props: ["pages", "button_links", "items"],
   updated() {
-//    var scrollDiv = document.querySelector(".scroll");
-//    scrollDiv.scrollTop = scrollDiv.scrollHeight;
+    //    var scrollDiv = document.querySelector(".scroll");
+    //    scrollDiv.scrollTop = scrollDiv.scrollHeight;
   }
 };
 </script>
@@ -52,15 +52,10 @@ export default {
   margin: 0px;
   padding: 0px;
 }
-.button {
-  background-color: rgba(255, 235, 146, 0.801);
-  outline: 2px solid #99855f;
-  padding-right: 5px;
-  padding-left: 5px;
-}
+
 .scroll {
   /* outline: 2px solid black; */
-  height: 40vh;
+  height: 100%;
   width: calc(60% + 40px);
   /* background-color: rgba(255, 235, 146, 0.801); */
   overflow-y: scroll;
