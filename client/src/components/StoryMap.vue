@@ -13,7 +13,7 @@ export default {
     props: ["pages"],
     data(){
         return {
-            currentPageCoords: [4000,3000],
+            currentPageCoords: [1900,3000],
             map: undefined,
             rc: undefined,
 
