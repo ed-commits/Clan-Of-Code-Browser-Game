@@ -2,7 +2,18 @@
   <div class="fight">
     <div class="combat-box">
       <!-- player box -->
-      <div class="items"></div>
+      
+        <div class="items">
+          <div class="backpack"> 
+        <ul>
+          <li v-for="(item, key) in player.items" :key="key">
+            <img :src="item.img_file" width="32px" />
+            {{ item.name }}
+            <span style="font-size: 0.5em;">({{ item.modifierDescription }})</span>
+            </li>
+        </ul>
+       </div>
+        </div>
       <div class="character-and-health">
         <div class="character">
           <h2>{{ player.name }}</h2>
@@ -22,13 +33,6 @@
           <dice :number="diceRoll.player.d1" />
           <dice :number="diceRoll.player.d2" />
         </div>
-        <ul>
-          <li v-for="(item, key) in player.items" :key="key">
-            <img :src="item.img_file" width="32px" />
-            {{ item.name }}
-            <span style="font-size: 0.5em;">({{ item.modifierDescription }})</span>
-            </li>
-        </ul>
       </div>
     </div>
     <div class="damage-box">
@@ -533,6 +537,17 @@ export default {
 
 }
 
+.backpack {
+  background-image: url("/assets/Backpack.png");
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  height: 110%;
+  z-index: 8;
+}
+
 .items {
   height: 100%;
   width: 30%;
@@ -559,6 +574,7 @@ export default {
   align-items: center;
   z-index: 2;
 }
+
 .character h2 {
   margin: 0;
   color: rgb(211, 243, 243);
