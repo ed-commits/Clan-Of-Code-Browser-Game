@@ -25,6 +25,7 @@
           <li v-for="(item, key) in player.items" :key="key">
             <img :src="item.img_file" width="32px" />
             {{ item.name }}
+            <span style="font-size: 0.5em;">({{ item.modifierDescription }})</span>
             </li>
         </ul>
       </div>
