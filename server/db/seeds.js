@@ -199,7 +199,7 @@ db.monsters.insertMany([
     {
         name: "Merman",
         taunt: "Glub glub!",
-        health: 30,
+        health: 5,
         img_file: "assets/Merman.png"
     },
     {
