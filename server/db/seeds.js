@@ -184,12 +184,14 @@ db.items.insertMany([
     {
         name: "Steel Blade",
         damage_modifier: 5,
-        img_file: "/assets/Sword_icon.png"
+        img_file: "/assets/Sword_icon.png",
+        modifierDescription: "+5 ATK"
     },
     {
         name: "Griffin Balls",
         health_modifier: 50,
-        img_file: "/assets/Griffin balls.png"
+        img_file: "/assets/Griffin balls.png",
+        modifierDescription: "+50 HP"
     }
 ]);
 
