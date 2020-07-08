@@ -474,7 +474,8 @@ export default {
 }
 
 .attack-button-parent {
-  width: 50%;
+  width: 100%;
+  display: flex;
 }
 
 .magic-button-parent {
