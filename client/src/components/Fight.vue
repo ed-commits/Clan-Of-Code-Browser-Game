@@ -75,13 +75,14 @@
     <div class="combat-box">
       <!-- monster box -->
 
-      <div class="damage-dealt">
-        <div class="damage-dealt-message">
-          <i v-if="monster">"{{ monster.taunt }}"</i>
-        </div>
+   <div class="damage-dealt">
+        <div class="damage-dealt-message"></div>
         <div class="dice" v-if="monster">
           <dice :number="diceRoll.monster.d1" />
           <dice :number="diceRoll.monster.d2" />
+        </div>
+        <div class="damage-dealt-message">
+          <i v-if="monster">"{{ monster.taunt }}"</i>
         </div>
       </div>
       <div class="character-and-health">
@@ -487,6 +488,7 @@ export default {
   cursor: pointer;
   height: 13%;
   width: auto;
+  margin-left: 15px;
 }
 
 .attack_button:hover {
@@ -527,6 +529,8 @@ export default {
   width: auto;
   z-index: 1; 
   position: absolute;
+  margin-left: 15px;
+
 }
 
 .items {
