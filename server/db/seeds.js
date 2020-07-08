@@ -231,10 +231,9 @@ db.monsters.insertMany([
     },
     {
         name: "Hydra",
-        taunt: "WHAT DO YOU MEAN YOU PUSHED TO MASTER YOUR WHOLE PROJECT!?",
+        taunt: "YOU PUSHED TO MASTER YOUR WHOLE PROJECT!?",
         health: 10000000000000000000,
-        img_file: "assets/hydra.png",
-        music_file: "assets/music/final_battle.mp3"
+        img_file: "assets/Hydra.png",
     }
     
 ]);

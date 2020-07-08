@@ -176,6 +176,7 @@ export default {
       this.draugrBattleMusic();
       this.ghostBattleMusic();
       this.dragonBattleMusic();
+      this.hydraBattleMusic();
     });
   },
   methods: {
@@ -190,6 +191,9 @@ export default {
     },
     dragonBattleMusic() {
       if (this.monster.name === "Dragon") this.playDragonBattleMusic();
+    },
+    hydraBattleMusic() {
+      if (this.monster.name === "Hydra") this.playDraugrBattleMusic();
     },
 
     combatEnd() {
