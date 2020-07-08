@@ -55,7 +55,7 @@
           </transition>
             <img class="button_used" style="z-index: 1; position: absolute;" src="/assets/atk_used.png" />
         </div>
-        <div class="magic-button-parent">
+        <div class="magic-button-parent" v-if="monster">
           <transition name="fade">
             <img
               class="magic_button"
@@ -290,7 +290,6 @@ export default {
       }
       this.show_attack_button = true
       this.combatEnd();
-      this.show_fireball_button = false
 
     },
 
