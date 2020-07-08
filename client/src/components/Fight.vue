@@ -21,7 +21,8 @@
             <transition name="heroslash">
               <img class="hero_slash" v-if="this.show_hero_slash" src="/assets/hero_slash.svg" />
             </transition>
-            <img class="character_image" :src="player.image" />
+            <img :class="this.monsterDamageIsActive ? 'character_image__active' : 'character_image'" :src="player.image" /> 
+ 
           </div>
         </div>
         <healthbar :amount="player.health" max="100" />
@@ -43,7 +44,7 @@
         </div>
         <div class="damage_excess">
           <transition name="damage_excess_animation">
-            <span style ="color: #e60000" v-if="this.show_damage_excess">+{{this.fight_data.damage_dealt}}</span>
+            <span style ="color: #e60000" v-if="this.show_damage_excess">{{this.fight_data.damage_dealt}}</span>
           </transition>
         </div>
         <div class="roll_total">
@@ -59,7 +60,7 @@
           </transition>
             <img class="button_used" style="z-index: 1; position: absolute;" src="/assets/atk_used.png" />
         </div>
-        <div class="magic-button-parent">
+        <div class="magic-button-parent" v-if="monster">
           <transition name="fade">
             <img
               class="magic_button"
@@ -97,7 +98,7 @@
               <img class="monster_slash" v-if="this.show_monster_slash" src="/assets/monster_slash.svg" />
             </transition>
             <transition name="slide">
-              <img class="character_image" v-if="monster" :src="monster.img_file" />
+              <img :class="this.heroDamageIsActive ? 'character_image__active' : 'character_image'" v-if="monster" :src="monster.img_file" />
             </transition>
           </div>
 
@@ -153,6 +154,8 @@ export default {
       show_used_fireball: false,
       show_hero_slash: false,
       show_monster_slash: false,
+      monsterDamageIsActive: false,
+      heroDamageIsActive: false,
     };
   },
   mounted() {
@@ -197,6 +200,9 @@ export default {
         this.stopDraugrMusic();
         this.stopGhostMusic();
         this.stopDragonMusic();
+        
+
+
       } else if (monsterWins) {
         this.monster = undefined;
         eventBus.$emit("fight-lost", {});
@@ -264,6 +270,12 @@ export default {
         this.fight_data.player_total_damage <
         this.fight_data.monster_total_damage;
 
+      const draw = 
+        this.fight_data.player_total_damage ===
+        this.fight_data.monster_total_damage;
+
+      if (draw) this.fight_data.damage_dealt ="DRAW"
+
       this.show_player_roll = true;
       await this.sleep(500);
       this.show_monster_roll = true;
@@ -272,7 +284,12 @@ export default {
       await this.sleep(1000);
       if (playerWinsRound) this.show_hero_slash = true;
       if (monsterWinsRound) this.show_monster_slash = true
-      await this.sleep(2000);
+      await this.sleep(1000);
+      if (monsterWinsRound) this.monsterDamageIsActive = true
+      if (playerWinsRound) this.heroDamageIsActive = true;
+      if (!draw) await this.sleep(1000);
+      if (monsterWinsRound) this.monsterDamageIsActive = false
+      if (playerWinsRound) this.heroDamageIsActive = false
       this.show_monster_slash = false;
       this.show_hero_slash = false;
       this.show_player_roll = false;
@@ -294,6 +311,7 @@ export default {
       }
       this.show_attack_button = true
       this.combatEnd();
+
     },
 
     async rollMagicDice() {
@@ -305,9 +323,11 @@ export default {
       this.show_used_fireball_button = true;
       this.playFireballAudio();
       this.fight_data.player_roll1 = this.numGenerator();
-
+      await this.sleep(1000);
+      this.heroDamageIsActive = true
       await this.sleep(1000);
       this.show_fireball = false;
+      this.heroDamageIsActive = false
 
       const playerMagicAtk = this.dealDamagetoMonster(
         this.fight_data.player_roll1
@@ -603,7 +623,7 @@ export default {
 .monster_slash {
   width: auto;
   height: 30%;
-  z-index: 0;
+  z-index: -9;
   margin-bottom: -60%;
   animation-duration: 0.05s;
   animation-name: monsterslash_flash;
@@ -650,6 +670,31 @@ export default {
   animation-iteration-count: infinite;
   animation-direction: alternate;
   z-index: 2;
+}
+
+.character_image__active {
+  height: 100%;
+  width: auto;
+  animation-duration: 1s;
+  animation-name: breathing;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  z-index: 2;
+  animation-duration: 0.1s;
+  animation-name: damage_hit;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  
+}
+
+@keyframes damage_hit {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
 }
 
 .damage-dealt {
