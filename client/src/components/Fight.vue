@@ -2,7 +2,9 @@
   <div class="fight">
     <div class="combat-box">
       <!-- player box -->
-      <div class="items"></div>
+      <div class="backpack">
+        <div class="items"></div>
+      </div>
       <div class="character-and-health">
         <div class="character">
           <h2>{{ player.name }}</h2>
@@ -513,6 +515,7 @@ export default {
 }
 
 .items {
+  
   height: 100%;
   width: 30%;
   height: 100%;
