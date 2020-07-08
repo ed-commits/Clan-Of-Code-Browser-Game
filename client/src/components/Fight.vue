@@ -319,7 +319,7 @@ export default {
       this.show_fireball_button = false;
       this.show_used_fireball_button = true;
       this.playFireballAudio();
-      this.fight_data.player_roll1 = this.numGenerator();
+      this.fight_data.player_roll1 = 5 + this.numGenerator();
       await this.sleep(1000);
       this.heroDamageIsActive = true
       await this.sleep(1000);
