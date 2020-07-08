@@ -487,7 +487,6 @@ export default {
   cursor: pointer;
   height: 13%;
   width: auto;
-  margin-left: -50px;
 }
 
 .attack_button:hover {
@@ -504,7 +503,6 @@ export default {
   cursor: pointer;
   height: 13%;
   width: auto;
-  margin-left: 50px;
 }
 
 .magic_button_used {
@@ -512,7 +510,6 @@ export default {
     width: auto;
     z-index: 1; 
     position: absolute; 
-    margin-left: 50px;
 }
 
 .magic_button:hover {
@@ -530,7 +527,6 @@ export default {
   width: auto;
   z-index: 1; 
   position: absolute;
-  margin-left: -50px;
 }
 
 .items {
