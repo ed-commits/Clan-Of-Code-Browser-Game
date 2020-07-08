@@ -75,8 +75,14 @@ export default {
     },
     turnToPage_internal(page, page_button) {
       // Add a "You then went to the bridge" type message
-      if(page_button.button_text != undefined)
-        this.addNarrativeMessage("You " + page_button.button_text.toLowerCase());
+      if(page_button.button_text != undefined) {
+        if(page_button.button_text.toLowerCase() == "the end") {
+          this.addNarrativeMessage(page_button.button_text.toLowerCase());
+        }
+        else {
+          this.addNarrativeMessage("You " + page_button.button_text.toLowerCase());
+        }
+      }
 
       this.current_monster = undefined;
       this.current_page = page;
