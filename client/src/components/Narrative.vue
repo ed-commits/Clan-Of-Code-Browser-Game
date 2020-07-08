@@ -54,7 +54,9 @@ export default {
 }
 .button {
   background-color: rgba(255, 235, 146, 0.801);
-  outline: 2px solid black;
+  outline: 2px solid #99855f;
+  padding-right: 5px;
+  padding-left: 5px;
 }
 .scroll {
   /* outline: 2px solid black; */

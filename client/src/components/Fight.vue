@@ -463,30 +463,30 @@ export default {
 
 .attack_button {
   cursor: pointer;
-  height: 15%;
+  height: 13%;
   width: auto;
   margin-left: -50px;
 }
 
 .attack_button:hover {
-  height: 15.5%;
+  height: 13.5%;
   width: auto;
 }
 
 .attack_button:active {
-  height: 15%;
+  height: 13%;
   width: auto;
 }
 
 .magic_button {
   cursor: pointer;
-  height: 15%;
+  height: 13%;
   width: auto;
   margin-left: 50px;
 }
 
 .magic_button_used {
-    height: 15%;
+    height: 13%;
     width: auto;
     z-index: 1; 
     position: absolute; 
@@ -494,17 +494,17 @@ export default {
 }
 
 .magic_button:hover {
-  height: 15.5%;
+  height: 13.5%;
   width: auto;
 }
 
 .magic_button:active {
-  height: 15%;
+  height: 13%;
   width: auto;
 }
 
 .button_used {
-  height: 15%;
+  height: 13%;
   width: auto;
   z-index: 1; 
   position: absolute;
