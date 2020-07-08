@@ -25,7 +25,7 @@ export default {
             this.currentPageCoords = page.map_coords
             this.map.flyTo(this.rc.unproject(this.currentPageCoords), 5, {
             animate: true,
-            duration: 5
+            duration: 7
             });
         }),
         this.leafletInit()

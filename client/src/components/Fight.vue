@@ -267,7 +267,7 @@ export default {
       await this.sleep(1000);
       if (playerWinsRound) this.show_hero_slash = true;
       if (monsterWinsRound) this.show_monster_slash = true
-      await this.sleep(2500);
+      await this.sleep(2000);
       this.show_monster_slash = false;
       this.show_hero_slash = false;
       this.show_player_roll = false;
@@ -463,52 +463,52 @@ export default {
 
 .attack_button {
   cursor: pointer;
-  height: 18%;
+  height: 15%;
   width: auto;
-  margin-left: -25px;
+  margin-left: -50px;
 }
 
 .attack_button:hover {
-  height: 18.5%;
+  height: 15.5%;
   width: auto;
 }
 
 .attack_button:active {
-  height: 18%;
+  height: 15%;
   width: auto;
 }
 
 .magic_button {
   cursor: pointer;
-  height: 18%;
+  height: 15%;
   width: auto;
-  margin-left: 25px;
+  margin-left: 50px;
 }
 
 .magic_button_used {
-    height: 18%;
+    height: 15%;
     width: auto;
     z-index: 1; 
     position: absolute; 
-    margin-left: 25px;
+    margin-left: 50px;
 }
 
 .magic_button:hover {
-  height: 18.5%;
+  height: 15.5%;
   width: auto;
 }
 
 .magic_button:active {
-  height: 18%;
+  height: 15%;
   width: auto;
 }
 
 .button_used {
-  height: 18%;
+  height: 15%;
   width: auto;
   z-index: 1; 
   position: absolute;
-  margin-left: -25px;
+  margin-left: -50px;
 }
 
 .items {
