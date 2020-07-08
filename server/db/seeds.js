@@ -168,11 +168,19 @@ db.pages.insertMany([
     {
         name: "credits",
         narrative_text: "Created by Keith Nimmo, Ollie Boyd, Edward Cant and Jack Morris. Thanks for playing!",
-        buttons: [{button_text: "New Game +", button_destination: "intro", button_style: "xyz"}],
+        buttons: [{button_text: "New Game +", button_destination: "intro", button_style: "xyz"}, {button_text: "???", button_destination: "hydra_combat", button_style: "xyz"}],
         gain_health_from_narrative: 0, //this should be filled with integer if something happens in narrative to add health
         map_coords: [3600,4500],
         map_marker_icon: ""
     },
+    {
+        name: "hydra_combat",
+        narrative_text: "",
+        fight_monster: "Hydra", 
+        destination_after_fight: "credits",
+        map_coords: [3600,4500],
+    },
+    
     {
         name: "died",
         narrative_text: "You have died. GAME OVER",
@@ -219,6 +227,13 @@ db.monsters.insertMany([
         taunt: "GET AWAY FROM MY TREASURES!",
         health: 100,
         img_file: "assets/Dragon.png",
+        music_file: "assets/music/final_battle.mp3"
+    },
+    {
+        name: "Hydra",
+        taunt: "WHAT DO YOU MEAN YOU PUSHED TO MASTER YOUR WHOLE PROJECT!?",
+        health: 10000000000000000000,
+        img_file: "assets/hydra.png",
         music_file: "assets/music/final_battle.mp3"
     }
     
