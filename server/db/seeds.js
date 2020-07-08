@@ -213,26 +213,30 @@ db.monsters.insertMany([
     {
         name: "Draugr",
         taunt: "My orders are as follows!",
-        health: 50,
+        // health: 50,
+        health: 10,
         img_file: "assets/Draugr.png"
     },
     {
         name: "Ghost",
         taunt: "This is my house!",
-        health: 30,
+        // health: 30,
+        health: 10,
         img_file: "assets/Ghost.png"
     },
     {
         name: "Dragon",
         taunt: "GET AWAY FROM MY TREASURES!",
-        health: 100,
+        // health: 100,
+        health: 10,
         img_file: "assets/Dragon.png",
         music_file: "assets/music/final_battle.mp3"
     },
     {
         name: "Hydra",
-        taunt: "YOU PUSHED TO MASTER YOUR WHOLE PROJECT!?",
-        health: 10000000000000000000,
+        taunt: "YOU PUSHED-TO-MASTER YOUR WHOLE PROJECT!?",
+        // health: 10000000000000000000,
+        health: 10,
         img_file: "assets/Hydra.png",
     }
     
