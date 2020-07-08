@@ -17,7 +17,7 @@
       </div>
       <div class="damage-dealt">
         <div class="damage-dealt-message"></div>
-        <div class="dice">
+        <div class="dice" v-if="monster">
           <dice :number="diceRoll.player.d1" />
           <dice :number="diceRoll.player.d2" />
         </div>
@@ -25,6 +25,7 @@
           <li v-for="(item, key) in player.items" :key="key">
             <img :src="item.img_file" width="32px" />
             {{ item.name }}
+            <span style="font-size: 0.5em;">({{ item.modifierDescription }})</span>
             </li>
         </ul>
       </div>
@@ -77,7 +78,7 @@
         <div class="damage-dealt-message">
           <i v-if="monster">"{{ monster.taunt }}"</i>
         </div>
-        <div class="dice">
+        <div class="dice" v-if="monster">
           <dice :number="diceRoll.monster.d1" />
           <dice :number="diceRoll.monster.d2" />
         </div>
