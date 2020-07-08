@@ -14,6 +14,7 @@
           </div>
         </div>
         <healthbar :amount="player.health" max="100" />
+        <h1>{{player.health}}</h1>
       </div>
       <div class="damage-dealt">
         <div class="damage-dealt-message"></div>
@@ -290,6 +291,8 @@ export default {
       }
       this.show_attack_button = true
       this.combatEnd();
+      this.show_fireball_button = false
+
     },
 
     async rollMagicDice() {
