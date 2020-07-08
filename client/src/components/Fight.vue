@@ -14,7 +14,6 @@
           </div>
         </div>
         <healthbar :amount="player.health" max="100" />
-        <h1>{{player.health}}</h1>
       </div>
       <div class="damage-dealt">
         <div class="damage-dealt-message"></div>
