@@ -319,9 +319,11 @@ export default {
       this.show_used_fireball_button = true;
       this.playFireballAudio();
       this.fight_data.player_roll1 = this.numGenerator();
-
+      await this.sleep(1000);
+      this.heroDamageIsActive = true
       await this.sleep(1000);
       this.show_fireball = false;
+      this.heroDamageIsActive = false
 
       const playerMagicAtk = this.dealDamagetoMonster(
         this.fight_data.player_roll1
