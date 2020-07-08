@@ -688,15 +688,23 @@ export default {
   transition: font-size 3s ;
 }
 
-.slide-enter-active,
-.slide-leave-active {
+.slide-enter-active {
   transition: margin-left 1s;
   transition-timing-function: ease-out;
 }
-.slide-enter,
-.slide-leave-to {
+.slide-enter {
   margin-left: 400px;
 }
+
+.slide-leave-active {
+  transition: margin-bottom 1s;
+}
+
+.slide-leave-to {
+  margin-bottom: -200%
+}
+
+
 
 .fade-enter-active,
 .fade-leave-active {
