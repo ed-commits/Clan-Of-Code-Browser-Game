@@ -52,12 +52,7 @@ export default {
   margin: 0px;
   padding: 0px;
 }
-.button {
-  background-color: rgba(255, 235, 146, 0.801);
-  outline: 2px solid #99855f;
-  padding-right: 5px;
-  padding-left: 5px;
-}
+
 .scroll {
   /* outline: 2px solid black; */
   height: 40vh;
