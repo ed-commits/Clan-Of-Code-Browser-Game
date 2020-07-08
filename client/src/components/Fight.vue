@@ -17,7 +17,7 @@
       </div>
       <div class="damage-dealt">
         <div class="damage-dealt-message"></div>
-        <div class="dice">
+        <div class="dice" v-if="monster">
           <dice :number="diceRoll.player.d1" />
           <dice :number="diceRoll.player.d2" />
         </div>
@@ -77,7 +77,7 @@
         <div class="damage-dealt-message">
           <i v-if="monster">"{{ monster.taunt }}"</i>
         </div>
-        <div class="dice">
+        <div class="dice" v-if="monster">
           <dice :number="diceRoll.monster.d1" />
           <dice :number="diceRoll.monster.d2" />
         </div>
