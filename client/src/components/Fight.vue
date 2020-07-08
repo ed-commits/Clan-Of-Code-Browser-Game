@@ -3,17 +3,22 @@
     <div class="combat-box">
       <!-- player box -->
       
-        <div class="items">
-          <div class="backpack"> 
-        <ul>
-          <li v-for="(item, key) in player.items" :key="key">
-            <img :src="item.img_file" width="32px" />
-            {{ item.name }}
-            <span style="font-size: 0.5em;">({{ item.modifierDescription }})</span>
-            </li>
-        </ul>
-       </div>
-        </div>
+      <div class="items">
+          <transition name="fade">
+            <img class="backpack_image" v-if="player.items.length" src="/assets/Backpack.png"/>
+          </transition>
+          <transition name="fade">
+            <div class="backpack" v-if="player.items.length" > 
+              <ul>
+                <li v-for="(item, key) in player.items" :key="key">
+                  <img :src="item.img_file" width="32px" />
+                    {{ item.name }}
+                  <span style="font-size: 0.5em;">({{ item.modifierDescription }})</span>
+                </li>
+              </ul>
+            </div>
+          </transition>
+      </div>
       <div class="character-and-health">
         <div class="character">
           <h2>{{ player.name }}</h2>
@@ -538,20 +543,52 @@ export default {
 }
 
 .backpack {
-  background-image: url("/assets/Backpack.png");
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 80%;
-  height: 110%;
-  z-index: 8;
+  height: 50%;
+  background-color: rgba(123, 126, 124, 0.637);
+  border-radius: 10px;
+  overflow: scroll;
+}
+
+.backpack ul {
+width: 100%;
+padding: 0;
+padding-top: 5vh;
+box-sizing: border-box;
+display: flex;
+flex-direction: column;
+height: 100%;
+margin: 0;
+}
+
+.backpack li {
+  list-style-type: none;
+  color: white;
+  margin: 5px;
+}
+
+.backpack li img {
+  float: left;
+  filter: drop-shadow(3px 3px 5px #00000078) drop-shadow(-3px -4px 5px #000000a3);
+}
+
+.backpack_image{
+  width: auto;
+  height: 30%;
+  z-index: 3;
+  transform: translateY(30%);
 }
 
 .items {
-  height: 100%;
   width: 30%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .character-and-health {
@@ -784,14 +821,5 @@ export default {
   flex-direction: row;
 }
 
-li {
-  list-style-type:none;
-  background-color: black;
-  color: white;
-  margin: 5px;
-}
 
-li img {
-  float: left;
-}
 </style>
