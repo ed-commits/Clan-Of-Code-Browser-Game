@@ -1,5 +1,7 @@
 <template>
+
   <div class="health-bar">
+    <div class="number" style="z-index: 1; position: absolute; " >{{this.displayAmount}}</div>
     <div class="health" v-bind:style="{ width: cssPercent }"></div>
   </div>
 </template>
@@ -44,6 +46,10 @@ export default {
 </script>
 
 <style>
+.number {
+  color: rgb(211, 243, 243);
+  text-align: right;
+}
 .health-bar {
   border: 2px solid black;
   background-color: red;
