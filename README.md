@@ -1,4 +1,4 @@
-# week8-group-project
+# Clan of Code
 
 Folder structure
 
